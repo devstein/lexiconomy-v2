@@ -3,14 +3,17 @@ import { Signer } from "ethers";
 import { expect } from "chai";
 
 const MIN_FEE = 1000;
+const VALID_LEMMA = "valid";
 
 const deployLexiconomy = async () => {
   const Pricer = await ethers.getContractFactory("FixedPricer");
   const pricer = await Pricer.deploy(MIN_FEE);
 
-  console.log(pricer.address);
+  const Validator = await ethers.getContractFactory("MockStringValidator");
+  const validator = await Validator.deploy(VALID_LEMMA);
+
   const Lexiconomy = await ethers.getContractFactory("Lexiconomy");
-  const lexiconomy = await Lexiconomy.deploy(pricer.address);
+  const lexiconomy = await Lexiconomy.deploy(pricer.address, validator.address);
 
   // TODO: we need to unpause!
   return lexiconomy;
@@ -33,16 +36,15 @@ describe("Lexiconomy", function () {
     const lexiconomy = await deployLexiconomy();
     const [owner] = await ethers.getSigners();
 
-    const lemma = "test";
     // TODO: dynamically get value via .price
-    const tx = await lexiconomy.mint(lemma, {
+    const tx = await lexiconomy.mint(VALID_LEMMA, {
       value: MIN_FEE,
     });
 
     const reciept = await tx.wait();
 
     // need to generate tokenId
-    const tokenId = ethers.utils.id(lemma);
+    const tokenId = ethers.utils.id(VALID_LEMMA);
 
     // want to assert that token exists
     const actualOwner = await lexiconomy.ownerOf(tokenId);
@@ -66,7 +68,7 @@ describe("Lexiconomy", function () {
     const lexiconomy = await deployLexiconomy();
 
     try {
-      await lexiconomy.mint("test", {
+      await lexiconomy.mint(VALID_LEMMA, {
         value: 0,
       });
       expect(true).to.equal(false);
@@ -137,16 +139,14 @@ describe("Lexiconomy", function () {
 
   it("should not allow the same lemma to be created twice", async function () {
     const lexiconomy = await deployLexiconomy();
-    const lemma = "test";
 
-    const tx = await lexiconomy.mint(lemma, {
+    const tx = await lexiconomy.mint(VALID_LEMMA, {
       value: MIN_FEE,
     });
-
     await tx.wait();
 
     try {
-      await lexiconomy.mint(lemma, {
+      await lexiconomy.mint(VALID_LEMMA, {
         value: MIN_FEE,
       });
       expect(true).to.equal(false);
@@ -159,14 +159,13 @@ describe("Lexiconomy", function () {
 
   it("should allow owners to define their lemmas", async function () {
     const lexiconomy = await deployLexiconomy();
-    const lemma = "test";
 
-    await lexiconomy.mint(lemma, {
+    await lexiconomy.mint(VALID_LEMMA, {
       value: MIN_FEE,
     });
 
     // need to generate tokenId
-    const tokenId = ethers.utils.id(lemma);
+    const tokenId = ethers.utils.id(VALID_LEMMA);
     const definition = "a definition";
 
     const tx = await lexiconomy.definition(tokenId, definition);
@@ -185,14 +184,13 @@ describe("Lexiconomy", function () {
 
   it("should reject non-owners from defining a lemma", async function () {
     const lexiconomy = await deployLexiconomy();
-    const lemma = "test";
 
-    await lexiconomy.mint(lemma, {
+    await lexiconomy.mint(VALID_LEMMA, {
       value: MIN_FEE,
     });
 
     // need to generate tokenId
-    const tokenId = ethers.utils.id(lemma);
+    const tokenId = ethers.utils.id(VALID_LEMMA);
     const definition = "a definition";
     const [_, nonOwner] = await ethers.getSigners();
 
@@ -209,14 +207,13 @@ describe("Lexiconomy", function () {
 
   it("should allow owners to add examples to their lemmas", async function () {
     const lexiconomy = await deployLexiconomy();
-    const lemma = "test";
 
-    await lexiconomy.mint(lemma, {
+    await lexiconomy.mint(VALID_LEMMA, {
       value: MIN_FEE,
     });
 
     // need to generate tokenId
-    const tokenId = ethers.utils.id(lemma);
+    const tokenId = ethers.utils.id(VALID_LEMMA);
     const example = "an example";
 
     const tx = await lexiconomy.example(tokenId, example);
@@ -235,14 +232,13 @@ describe("Lexiconomy", function () {
 
   it("should reject non-owners from adding examples a lemma", async function () {
     const lexiconomy = await deployLexiconomy();
-    const lemma = "test";
 
-    await lexiconomy.mint(lemma, {
+    await lexiconomy.mint(VALID_LEMMA, {
       value: MIN_FEE,
     });
 
     // need to generate tokenId
-    const tokenId = ethers.utils.id(lemma);
+    const tokenId = ethers.utils.id(VALID_LEMMA);
     const example = "an example";
     const [_, nonOwner] = await ethers.getSigners();
 

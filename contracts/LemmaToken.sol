@@ -11,6 +11,7 @@ import "@openzeppelin/contracts/utils/introspection/ERC165Checker.sol";
 import "hardhat/console.sol";
 
 import "./Pricer.sol";
+import "./StringValidator.sol";
 
 contract LemmaToken is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable {
     using ERC165Checker for address;
@@ -121,12 +122,28 @@ contract LemmaToken is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Own
         pricer = candidateContract;
     }
 
+    bytes4 public constant stringValidatorInterfaceId = type(StringValidator).interfaceId;    
+    StringValidator public lemmaValidator;
+
+    function setLemmaValidator(address _address) public onlyOwner {
+        require(_address.supportsInterface(stringValidatorInterfaceId), "LemmaToken: address does not implement the StringValidator interface");
+
+        StringValidator candidateContract = StringValidator(_address);
+
+        // Set the new contract address
+        lemmaValidator = candidateContract;
+    }
+
     function mintFee() public view returns (uint256) {
         return pricer.price();
+    }
+    function lemmaValid(string memory lemma) public view returns (bool) {
+        return lemmaValidator.valid(lemma);
     }
 
     function mint(string memory lemma) public payable returns (uint256 tokenId) {
       require(msg.value >= mintFee(), "LemmaToken: minting fee too low");
+      require(lemmaValid(lemma), "LemmaToken: lemma is not valid");
       tokenId = uint256(keccak256(bytes(lemma)));
       _safeMint(msg.sender, tokenId);
       return tokenId;
@@ -143,16 +160,4 @@ contract LemmaToken is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Own
       require(allowed, "LemmaToken: caller is not owner nor approved");
       emit Example(msg.sender, tokenId, text);
     }
-
-    function _isLowercase(bytes1 _b1)
-        private
-        pure
-    returns (bool) {
-        return !(_b1 >= 0x41 && _b1 <= 0x5A);
-    }
-
-    // check first and last letter for lowercase
-    // check every character for upper case
-    // check every for illegal whitespace character
-    // check every for illegal control character
 }

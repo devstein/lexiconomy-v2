@@ -10,11 +10,11 @@ contract Lexiconomy is LemmaToken {
 
     /// @notice Creates the main Lexiconomy smart contract instance.
     // TODO: Migration script
-    // TODO: Set price contract on load
-    constructor(address _pricer) {
+    constructor(address _pricer, address _lemmaValidator) {
         // Starts paused.
         // _pause();
         setPricer(_pricer);
+        setLemmaValidator(_lemmaValidator);
 
         // invent the lexiconomy
         // uint256 lexiconomyId = 16346186601005818604545026402126349825711086327116502709577031182923613203716;

@@ -56,7 +56,7 @@ describe("LemmaValidator", function () {
     }
 
     // make a char invalid
-    await contract.setCharacterValidity(str.codePointAt(2), true);
+    await contract.setCharacterValidity(str.codePointAt(2), false);
 
     const valid = await contract.valid(str);
     expect(valid).to.equal(false);
