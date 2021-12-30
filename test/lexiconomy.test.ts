@@ -5,22 +5,27 @@ import { expect } from "chai";
 const MIN_FEE = 1000;
 
 const deployLexiconomy = async () => {
+  const Pricer = await ethers.getContractFactory("SimplePricer");
+  const pricer = await Pricer.deploy(MIN_FEE);
+
+  console.log(pricer.address);
   const Lexiconomy = await ethers.getContractFactory("Lexiconomy");
-  const lexiconomy = await Lexiconomy.deploy();
+  const lexiconomy = await Lexiconomy.deploy(pricer.address);
+
   // TODO: we need to unpause!
   return lexiconomy;
 };
 
-// TODO: Pricing contract
-// setPricingContract() onlyOwner
-// price()
+interface ContractError {
+  message: string;
+}
 
 describe("Lexiconomy", function () {
   it("should deploy successfully", async function () {
     try {
       await deployLexiconomy();
     } catch (error) {
-      expect(false).to.be("failed to deploy");
+      expect(false).to.equal("failed to deploy");
     }
   });
 
@@ -66,7 +71,9 @@ describe("Lexiconomy", function () {
       });
       expect(true).to.equal(false);
     } catch (error) {
-      expect(error.message).to.contain("minting fee too low");
+      expect((error as ContractError).message).to.contain(
+        "minting fee too low"
+      );
     }
   });
 
@@ -79,7 +86,9 @@ describe("Lexiconomy", function () {
       });
       expect(true).to.equal(false);
     } catch (error) {
-      expect(error.message).to.contain("lemma contains illegal characters ");
+      expect((error as ContractError).message).to.contain(
+        "lemma contains illegal characters "
+      );
     }
   });
 
@@ -93,7 +102,9 @@ describe("Lexiconomy", function () {
       });
       expect(true).to.equal(false);
     } catch (error) {
-      expect(error.message).to.contain("lemma contains illegal characters");
+      expect((error as ContractError).message).to.contain(
+        "lemma contains illegal characters"
+      );
     }
   });
 
@@ -107,7 +118,9 @@ describe("Lexiconomy", function () {
       });
       expect(true).to.equal(false);
     } catch (error) {
-      expect(error.message).to.contain("lemma contains illegal characters");
+      expect((error as ContractError).message).to.contain(
+        "lemma contains illegal characters"
+      );
     }
     try {
       // this is tab character
@@ -116,7 +129,9 @@ describe("Lexiconomy", function () {
       });
       expect(true).to.equal(false);
     } catch (error) {
-      expect(error.message).to.contain("lemma contains illegal characters");
+      expect((error as ContractError).message).to.contain(
+        "lemma contains illegal characters"
+      );
     }
   });
 
@@ -136,7 +151,9 @@ describe("Lexiconomy", function () {
       });
       expect(true).to.equal(false);
     } catch (error) {
-      expect(error.message).to.contain("token already minted");
+      expect((error as ContractError).message).to.contain(
+        "token already minted"
+      );
     }
   });
 
@@ -184,7 +201,9 @@ describe("Lexiconomy", function () {
       await lexiconomy.connect(nonOwner).definition(tokenId, definition);
       expect(true).to.equal(false);
     } catch (error) {
-      expect(error.message).to.contain("caller is not owner nor approved");
+      expect((error as ContractError).message).to.contain(
+        "caller is not owner nor approved"
+      );
     }
   });
 
@@ -228,11 +247,12 @@ describe("Lexiconomy", function () {
     const [_, nonOwner] = await ethers.getSigners();
 
     try {
-      // await greeter.connect(addr1).setGreeting("Hallo, Erde!");
       await lexiconomy.connect(nonOwner).example(tokenId, example);
       expect(true).to.equal(false);
     } catch (error) {
-      expect(error.message).to.contain("caller is not owner nor approved");
+      expect((error as ContractError).message).to.contain(
+        "caller is not owner nor approved"
+      );
     }
   });
 
@@ -252,5 +272,45 @@ describe("Lexiconomy", function () {
 
     expect(event).to.equal("Donation");
     expect(args[0]).to.equal(owner.address);
+  });
+
+  it("it should return a mint fee", async function () {
+    const lexiconomy = await deployLexiconomy();
+
+    const mintFee = await lexiconomy.mintFee();
+    expect(mintFee).to.equal(MIN_FEE);
+  });
+
+  it("should set a new pricer contract", async function () {
+    const newPrice = 10000;
+    const Pricer = await ethers.getContractFactory("SimplePricer");
+    const pricer = await Pricer.deploy(newPrice);
+
+    const lexiconomy = await deployLexiconomy();
+
+    await lexiconomy.setPricer(pricer.address);
+
+    const pricerAddr = await lexiconomy.pricer();
+    expect(pricerAddr).to.equal(pricer.address);
+
+    const mintFee = await lexiconomy.mintFee();
+    expect(mintFee).to.equal(newPrice);
+  });
+
+  it("should reject non-owner from setting a new pricer contract", async function () {
+    const Pricer = await ethers.getContractFactory("SimplePricer");
+    const pricer = await Pricer.deploy(MIN_FEE);
+
+    const lexiconomy = await deployLexiconomy();
+    const [_, nonOwner] = await ethers.getSigners();
+    try {
+      await lexiconomy.connect(nonOwner).setPricer(pricer.address);
+      // fail -> should not succeed
+      expect(true).to.equal(false);
+    } catch (error) {
+      expect((error as ContractError).message).to.contain(
+        "caller is not the owner"
+      );
+    }
   });
 });
