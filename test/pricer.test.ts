@@ -2,9 +2,9 @@ import { ethers } from "hardhat";
 import { Signer } from "ethers";
 import { expect } from "chai";
 
-describe("SimplePricer", function () {
+describe("FixedPricer", function () {
   it("should set the inital price once deployed", async function () {
-    const Pricer = await ethers.getContractFactory("SimplePricer");
+    const Pricer = await ethers.getContractFactory("FixedPricer");
     const initalVal = 100;
     const pricer = await Pricer.deploy(initalVal);
     await pricer.deployed();
@@ -13,7 +13,7 @@ describe("SimplePricer", function () {
   });
 
   it("should return the new price once it's changed", async function () {
-    const Pricer = await ethers.getContractFactory("SimplePricer");
+    const Pricer = await ethers.getContractFactory("FixedPricer");
     const initalVal = 100;
     const pricer = await Pricer.deploy(initalVal);
     await pricer.deployed();

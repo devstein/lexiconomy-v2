@@ -5,7 +5,7 @@ import { expect } from "chai";
 const MIN_FEE = 1000;
 
 const deployLexiconomy = async () => {
-  const Pricer = await ethers.getContractFactory("SimplePricer");
+  const Pricer = await ethers.getContractFactory("FixedPricer");
   const pricer = await Pricer.deploy(MIN_FEE);
 
   console.log(pricer.address);
@@ -283,7 +283,7 @@ describe("Lexiconomy", function () {
 
   it("should set a new pricer contract", async function () {
     const newPrice = 10000;
-    const Pricer = await ethers.getContractFactory("SimplePricer");
+    const Pricer = await ethers.getContractFactory("FixedPricer");
     const pricer = await Pricer.deploy(newPrice);
 
     const lexiconomy = await deployLexiconomy();
@@ -298,7 +298,7 @@ describe("Lexiconomy", function () {
   });
 
   it("should reject non-owner from setting a new pricer contract", async function () {
-    const Pricer = await ethers.getContractFactory("SimplePricer");
+    const Pricer = await ethers.getContractFactory("FixedPricer");
     const pricer = await Pricer.deploy(MIN_FEE);
 
     const lexiconomy = await deployLexiconomy();
