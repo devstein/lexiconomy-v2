@@ -51,24 +51,37 @@ describe("Lexiconomy", function () {
     const actualOwner = await lexiconomy.ownerOf(tokenId);
     expect(actualOwner).to.equal(owner.address);
 
+    const numberOfTokens = 1;
     // want to assert that the default address owns the token
     const tokenCount = await lexiconomy.balanceOf(owner.address);
-    expect(tokenCount).to.equal(1);
+    expect(tokenCount).to.equal(numberOfTokens);
 
     // want to assert that the default address owns the token
     const tokenSupply = await lexiconomy.totalSupply();
-    expect(tokenSupply).to.equal(1);
+    expect(tokenSupply).to.equal(numberOfTokens);
 
     // want to assert the Transfer and Invent events fired
-    expect(reciept.events).to.have.length(1);
+    expect(reciept.events).to.have.length(2);
+
+    const [transfer, invent] = reciept.events;
+
+    expect(transfer.args.to).to.equal(owner.address);
+    expect(transfer.args.tokenId).to.equal(tokenId);
+
+    expect(invent.args.owner).to.equal(owner.address);
+    expect(invent.args.tokenId).to.equal(tokenId);
+    expect(invent.args.fee).to.equal(value);
+    expect(invent.args.number).to.equal(numberOfTokens);
+    expect(invent.args.lemma).to.equal(VALID_LEMMA);
   });
 
   it("should reject if minting fee is too low", async function () {
     const lexiconomy = await deployLexiconomy();
 
     try {
+      const value = await lexiconomy.mintFee();
       await lexiconomy.mint(VALID_LEMMA, {
-        value: 0,
+        value: value - 1,
       });
       expect(true).to.equal(false);
     } catch (error) {
@@ -112,7 +125,7 @@ describe("Lexiconomy", function () {
     const tokenId = ethers.utils.id(VALID_LEMMA);
     const definition = "a definition";
 
-    const tx = await lexiconomy.define(tokenId, definition);
+    const tx = await lexiconomy.definition(tokenId, definition);
 
     const reciept = await tx.wait();
     expect(reciept.events).to.have.length(1);
