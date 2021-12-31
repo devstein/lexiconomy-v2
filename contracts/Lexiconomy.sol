@@ -8,17 +8,11 @@ contract Lexiconomy is LemmaToken {
     event Donation(address indexed donor);
 
     /// @notice Creates the main Lexiconomy smart contract instance.
-    // TODO: Migration script
     constructor(address _pricer, address _lemmaValidator) {
         // Starts paused.
         pause();
         setPricer(_pricer);
         setLemmaValidator(_lemmaValidator);
-
-        // invent the lexiconomy
-        // uint256 lexiconomyId = 16346186601005818604545026402126349825711086327116502709577031182923613203716;
-        // _inventLemma(msg.sender, lexiconomyId, 0, 0);
-        // _defineLemma(lexiconomyId, "the world's decentralized dictionary.");
     }
 
     /// @notice Thank you :)
