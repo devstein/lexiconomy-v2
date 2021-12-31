@@ -15,7 +15,8 @@ const deployLexiconomy = async () => {
   const Lexiconomy = await ethers.getContractFactory("Lexiconomy");
   const lexiconomy = await Lexiconomy.deploy(pricer.address, validator.address);
 
-  // TODO: we need to unpause!
+  await lexiconomy.unpause();
+
   return lexiconomy;
 };
 
@@ -36,9 +37,9 @@ describe("Lexiconomy", function () {
     const lexiconomy = await deployLexiconomy();
     const [owner] = await ethers.getSigners();
 
-    // TODO: dynamically get value via .price
+    const value = await lexiconomy.mintFee();
     const tx = await lexiconomy.mint(VALID_LEMMA, {
-      value: MIN_FEE,
+      value,
     });
 
     const reciept = await tx.wait();
@@ -60,8 +61,6 @@ describe("Lexiconomy", function () {
 
     // want to assert the Transfer and Invent events fired
     expect(reciept.events).to.have.length(1);
-
-    // TODO: check contract balance
   });
 
   it("should reject if minting fee is too low", async function () {
@@ -79,75 +78,19 @@ describe("Lexiconomy", function () {
     }
   });
 
-  it("should not mint uppercase letters", async function () {
-    const lexiconomy = await deployLexiconomy();
-
-    try {
-      await lexiconomy.mint("TEST", {
-        value: MIN_FEE,
-      });
-      expect(true).to.equal(false);
-    } catch (error) {
-      expect((error as ContractError).message).to.contain(
-        "lemma contains illegal characters "
-      );
-    }
-  });
-
-  it("should not mint non-space whitespace", async function () {
-    const lexiconomy = await deployLexiconomy();
-
-    try {
-      // this is tab character
-      await lexiconomy.mint("a phrase", {
-        value: MIN_FEE,
-      });
-      expect(true).to.equal(false);
-    } catch (error) {
-      expect((error as ContractError).message).to.contain(
-        "lemma contains illegal characters"
-      );
-    }
-  });
-
-  it("should not mint non-trimmed lemmas", async function () {
-    const lexiconomy = await deployLexiconomy();
-
-    try {
-      // this is tab character
-      await lexiconomy.mint("test	", {
-        value: MIN_FEE,
-      });
-      expect(true).to.equal(false);
-    } catch (error) {
-      expect((error as ContractError).message).to.contain(
-        "lemma contains illegal characters"
-      );
-    }
-    try {
-      // this is tab character
-      await lexiconomy.mint(" test", {
-        value: MIN_FEE,
-      });
-      expect(true).to.equal(false);
-    } catch (error) {
-      expect((error as ContractError).message).to.contain(
-        "lemma contains illegal characters"
-      );
-    }
-  });
-
   it("should not allow the same lemma to be created twice", async function () {
     const lexiconomy = await deployLexiconomy();
 
+    const value = await lexiconomy.mintFee();
     const tx = await lexiconomy.mint(VALID_LEMMA, {
-      value: MIN_FEE,
+      value,
     });
     await tx.wait();
 
     try {
+      const value = await lexiconomy.mintFee();
       await lexiconomy.mint(VALID_LEMMA, {
-        value: MIN_FEE,
+        value,
       });
       expect(true).to.equal(false);
     } catch (error) {
@@ -160,15 +103,16 @@ describe("Lexiconomy", function () {
   it("should allow owners to define their lemmas", async function () {
     const lexiconomy = await deployLexiconomy();
 
+    const value = await lexiconomy.mintFee();
     await lexiconomy.mint(VALID_LEMMA, {
-      value: MIN_FEE,
+      value,
     });
 
     // need to generate tokenId
     const tokenId = ethers.utils.id(VALID_LEMMA);
     const definition = "a definition";
 
-    const tx = await lexiconomy.definition(tokenId, definition);
+    const tx = await lexiconomy.define(tokenId, definition);
 
     const reciept = await tx.wait();
     expect(reciept.events).to.have.length(1);
@@ -185,8 +129,9 @@ describe("Lexiconomy", function () {
   it("should reject non-owners from defining a lemma", async function () {
     const lexiconomy = await deployLexiconomy();
 
+    const value = await lexiconomy.mintFee();
     await lexiconomy.mint(VALID_LEMMA, {
-      value: MIN_FEE,
+      value,
     });
 
     // need to generate tokenId
@@ -208,8 +153,9 @@ describe("Lexiconomy", function () {
   it("should allow owners to add examples to their lemmas", async function () {
     const lexiconomy = await deployLexiconomy();
 
+    const value = await lexiconomy.mintFee();
     await lexiconomy.mint(VALID_LEMMA, {
-      value: MIN_FEE,
+      value,
     });
 
     // need to generate tokenId
@@ -233,8 +179,9 @@ describe("Lexiconomy", function () {
   it("should reject non-owners from adding examples a lemma", async function () {
     const lexiconomy = await deployLexiconomy();
 
+    const value = await lexiconomy.mintFee();
     await lexiconomy.mint(VALID_LEMMA, {
-      value: MIN_FEE,
+      value,
     });
 
     // need to generate tokenId
@@ -270,7 +217,7 @@ describe("Lexiconomy", function () {
     expect(args[0]).to.equal(owner.address);
   });
 
-  it("it should return a mint fee", async function () {
+  it("should return a mint fee", async function () {
     const lexiconomy = await deployLexiconomy();
 
     const mintFee = await lexiconomy.mintFee();
@@ -307,6 +254,69 @@ describe("Lexiconomy", function () {
       expect((error as ContractError).message).to.contain(
         "caller is not the owner"
       );
+    }
+  });
+
+  it("should set a new validator contract", async function () {
+    const lemma = "test";
+    const Validator = await ethers.getContractFactory("MockStringValidator");
+    const validator = await Validator.deploy(lemma);
+
+    const lexiconomy = await deployLexiconomy();
+
+    await lexiconomy.setLemmaValidator(validator.address);
+
+    const validatorAddr = await lexiconomy.lemmaValidator();
+    expect(validatorAddr).to.equal(validator.address);
+  });
+
+  it("should reject non-owner from setting a new validator contract", async function () {
+    const lemma = "test";
+    const Validator = await ethers.getContractFactory("MockStringValidator");
+    const validator = await Validator.deploy(lemma);
+
+    const lexiconomy = await deployLexiconomy();
+
+    const [_, nonOwner] = await ethers.getSigners();
+    try {
+      await lexiconomy.connect(nonOwner).setLemmaValidator(validator.address);
+      // fail -> should not succeed
+      expect(true).to.equal(false);
+    } catch (error) {
+      expect((error as ContractError).message).to.contain(
+        "caller is not the owner"
+      );
+    }
+  });
+
+  it("should return the correct token URI", async function () {
+    const lexiconomy = await deployLexiconomy();
+
+    const value = await lexiconomy.mintFee();
+    const tx = await lexiconomy.mint(VALID_LEMMA, {
+      value,
+    });
+
+    const reciept = await tx.wait();
+    const tokenId = await lexiconomy.getTokenId(VALID_LEMMA);
+
+    const expected = `https://lexiconomy.org/lemma-id/${tokenId}`;
+    const uri = await lexiconomy.tokenURI(tokenId);
+    expect(uri).to.equal(expected);
+  });
+
+  it("should prevent the tokens from minting when the contract is paused", async function () {
+    const lexiconomy = await deployLexiconomy();
+    await lexiconomy.pause();
+
+    try {
+      const value = await lexiconomy.mintFee();
+      await lexiconomy.mint(VALID_LEMMA, {
+        value,
+      });
+      expect(true).to.equal(false);
+    } catch (error) {
+      expect((error as ContractError).message).to.contain("paused");
     }
   });
 });

@@ -11,7 +11,7 @@ contract Lexiconomy is LemmaToken {
     // TODO: Migration script
     constructor(address _pricer, address _lemmaValidator) {
         // Starts paused.
-        // _pause();
+        pause();
         setPricer(_pricer);
         setLemmaValidator(_lemmaValidator);
 
