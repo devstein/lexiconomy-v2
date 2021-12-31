@@ -11,14 +11,14 @@ async function main() {
   const Pricer = await ethers.getContractFactory(PRICER_CONTRACT);
   const pricer = await Pricer.deploy(MINT_FEE_WEI);
   await pricer.deployed();
-  console.log(`${PRICER_CONTRACT} contract deployed.`);
+  console.log(`${PRICER_CONTRACT} contract deployed: ${pricer.address}`);
 
   // 2. Deploy LemmaValidator Contract
   // - Set invalid characters
   const Validator = await ethers.getContractFactory(VALIDATOR_CONTRACT);
   const validator = await Validator.deploy();
   await validator.deployed();
-  console.log(`${VALIDATOR_CONTRACT} contract deployed.`);
+  console.log(`${VALIDATOR_CONTRACT} contract deployed: ${validator.address}`);
 
   const illegalCharCodepoints = await getIllegalCharacterCodepoints();
 
@@ -31,7 +31,7 @@ async function main() {
   const Lexiconomy = await ethers.getContractFactory("Lexiconomy");
   const lexiconomy = await Lexiconomy.deploy(pricer.address, validator.address);
   await lexiconomy.deployed();
-  console.log("Lexiconomy deployed 🎉");
+  console.log(`Lexiconomy deployed 🎉: ${lexiconomy.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
