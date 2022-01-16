@@ -1,5 +1,4 @@
 import { ethers } from "hardhat";
-import fs from "fs";
 import fetch from "node-fetch";
 
 // Adapted from: https://github.com/chbrown/unidata
