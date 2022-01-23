@@ -7,28 +7,27 @@ import "./StringValidator.sol";
 
 // MockStringValidator is for testing
 contract MockStringValidator is StringValidator, Ownable {
-    bytes4 public constant interfaceId = type(StringValidator).interfaceId;
+  bytes4 public constant interfaceId = type(StringValidator).interfaceId;
 
-    string public validString;
+  string public validString;
 
-    constructor(string memory _valid) {
-        validString = _valid;
-    }
+  constructor(string memory _valid) {
+    validString = _valid;
+  }
 
-    /// @dev Given a string, determine if all it's underlying UTF-8 unicode characters are valid.
-    function valid(string memory _str) external view returns (bool) {
-        return (keccak256(bytes((_str))) == keccak256(bytes((validString))));
-    }
+  /// @dev Given a string, determine if all it's underlying UTF-8 unicode characters are valid.
+  function valid(string memory _str) external view returns (bool) {
+    return (keccak256(bytes((_str))) == keccak256(bytes((validString))));
+  }
 
-    function supportsInterface(bytes4 _interfaceId)
-        public
-        view
-        virtual
-        override(IERC165)
-        returns (bool)
-    {
-        return
-            _interfaceId == interfaceId ||
-            _interfaceId == type(IERC165).interfaceId;
-    }
+  function supportsInterface(bytes4 _interfaceId)
+    public
+    view
+    virtual
+    override(IERC165)
+    returns (bool)
+  {
+    return
+      _interfaceId == interfaceId || _interfaceId == type(IERC165).interfaceId;
+  }
 }
