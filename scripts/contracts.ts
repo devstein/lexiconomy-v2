@@ -1,7 +1,10 @@
 import { ethers } from "hardhat";
 import { Contract } from "ethers";
 
-import { getIllegalCharacterCodepoints } from "./unicode-data";
+import {
+  getIllegalCharacterCodePoints,
+  getWhitespaceCodePoints,
+} from "./unicode-data";
 
 export const MINT_FEE_WEI = 1000000000000000; // .001 ETH
 
@@ -17,16 +20,31 @@ export const deployPricer = async (): Promise<Contract> => {
 };
 
 export const deployValidator = async (): Promise<Contract> => {
-  const Validator = await ethers.getContractFactory(VALIDATOR_CONTRACT);
+  const Unicode = await ethers.getContractFactory("Unicode");
+  const unicode = await Unicode.deploy();
+  const Validator = await ethers.getContractFactory(VALIDATOR_CONTRACT, {
+    libraries: {
+      Unicode: unicode.address,
+    },
+  });
   const validator = await Validator.deploy();
   await validator.deployed();
   console.log(`${VALIDATOR_CONTRACT} contract deployed: ${validator.address}`);
 
-  const illegalCharCodepoints = await getIllegalCharacterCodepoints();
+  const illegalCharCodepoints = await getIllegalCharacterCodePoints();
 
+  console.log("setting illegal characters...");
   for (let codepoint of illegalCharCodepoints) {
-    await validator.setCharacterValidity(codepoint, false);
+    await validator.setIllegalCharacter(codepoint, true);
   }
+
+  const whitespaceCodePoints = await getWhitespaceCodePoints();
+
+  console.log("setting whitespace characters...");
+  for (let codepoint of whitespaceCodePoints) {
+    await validator.setWhitespaceCharacter(codepoint, true);
+  }
+
   console.log(
     `${VALIDATOR_CONTRACT} contract character point validity configured`
   );

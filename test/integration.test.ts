@@ -31,10 +31,21 @@ onlyIntegration("Deployment and Integration Tests", function () {
     }
   });
 
-  it("should not mint non-space whitespace", async function () {
+  it("should allow separator characters", async function () {
     try {
       const value = await lexiconomy.mintFee();
-      await lexiconomy.mint("a phrase", {
+      await lexiconomy.mint("some long phrase", {
+        value,
+      });
+    } catch (error) {
+      expect(true).to.equal((error as ContractError).message);
+    }
+  });
+
+  it("should not mint multiple consecutive whitespace characters", async function () {
+    try {
+      const value = await lexiconomy.mintFee();
+      await lexiconomy.mint("a  phrase", {
         value,
       });
       expect(true).to.equal(false);

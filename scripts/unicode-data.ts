@@ -152,7 +152,24 @@ const parseUnicodeData = (data: string): Character[] =>
       return character;
     });
 
-export const getIllegalCharacterCodepoints = async (): Promise<number[]> => {
+export const getIllegalCharacterCodePoints = async (): Promise<number[]> => {
+  const data = await fetch(
+    "https://unicode.org/Public/UNIDATA/UnicodeData.txt"
+  ).then((resp) => resp.text());
+
+  const characters = parseUnicodeData(data);
+
+  const controls = characters.filter(({ cat }) => cat[0] === "C");
+  const uppercase = characters.filter(
+    ({ cat }) => cat === "Lu" || cat === "Lt"
+  );
+
+  const illegal = [...controls, ...uppercase];
+
+  return illegal.map(({ code }) => code);
+};
+
+export const getWhitespaceCodePoints = async (): Promise<number[]> => {
   const data = await fetch(
     "https://unicode.org/Public/UNIDATA/UnicodeData.txt"
   ).then((resp) => resp.text());
@@ -160,12 +177,6 @@ export const getIllegalCharacterCodepoints = async (): Promise<number[]> => {
   const characters = parseUnicodeData(data);
 
   const whitespaces = characters.filter(({ cat }) => cat[0] === "Z");
-  const controls = characters.filter(({ cat }) => cat[0] === "C");
-  const uppercase = characters.filter(
-    ({ cat }) => cat === "Lu" || cat === "Lt"
-  );
 
-  const illegal = [...whitespaces, ...controls, ...uppercase];
-
-  return illegal.map(({ code }) => code);
+  return whitespaces.map(({ code }) => code);
 };
