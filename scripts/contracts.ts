@@ -20,13 +20,11 @@ export const deployPricer = async (): Promise<Contract> => {
 };
 
 export const deployValidator = async (): Promise<Contract> => {
-  const Test = await ethers.getContractFactory(
-    "unicode-eth/contracts/Unicode.sol"
-  );
-  const test = await Test.deploy();
+  const Unicode = await ethers.getContractFactory("Unicode");
+  const unicode = await Unicode.deploy();
   const Validator = await ethers.getContractFactory(VALIDATOR_CONTRACT, {
     libraries: {
-      Unicode: test.address,
+      Unicode: unicode.address,
     },
   });
   const validator = await Validator.deploy();

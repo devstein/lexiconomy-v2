@@ -5,9 +5,7 @@ import { expect } from "chai";
 const VALIDATOR_CONTRACT = "LemmaValidator";
 
 const deploy = async () => {
-  const Lib = await ethers.getContractFactory(
-    "unicode-eth/contracts/Unicode.sol"
-  );
+  const Lib = await ethers.getContractFactory("Unicode");
   const lib = await Lib.deploy();
   const Validator = await ethers.getContractFactory(VALIDATOR_CONTRACT, {
     libraries: {
