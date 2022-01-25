@@ -1,7 +1,7 @@
 import { task, HardhatUserConfig } from "hardhat/config";
+
 import "@nomiclabs/hardhat-waffle";
-import "@nomiclabs/hardhat-etherscan";
-import "@primitivefi/hardhat-dodoc";
+import "hardhat-deploy";
 
 import "dotenv/config";
 
@@ -37,6 +37,14 @@ const config: HardhatUserConfig = {
       },
     },
   },
+  namedAccounts: {
+    deployer: {
+      default: 0, // here this will by default take the first account as deployer
+    },
+    nonOwner: {
+      default: 1, // here this will by default take the second account as non-owner
+    },
+  },
   networks: {
     ropsten: {
       url: `https://eth-ropsten.alchemyapi.io/v2/${ROPSTEN_ALCHEMY_API_KEY}`,
@@ -47,7 +55,9 @@ const config: HardhatUserConfig = {
       accounts: [`${MUMBAI_PRIVATE_KEY}`],
     },
   },
+  // @ts-ignore
   etherscan: {
+    // @ts-ignore
     apiKey: {
       // Ethereum
       mainnet: ETHERSCAN_API_KEY,
