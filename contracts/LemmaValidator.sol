@@ -75,10 +75,30 @@ contract LemmaValidator is StringValidator, Ownable {
     illegal[_codePoint] = _illegal;
   }
 
+  function batchSetIllegalCharacters(
+    uint32[] calldata _codePoints,
+    bool _illegal
+  ) external onlyOwner {
+    uint256 len = _codePoints.length;
+    for (uint256 i = 0; i < len; i++) {
+      illegal[_codePoints[i]] = _illegal;
+    }
+  }
+
   function setWhitespaceCharacter(uint32 _codePoint, bool _whitespace)
     external
     onlyOwner
   {
     whitespace[_codePoint] = _whitespace;
+  }
+
+  function batchSetWhitespaceCharacters(
+    uint32[] calldata _codePoints,
+    bool _whitespace
+  ) external onlyOwner {
+    uint256 len = _codePoints.length;
+    for (uint256 i = 0; i < len; i++) {
+      whitespace[_codePoints[i]] = _whitespace;
+    }
   }
 }
