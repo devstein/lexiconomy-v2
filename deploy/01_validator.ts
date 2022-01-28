@@ -11,6 +11,19 @@ const VALIDATOR_CONTRACT = "LemmaValidator";
 
 export const tags = ["Validator"];
 
+const printInitializationProgress = (
+  count: number,
+  total: number,
+  codepoint: number
+) => {
+  process.stdout.clearLine(1);
+  process.stdout.write(
+    `${count} of ${total}\t${((count / total) * 100).toFixed(
+      2
+    )}% \t ${codepoint}\r`
+  );
+};
+
 const func: DeployFunction = async function ({
   getNamedAccounts,
   deployments,
@@ -31,32 +44,44 @@ const func: DeployFunction = async function ({
     log: true,
   });
 
+  // only init new contracts
   if (!validator.newlyDeployed) return;
 
   const illegalCharCodepoints = await getIllegalCharacterCodePoints();
+  const chunkSize = 100;
+  let numChunks = Math.ceil(illegalCharCodepoints.length / chunkSize);
 
   log("setting illegal characters...");
-  for (let codepoint of illegalCharCodepoints) {
-    // @ts-ignore
+  for (let i = 0; i < numChunks; i++) {
+    const codePoints = illegalCharCodepoints.slice(
+      chunkSize * i,
+      chunkSize * (i + 1)
+    );
+    printInitializationProgress(i + 1, numChunks, codePoints[0]);
     await execute(
       VALIDATOR_CONTRACT,
       { from: deployer },
-      "setIllegalCharacter",
-      codepoint,
+      "batchSetIllegalCharacters",
+      codePoints,
       true
     );
   }
 
   const whitespaceCodePoints = await getWhitespaceCodePoints();
+  numChunks = Math.ceil(whitespaceCodePoints.length / chunkSize);
 
   log("setting whitespace characters...");
-  for (let codepoint of whitespaceCodePoints) {
-    // @ts-ignore
+  for (let i = 0; i < numChunks; i++) {
+    const codePoints = whitespaceCodePoints.slice(
+      chunkSize * i,
+      chunkSize * (i + 1)
+    );
+    printInitializationProgress(i + 1, numChunks, codePoints[0]);
     await execute(
       VALIDATOR_CONTRACT,
       { from: deployer },
-      "setWhitespaceCharacter",
-      codepoint,
+      "batchSetWhitespaceCharacters",
+      codePoints,
       true
     );
   }
