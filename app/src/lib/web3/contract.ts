@@ -6,7 +6,7 @@ import chains, { isChainSupported } from './chains';
 import type { ChainInfo } from './chains';
 import lemmas from './store';
 
-export const getServerProvider = (): Promise<Provider> => {
+export const getServerProvider = (): Provider => {
 	const rpc = import.meta.env.VITE_WEB3_PROVIDER;
 
 	if (!rpc) {
@@ -16,9 +16,7 @@ export const getServerProvider = (): Promise<Provider> => {
 	return new ethers.providers.JsonRpcProvider(String(rpc));
 };
 
-export const getServerChainInfo = async (): Promise<ChainInfo> => {
-	const provider = getServerProvider();
-
+export const getProviderChainInfo = async (provider: Provider): Promise<ChainInfo> => {
 	const { chainId } = await provider.getNetwork();
 
 	if (!isChainSupported(chainId)) {
@@ -90,7 +88,7 @@ export const getContract = async (): Promise<Contract> => {
 	if (contractPromise) return contractPromise;
 
 	const provider = getServerProvider();
-	const { lexiconomyAddress } = await getServerChainInfo();
+	const { lexiconomyAddress } = await getProviderChainInfo(provider);
 
 	contractPromise = new Promise((resolve) => {
 		let contract = new Contract(lexiconomyAddress, abi, provider);
@@ -105,11 +103,13 @@ export const getContract = async (): Promise<Contract> => {
 };
 
 export const getContractWithProvider = async (provider: Provider): Promise<Contract> => {
-	const signer = provider.getSigner();
-	let contract = new Contract(address, abi, provider);
+	const { lexiconomyAddress } = await getProviderChainInfo(provider);
+	let contract = new Contract(lexiconomyAddress, abi, provider);
 
 	// setup event subscriptions
 	contract = setContractEventSubscriptions(contract);
+
+	const signer = provider.getSigner();
 
 	return contract.connect(signer);
 };

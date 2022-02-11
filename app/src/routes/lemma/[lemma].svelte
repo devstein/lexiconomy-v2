@@ -34,6 +34,9 @@
 	});
 
 	const mint = async () => {
+		if (!$connected) {
+			await window.ethereum.request({ method: 'eth_requestAccounts' });
+		}
 		const contract = await getContractWithProvider($provider);
 		const fee = await contract.mintFee();
 
