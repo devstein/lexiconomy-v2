@@ -3,7 +3,10 @@
 
 	let search: string;
 
-	const submit = () => goto(`/lemma/${search}`);
+	const submit = () => {
+		if (!search) return;
+		goto(`/lemma/${encodeURIComponent(search.trim())}`);
+	};
 </script>
 
 <header class="flex flex-row items-center font-mono space-x-4">
