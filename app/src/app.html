@@ -10,25 +10,28 @@
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-		<link rel="manifest" href="%svelte.assets%/manifest.json" />
+		<!--
+		TODO: MOVE TO <svelte:head> in layout
+    -->
+		<link rel="manifest" href="/manifest.json" />
 
-		<link rel="shortcut icon" href="%svelte.assets%/favicon/favicon.ico" />
+		<link rel="shortcut icon" href="/favicon/favicon.ico" />
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="%svelte.assets%/favicon/apple-touch-icon.png"
+			href="/favicon/apple-touch-icon.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="32x32"
-			href="%svelte.assets%/favicon/favicon-32x32.png"
+			href="/favicon/favicon-32x32.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="16x16"
-			href="%svelte.assets%/favicon/favicon-16x16.png"
+			href="/favicon/favicon-16x16.png"
 		/>
 		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
 
