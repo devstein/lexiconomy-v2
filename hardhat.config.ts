@@ -20,6 +20,9 @@ task("accounts", "Prints the list of accounts", async () => {
 const ROPSTEN_PRIVATE_KEY = process.env.ROPSTEN_PRIVATE_KEY;
 const ROPSTEN_ALCHEMY_API_KEY = process.env.ROPSTEN_ALCHEMY_API_KEY;
 
+const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY;
+const RINKEBY_ALCHEMY_API_KEY = process.env.RINKEBY_ALCHEMY_API_KEY;
+
 const MUMBAI_PRIVATE_KEY = process.env.MUMBAI_PRIVATE_KEY;
 const MUMBAI_ALCHEMY_API_KEY = process.env.MUMBAI_ALCHEMY_API_KEY;
 
@@ -47,6 +50,10 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
+    rinkeby: {
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${RINKEBY_ALCHEMY_API_KEY}`,
+      accounts: [`${RINKEBY_PRIVATE_KEY}`],
+    },
     ropsten: {
       url: `https://eth-ropsten.alchemyapi.io/v2/${ROPSTEN_ALCHEMY_API_KEY}`,
       accounts: [`${ROPSTEN_PRIVATE_KEY}`],
@@ -63,6 +70,7 @@ const config: HardhatUserConfig = {
       // Ethereum
       mainnet: ETHERSCAN_API_KEY,
       ropsten: ETHERSCAN_API_KEY,
+      rinkeby: ETHERSCAN_API_KEY,
       // polygon
       polygon: POLYGONSCAN_API_KEY,
       polygonMumbai: POLYGONSCAN_API_KEY,
