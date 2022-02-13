@@ -13,6 +13,7 @@
 
 	// pass lemma as prop
 	export let tokenId: BigNumber;
+	export let number: BigNumber;
 	export let definition: string;
 	export let example: string;
 	export let owner: string;
@@ -76,7 +77,7 @@
 	<div>
 		<h3 class="section">metadata</h3>
 		<div class="flex flex-row flex-wrap space-x-8 text-gray-700 text-base">
-			<div>#4</div>
+			<div>#{number}</div>
 			<div>
 				owned by
 				<a
