@@ -1,9 +1,10 @@
 import { ethers } from "hardhat";
-import { Signer } from "ethers";
 import { expect } from "chai";
 
 const MIN_FEE = 1000;
 const VALID_LEMMA = "valid";
+const LEMMA_DEFINITION = "definition";
+const LEMMA_EXAMPLE = "example";
 
 const deployLexiconomy = async () => {
   const Pricer = await ethers.getContractFactory("FixedPricer");
@@ -38,9 +39,14 @@ describe("Lexiconomy", function () {
     const [owner] = await ethers.getSigners();
 
     const value = await lexiconomy.mintFee();
-    const tx = await lexiconomy.mint(VALID_LEMMA, {
-      value,
-    });
+    const tx = await lexiconomy.mint(
+      VALID_LEMMA,
+      LEMMA_DEFINITION,
+      LEMMA_EXAMPLE,
+      {
+        value,
+      }
+    );
 
     const reciept = await tx.wait();
 
@@ -60,19 +66,31 @@ describe("Lexiconomy", function () {
     const tokenSupply = await lexiconomy.totalSupply();
     expect(tokenSupply).to.equal(numberOfTokens);
 
-    // want to assert the Transfer and Invent events fired
-    expect(reciept.events).to.have.length(2);
+    // verify the data is correctly saved to the lemmas mapping
+    const data = await lexiconomy.lemmas(tokenId);
+    expect(data.lemma).to.equal(VALID_LEMMA);
+    expect(data.definition).to.equal(LEMMA_DEFINITION);
+    expect(data.example).to.equal(LEMMA_EXAMPLE);
 
-    const [transfer, invent] = reciept.events;
+    // want to assert the Transfer, Invent, Definition, Example events fired
+    expect(reciept.events).to.have.length(4);
+
+    const [transfer, invent, definition, example] = reciept.events;
 
     expect(transfer.args.to).to.equal(owner.address);
     expect(transfer.args.tokenId).to.equal(tokenId);
 
     expect(invent.args.owner).to.equal(owner.address);
     expect(invent.args.tokenId).to.equal(tokenId);
-    expect(invent.args.fee).to.equal(value);
-    expect(invent.args.number).to.equal(numberOfTokens);
     expect(invent.args.lemma).to.equal(VALID_LEMMA);
+
+    expect(definition.args.owner).to.equal(owner.address);
+    expect(definition.args.tokenId).to.equal(tokenId);
+    expect(definition.args.definition).to.equal(LEMMA_DEFINITION);
+
+    expect(example.args.owner).to.equal(owner.address);
+    expect(example.args.tokenId).to.equal(tokenId);
+    expect(example.args.example).to.equal(LEMMA_EXAMPLE);
   });
 
   it("should reject if minting fee is too low", async function () {
@@ -80,7 +98,7 @@ describe("Lexiconomy", function () {
 
     try {
       const value = await lexiconomy.mintFee();
-      await lexiconomy.mint(VALID_LEMMA, {
+      await lexiconomy.mint(VALID_LEMMA, LEMMA_DEFINITION, LEMMA_EXAMPLE, {
         value: value - 1,
       });
       expect(true).to.equal(false);
@@ -95,14 +113,19 @@ describe("Lexiconomy", function () {
     const lexiconomy = await deployLexiconomy();
 
     const value = await lexiconomy.mintFee();
-    const tx = await lexiconomy.mint(VALID_LEMMA, {
-      value,
-    });
+    const tx = await lexiconomy.mint(
+      VALID_LEMMA,
+      LEMMA_DEFINITION,
+      LEMMA_EXAMPLE,
+      {
+        value,
+      }
+    );
     await tx.wait();
 
     try {
       const value = await lexiconomy.mintFee();
-      await lexiconomy.mint(VALID_LEMMA, {
+      await lexiconomy.mint(VALID_LEMMA, LEMMA_DEFINITION, LEMMA_EXAMPLE, {
         value,
       });
       expect(true).to.equal(false);
@@ -117,13 +140,17 @@ describe("Lexiconomy", function () {
     const lexiconomy = await deployLexiconomy();
 
     const value = await lexiconomy.mintFee();
-    await lexiconomy.mint(VALID_LEMMA, {
+    await lexiconomy.mint(VALID_LEMMA, LEMMA_DEFINITION, LEMMA_EXAMPLE, {
       value,
     });
 
     // need to generate tokenId
     const tokenId = ethers.utils.id(VALID_LEMMA);
     const definition = "a definition";
+
+    // verify the data before updating
+    const data = await lexiconomy.lemmas(tokenId);
+    expect(data.definition).to.equal(LEMMA_DEFINITION);
 
     const tx = await lexiconomy.definition(tokenId, definition);
 
@@ -137,13 +164,17 @@ describe("Lexiconomy", function () {
     expect(args[0]).to.equal(owner.address);
     expect(args[1]).to.equal(tokenId);
     expect(args[2]).to.equal(definition);
+
+    // verify the data before updating
+    const updated = await lexiconomy.lemmas(tokenId);
+    expect(updated.definition).to.equal(definition);
   });
 
   it("should reject non-owners from defining a lemma", async function () {
     const lexiconomy = await deployLexiconomy();
 
     const value = await lexiconomy.mintFee();
-    await lexiconomy.mint(VALID_LEMMA, {
+    await lexiconomy.mint(VALID_LEMMA, LEMMA_DEFINITION, LEMMA_EXAMPLE, {
       value,
     });
 
@@ -167,13 +198,17 @@ describe("Lexiconomy", function () {
     const lexiconomy = await deployLexiconomy();
 
     const value = await lexiconomy.mintFee();
-    await lexiconomy.mint(VALID_LEMMA, {
+    await lexiconomy.mint(VALID_LEMMA, LEMMA_DEFINITION, LEMMA_EXAMPLE, {
       value,
     });
 
     // need to generate tokenId
     const tokenId = ethers.utils.id(VALID_LEMMA);
     const example = "an example";
+
+    // verify the data before updating
+    const current = await lexiconomy.lemmas(tokenId);
+    expect(current.example).to.equal(LEMMA_EXAMPLE);
 
     const tx = await lexiconomy.example(tokenId, example);
 
@@ -187,13 +222,17 @@ describe("Lexiconomy", function () {
     expect(args[0]).to.equal(owner.address);
     expect(args[1]).to.equal(tokenId);
     expect(args[2]).to.equal(example);
+
+    // verify the data is updated
+    const updated = await lexiconomy.lemmas(tokenId);
+    expect(updated.example).to.equal(example);
   });
 
   it("should reject non-owners from adding examples a lemma", async function () {
     const lexiconomy = await deployLexiconomy();
 
     const value = await lexiconomy.mintFee();
-    await lexiconomy.mint(VALID_LEMMA, {
+    await lexiconomy.mint(VALID_LEMMA, LEMMA_DEFINITION, LEMMA_EXAMPLE, {
       value,
     });
 
@@ -306,14 +345,19 @@ describe("Lexiconomy", function () {
     const lexiconomy = await deployLexiconomy();
 
     const value = await lexiconomy.mintFee();
-    const tx = await lexiconomy.mint(VALID_LEMMA, {
-      value,
-    });
+    const tx = await lexiconomy.mint(
+      VALID_LEMMA,
+      LEMMA_DEFINITION,
+      LEMMA_EXAMPLE,
+      {
+        value,
+      }
+    );
 
-    const reciept = await tx.wait();
+    await tx.wait();
     const tokenId = await lexiconomy.getTokenId(VALID_LEMMA);
 
-    const expected = `https://lexiconomy.org/lemma-id/${tokenId}`;
+    const expected = `https://lexiconomy.org/token/${tokenId}`;
     const uri = await lexiconomy.tokenURI(tokenId);
     expect(uri).to.equal(expected);
   });
@@ -324,7 +368,7 @@ describe("Lexiconomy", function () {
 
     try {
       const value = await lexiconomy.mintFee();
-      await lexiconomy.mint(VALID_LEMMA, {
+      await lexiconomy.mint(VALID_LEMMA, LEMMA_DEFINITION, LEMMA_EXAMPLE, {
         value,
       });
       expect(true).to.equal(false);

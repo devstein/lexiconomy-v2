@@ -38,7 +38,7 @@ contract LemmaToken is
 
   function _baseURI() internal pure override returns (string memory) {
     // tokenURI concats the baseURI with the token id
-    return "https://lexiconomy.org/lemma-id/";
+    return "https://lexiconomy.org/token/";
   }
 
   function _beforeTokenTransfer(
@@ -82,10 +82,13 @@ contract LemmaToken is
     override
     returns (bool)
   {
-    // Whitelist OpenSea proxy contract for easy trading
-    ProxyRegistry proxyRegistry = ProxyRegistry(proxyRegistryAddress);
-    if (address(proxyRegistry.proxies(owner)) == operator) {
-      return true;
+    // only execute if proxyRegistryAddress is set
+    if (proxyRegistryAddress != address(0)) {
+      // Whitelist OpenSea proxy contract for easy trading
+      ProxyRegistry proxyRegistry = ProxyRegistry(proxyRegistryAddress);
+      if (address(proxyRegistry.proxies(owner)) == operator) {
+        return true;
+      }
     }
 
     return super.isApprovedForAll(owner, operator);
@@ -97,15 +100,8 @@ contract LemmaToken is
 
   // END: Support OpenSea Trading
 
-  /// @dev The Invent event is fired whenever a new lemma is invented.
-  /// This helps map ERC721 token Ids back to the associate lemma
-  event Invent(
-    address indexed owner,
-    uint256 indexed tokenId,
-    uint256 fee,
-    uint256 number,
-    string lemma
-  );
+  /// @dev The Invent event is fired whenever a new lemma is invented
+  event Invent(address indexed owner, uint256 indexed tokenId, string lemma);
 
   /// @dev Definition event whenever an owner redefines their lemma
   event Definition(
@@ -116,6 +112,14 @@ contract LemmaToken is
 
   /// @dev Example event whenever an owner provides an example for their lemma
   event Example(address indexed owner, uint256 indexed tokenId, string example);
+
+  struct Lemma {
+    string lemma;
+    string definition;
+    string example;
+  }
+
+  mapping(uint256 => Lemma) public lemmas;
 
   bytes4 public constant pricerInterfaceId = type(Pricer).interfaceId;
   Pricer public pricer;
@@ -152,40 +156,60 @@ contract LemmaToken is
     return pricer.price();
   }
 
-  function lemmaValid(string memory _lemma) public view returns (bool) {
+  function lemmaValid(string calldata _lemma) public view returns (bool) {
     return lemmaValidator.valid(_lemma);
   }
 
-  function getTokenId(string memory _lemma) public pure returns (uint256) {
+  function getTokenId(string calldata _lemma) public pure returns (uint256) {
     return uint256(keccak256(bytes(_lemma)));
   }
 
-  function mint(string memory _lemma) public payable returns (uint256 tokenId) {
+  function mint(
+    string calldata _lemma,
+    string calldata _definition,
+    string calldata _example
+  ) public payable returns (uint256 tokenId) {
     require(msg.value >= mintFee(), "LemmaToken: minting fee too low");
     require(
       lemmaValid(_lemma),
-      "LemmaToken: lemma is invalid. Does it contain invalid characters?"
+      "LemmaToken: lemma is invalid: does it contain invalid characters?"
     );
     tokenId = getTokenId(_lemma);
+
+    // _safeMint verifies the tokenId doesn't exist
     _safeMint(msg.sender, tokenId);
+
+    lemmas[tokenId] = Lemma(_lemma, _definition, _example);
+
     // emit Invent event to associate metadata with minting a tokenId
-    emit Invent(msg.sender, tokenId, msg.value, totalSupply(), _lemma);
+    // TODO: Consider removing _lemma
+    emit Invent(msg.sender, tokenId, _lemma);
+    emit Definition(msg.sender, tokenId, _definition);
+    emit Example(msg.sender, tokenId, _example);
+
     return tokenId;
   }
 
   /// @dev named 'definition' because 'define' is a reserved keyword
-  function definition(uint256 tokenId, string calldata text)
+  function definition(uint256 tokenId, string calldata _text)
     public
     whenNotPaused
   {
     bool allowed = _isApprovedOrOwner(msg.sender, tokenId);
     require(allowed, "LemmaToken: caller is not owner nor approved");
-    emit Definition(msg.sender, tokenId, text);
+
+    lemmas[tokenId].definition = _text;
+    emit Definition(msg.sender, tokenId, _text);
   }
 
-  function example(uint256 tokenId, string calldata text) public whenNotPaused {
+  function example(uint256 tokenId, string calldata _text)
+    public
+    whenNotPaused
+  {
     bool allowed = _isApprovedOrOwner(msg.sender, tokenId);
     require(allowed, "LemmaToken: caller is not owner nor approved");
-    emit Example(msg.sender, tokenId, text);
+
+    lemmas[tokenId].example = _text;
+    emit Example(msg.sender, tokenId, _text);
   }
 }
