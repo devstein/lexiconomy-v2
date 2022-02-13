@@ -7,7 +7,7 @@
 
 	const submit = () => {
 		if (!search) return;
-		goto(`/lemma/${search}`);
+		goto(`/lemma/${encodeURIComponent(search.trim())}`);
 	};
 </script>
 

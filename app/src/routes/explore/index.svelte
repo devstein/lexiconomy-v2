@@ -48,6 +48,7 @@
 	export let lemmas: object[] = [];
 </script>
 
+<h1 class="text-5xl pb-4 mb-8 border-b-4 border-green-400">explore</h1>
 <div class="px-8 py-4 h-full">
 	<ul class="h-full grid grid-cols-5 gap-5 place-items-center break-words">
 		{#each items as item}
