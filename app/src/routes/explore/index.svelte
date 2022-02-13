@@ -1,7 +1,6 @@
 <script lang="ts" context="module">
 	export const prerender = true;
 
-	import Header from '$lib/components/Header.svelte';
 	import { getContract } from '$lib/web3/contract';
 
 	const items = [
@@ -48,8 +47,6 @@
 <script lang="ts">
 	export let lemmas: object[] = [];
 </script>
-
-<Header />
 
 <div class="px-8 py-4 h-full">
 	<ul class="h-full grid grid-cols-5 gap-5 place-items-center break-words">

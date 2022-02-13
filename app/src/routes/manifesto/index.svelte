@@ -1,7 +1,1 @@
-<script lang="ts">
-	import Header from '$lib/components/Header.svelte';
-</script>
-
-<Header />
-
-<div>manifesto</div>
+<h1>manifesto</h1>

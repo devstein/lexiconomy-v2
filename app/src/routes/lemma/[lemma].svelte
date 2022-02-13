@@ -19,7 +19,6 @@
 <script lang="ts">
 	import type { BigNumber } from 'ethers';
 
-	import Header from '$lib/components/Header.svelte';
 	import UndefinedState from './_undefined.svelte';
 	import DefinedState from './_defined.svelte';
 
@@ -40,13 +39,9 @@
 	console.log(owner, approved, tokenId, lemma);
 </script>
 
-<Header />
-<!-- TODO: Make Header/Layout have padding up until search icon on desktop -->
-<div class="px-40 py-8">
-	<h1 class="text-5xl pb-4 mb-8 border-b-4 border-yellow-400">{lemma}</h1>
-	{#if exists}
-		<DefinedState {tokenId} {example} {definition} {owner} {approved} />
-	{:else}
-		<UndefinedState {lemma} />
-	{/if}
-</div>
+<h1 class="text-5xl pb-4 mb-8 border-b-4 border-yellow-400">{lemma}</h1>
+{#if exists}
+	<DefinedState {tokenId} {example} {definition} {owner} {approved} />
+{:else}
+	<UndefinedState {lemma} />
+{/if}

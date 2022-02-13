@@ -10,7 +10,7 @@
 </script>
 
 <header class="flex flex-row items-center font-mono space-x-4">
-	<a href="/" class="text-2xl">lexiconomy</a>
+	<a href="/home" class="text-2xl">lexiconomy</a>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="24"
