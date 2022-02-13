@@ -1,0 +1,338 @@
+{
+  "address": "0xe93234da8074c55E3de7E2Ba886abD0fC59B000f",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32[]",
+          "name": "_codePoints",
+          "type": "uint32[]"
+        },
+        {
+          "internalType": "bool",
+          "name": "_illegal",
+          "type": "bool"
+        }
+      ],
+      "name": "batchSetIllegalCharacters",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32[]",
+          "name": "_codePoints",
+          "type": "uint32[]"
+        },
+        {
+          "internalType": "bool",
+          "name": "_whitespace",
+          "type": "bool"
+        }
+      ],
+      "name": "batchSetWhitespaceCharacters",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        }
+      ],
+      "name": "illegal",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "interfaceId",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "_codePoint",
+          "type": "uint32"
+        },
+        {
+          "internalType": "bool",
+          "name": "_illegal",
+          "type": "bool"
+        }
+      ],
+      "name": "setIllegalCharacter",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "_codePoint",
+          "type": "uint32"
+        },
+        {
+          "internalType": "bool",
+          "name": "_whitespace",
+          "type": "bool"
+        }
+      ],
+      "name": "setWhitespaceCharacter",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "_interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_str",
+          "type": "string"
+        }
+      ],
+      "name": "valid",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        }
+      ],
+      "name": "whitespace",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x6692bcbd043f3b5a6a5d3d68c2c6261b9473d942b9eaedf1e92f27c4c2739a75",
+  "receipt": {
+    "to": null,
+    "from": "0xC7346259a4a2E1ECCb34d7a2b124cbe0D8a98497",
+    "contractAddress": "0xe93234da8074c55E3de7E2Ba886abD0fC59B000f",
+    "transactionIndex": 24,
+    "gasUsed": "764063",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000100800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000020000000000000000000800004000000000000000000000000400400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000020000000000000000000000000800000000008000000000000000000000000000000",
+    "blockHash": "0x58df917d6d6952f9bf7454b0574dcbbaac60432bb443584aa6fa1485a98dc84f",
+    "transactionHash": "0x6692bcbd043f3b5a6a5d3d68c2c6261b9473d942b9eaedf1e92f27c4c2739a75",
+    "logs": [
+      {
+        "transactionIndex": 24,
+        "blockNumber": 10161676,
+        "transactionHash": "0x6692bcbd043f3b5a6a5d3d68c2c6261b9473d942b9eaedf1e92f27c4c2739a75",
+        "address": "0xe93234da8074c55E3de7E2Ba886abD0fC59B000f",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x000000000000000000000000c7346259a4a2e1eccb34d7a2b124cbe0d8a98497"
+        ],
+        "data": "0x",
+        "logIndex": 35,
+        "blockHash": "0x58df917d6d6952f9bf7454b0574dcbbaac60432bb443584aa6fa1485a98dc84f"
+      }
+    ],
+    "blockNumber": 10161676,
+    "cumulativeGasUsed": "6915810",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "7480a9ee76f77d5f4ab55bf783d13ed6",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint32[]\",\"name\":\"_codePoints\",\"type\":\"uint32[]\"},{\"internalType\":\"bool\",\"name\":\"_illegal\",\"type\":\"bool\"}],\"name\":\"batchSetIllegalCharacters\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32[]\",\"name\":\"_codePoints\",\"type\":\"uint32[]\"},{\"internalType\":\"bool\",\"name\":\"_whitespace\",\"type\":\"bool\"}],\"name\":\"batchSetWhitespaceCharacters\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"illegal\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"interfaceId\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"_codePoint\",\"type\":\"uint32\"},{\"internalType\":\"bool\",\"name\":\"_illegal\",\"type\":\"bool\"}],\"name\":\"setIllegalCharacter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"_codePoint\",\"type\":\"uint32\"},{\"internalType\":\"bool\",\"name\":\"_whitespace\",\"type\":\"bool\"}],\"name\":\"setWhitespaceCharacter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"_interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_str\",\"type\":\"string\"}],\"name\":\"valid\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"whitespace\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"valid(string)\":{\"details\":\"Given a string, determine if all it's underlying UTF-8 Unicode characters are valid.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/LemmaValidator.sol\":\"LemmaValidator\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (access/Ownable.sol)\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor() {\\n        _transferOwnership(_msgSender());\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        require(owner() == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions anymore. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby removing any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0x24e0364e503a9bbde94c715d26573a76f14cd2a202d45f96f52134ab806b67b9\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (utils/Context.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n}\\n\",\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/introspection/IERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (utils/introspection/IERC165.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Interface of the ERC165 standard, as defined in the\\n * https://eips.ethereum.org/EIPS/eip-165[EIP].\\n *\\n * Implementers can declare support of contract interfaces, which can then be\\n * queried by others ({ERC165Checker}).\\n *\\n * For an implementation, see {ERC165}.\\n */\\ninterface IERC165 {\\n    /**\\n     * @dev Returns true if this contract implements the interface defined by\\n     * `interfaceId`. See the corresponding\\n     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]\\n     * to learn more about how these ids are created.\\n     *\\n     * This function call must use less than 30 000 gas.\\n     */\\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\\n}\\n\",\"keccak256\":\"0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1\",\"license\":\"MIT\"},\"contracts/LemmaValidator.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\npragma solidity ^0.8.9;\\n\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\n\\nimport \\\"unicode-eth/contracts/Unicode.sol\\\";\\n\\nimport \\\"./StringValidator.sol\\\";\\n\\ncontract LemmaValidator is StringValidator, Ownable {\\n  using Unicode for string;\\n\\n  bytes4 public constant interfaceId = type(StringValidator).interfaceId;\\n\\n  mapping(uint32 => bool) public illegal;\\n  mapping(uint32 => bool) public whitespace;\\n\\n  constructor() {}\\n\\n  function supportsInterface(bytes4 _interfaceId)\\n    public\\n    view\\n    virtual\\n    override(IERC165)\\n    returns (bool)\\n  {\\n    return\\n      _interfaceId == interfaceId || _interfaceId == type(IERC165).interfaceId;\\n  }\\n\\n  /// @dev Given a string, determine if all it's underlying UTF-8 Unicode characters are valid.\\n  function valid(string memory _str) external view returns (bool) {\\n    string memory char;\\n    uint256 len = bytes(_str).length;\\n    uint256 cursor;\\n    uint32 codePoint;\\n\\n    // check first character\\n    (char, cursor) = _str.decodeChar(cursor);\\n    codePoint = char.toCodePoint();\\n\\n    // do not allow whitespace prefix\\n    if (illegal[codePoint] || whitespace[codePoint]) return false;\\n\\n    bool isWhitespace;\\n    // maintain flag for previous character\\n    bool prevWhitespace;\\n\\n    while (cursor < len) {\\n      (char, cursor) = _str.decodeChar(cursor);\\n      codePoint = char.toCodePoint();\\n\\n      // if invalid return false\\n      if (illegal[codePoint]) return false;\\n\\n      // only allow one whitespace character between words\\n      isWhitespace = whitespace[codePoint];\\n      if (isWhitespace && prevWhitespace) return false;\\n\\n      prevWhitespace = isWhitespace;\\n    }\\n\\n    // check last character\\n    // do not allow trailing whitespace\\n    // we've already check if it's illegal above\\n    if (isWhitespace) return false;\\n\\n    return true;\\n  }\\n\\n  function setIllegalCharacter(uint32 _codePoint, bool _illegal)\\n    external\\n    onlyOwner\\n  {\\n    illegal[_codePoint] = _illegal;\\n  }\\n\\n  function batchSetIllegalCharacters(\\n    uint32[] calldata _codePoints,\\n    bool _illegal\\n  ) external onlyOwner {\\n    uint256 len = _codePoints.length;\\n    for (uint256 i = 0; i < len; i++) {\\n      illegal[_codePoints[i]] = _illegal;\\n    }\\n  }\\n\\n  function setWhitespaceCharacter(uint32 _codePoint, bool _whitespace)\\n    external\\n    onlyOwner\\n  {\\n    whitespace[_codePoint] = _whitespace;\\n  }\\n\\n  function batchSetWhitespaceCharacters(\\n    uint32[] calldata _codePoints,\\n    bool _whitespace\\n  ) external onlyOwner {\\n    uint256 len = _codePoints.length;\\n    for (uint256 i = 0; i < len; i++) {\\n      whitespace[_codePoints[i]] = _whitespace;\\n    }\\n  }\\n}\\n\",\"keccak256\":\"0xdeab22c8024355b2211df97b3b3e3add33a961bf118d88c58b0bd0f78a98e007\",\"license\":\"MIT\"},\"contracts/StringValidator.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\npragma solidity ^0.8.9;\\n\\nimport \\\"@openzeppelin/contracts/utils/introspection/IERC165.sol\\\";\\n\\ninterface StringValidator is IERC165 {\\n  function valid(string memory _str) external view returns (bool);\\n}\\n\",\"keccak256\":\"0x7440f475e626b7f3a4edd50fc17341f19b4f6d721cf922eccafa9bf809b9a31f\",\"license\":\"MIT\"},\"unicode-eth/contracts/Unicode.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\npragma solidity ^0.8.9;\\n\\n/// @title A library for validating, parsing, and manipulating UTF-8 encoded Unicode strings\\n/// @author Devin Stein\\n/// @notice For character introspection or more complex transformations, checkout the UnicodeData contract.\\n/// @dev All external and public functions use self as their first parameter to allow \\\"using Unicode for strings;\\\". If you have ideas for new functions or improvements, please contribute!\\nlibrary Unicode {\\n  /// @notice Check if `self` contains only single byte ASCII characters (0-127)\\n  /// @dev If a string is only ASCII, then it's safe to treat each byte as a character. This returns false for extended ASCII (128-255) because they are use two bytes in UTF-8.\\n  /// @param self The input string\\n  /// @return True if  the `self` only contains ASCII\\n  function isASCII(string calldata self) external pure returns (bool) {\\n    bytes calldata _b = bytes(self);\\n    uint256 len = _b.length;\\n\\n    for (uint256 i = 0; i < len; i++) {\\n      if ((_b[i] & 0x80) != 0x00) return false;\\n    }\\n    return true;\\n  }\\n\\n  // ASCII\\n  /* 1 byte sequence: U+0000..U+007F */\\n  function isOneBytesSequence(bytes1 _b) private pure returns (bool) {\\n    return _b[0] <= 0x7F;\\n  }\\n\\n  /* 0b110xxxxx: 2 bytes sequence */\\n  /* U+0080..U+07FF */\\n  function isTwoBytesSequence(bytes1 _b) private pure returns (bool) {\\n    return bytes1(0xC2) <= _b[0] && _b[0] <= bytes1(0xDF);\\n  }\\n\\n  /* 0b1110xxxx: 3 bytes sequence */\\n  /* 3 bytes sequence: U+0800..U+FFFF */\\n  function isThreeBytesSequence(bytes1 _b) private pure returns (bool) {\\n    return bytes1(0xE0) <= _b[0] && _b[0] <= bytes1(0xEF);\\n  }\\n\\n  /* 4 bytes sequence: U+10000..U+10FFFF */\\n  /* 0b11110xxx: 4 bytes sequence */\\n  function isFourBytesSequence(bytes1 _b) private pure returns (bool) {\\n    return bytes1(0xF0) <= _b[0] && _b[0] <= bytes1(0xF4);\\n  }\\n\\n  function isContinuationByte(bytes1 _b) private pure returns (bool) {\\n    return ((_b & 0xC0) != 0x80);\\n  }\\n\\n  function twoBytesCodePoint(bytes memory _b) private pure returns (uint32) {\\n    return (uint16(uint8(_b[0] & 0x1f)) << 6) + uint16(uint8(_b[1] & 0x3f));\\n  }\\n\\n  function threeBytesCodePoint(bytes memory _b) private pure returns (uint32) {\\n    return\\n      (uint16(uint8(_b[0] & bytes1(0x0f))) << 12) +\\n      (uint16(uint8((_b[1] & bytes1(0x3f)))) << 6) +\\n      uint16(uint8(_b[2] & 0x3f));\\n  }\\n\\n  function fourBytesCodePoint(bytes memory _b) private pure returns (uint32) {\\n    return\\n      ((uint32(uint8(_b[0] & 0x07)) << 18)) +\\n      (uint32(uint8(_b[1] & 0x3f)) << 12) +\\n      (uint32(uint8(_b[2] & 0x3f)) << 6) +\\n      uint8(_b[3] & 0x3f);\\n  }\\n\\n  /// @notice Get length of `self`\\n  /// @dev For efficiency, length assumes valid UTF-8 encoded input. It only does simple checks for bytes sequences\\n  /// @param self The input string\\n  /// @return The number of UTF-8 characters in `self`\\n  function length(string calldata self) public pure returns (uint256) {\\n    bytes memory _b = bytes(self);\\n    uint256 end = _b.length;\\n    uint256 len;\\n    uint256 i;\\n\\n    while (i < end) {\\n      len++;\\n\\n      if (isOneBytesSequence(_b[i])) {\\n        i += 1;\\n        continue;\\n      } else if (isTwoBytesSequence(_b[i])) {\\n        i += 2;\\n        continue;\\n      } else if (isThreeBytesSequence(_b[i])) {\\n        i += 3;\\n        continue;\\n      } else if (isFourBytesSequence(_b[i])) {\\n        i += 4;\\n        continue;\\n      }\\n\\n      require(false, \\\"invalid utf8\\\");\\n    }\\n\\n    return len;\\n  }\\n\\n  /// @notice Get the code point of character: `self`\\n  /// @dev This function requires a valid UTF-8 character\\n  /// @param self The input character\\n  /// @return The code point of `self`\\n  function toCodePoint(string memory self) public pure returns (uint32) {\\n    bytes memory _b = bytes(self);\\n    uint256 len = _b.length;\\n\\n    require(\\n      len <= 4,\\n      \\\"invalid utf8 character: a character cannot be more than four bytes\\\"\\n    );\\n    require(len > 0, \\\"invalid utf8 character: empty string\\\");\\n\\n    if (isOneBytesSequence(_b[0])) return uint8(bytes1(_b[0]));\\n\\n    require(len > 1, \\\"invalid utf8 character\\\");\\n\\n    /* 0b110xxxxx: 2 bytes sequence */\\n    /* U+0080..U+07FF */\\n    if (isTwoBytesSequence(_b[0])) {\\n      return twoBytesCodePoint(_b);\\n    }\\n\\n    require(len > 2, \\\"invalid utf8 character\\\");\\n\\n    /* 0b1110xxxx: 3 bytes sequence */\\n    /* 3 bytes sequence: U+0800..U+FFFF */\\n    if (isThreeBytesSequence(_b[0])) {\\n      return threeBytesCodePoint(_b);\\n    }\\n\\n    require(len > 3, \\\"invalid utf8 character\\\");\\n\\n    /* 0b11110xxx: 4 bytes sequence */\\n    /* 4 bytes sequence: U+10000..U+10FFFF */\\n    if (isFourBytesSequence(_b[0])) {\\n      return fourBytesCodePoint(_b);\\n    }\\n\\n    require(false, \\\"invalid utf8 character\\\");\\n    return 0;\\n  }\\n\\n  /// @notice Check if `self` is valid UTF-8\\n  /// @param self The input string\\n  /// @return True if the string is UTF-8 encoded\\n  function isUTF8(string calldata self) external pure returns (bool) {\\n    bytes memory _b = bytes(self);\\n    uint256 end = _b.length;\\n    uint32 cp;\\n    uint256 i;\\n\\n    while (i < end) {\\n      if (isOneBytesSequence(_b[i])) {\\n        i += 1;\\n        continue;\\n      }\\n\\n      /* Check continuation bytes: bit 7 should be set, bit 6 should be\\n       * unset (b10xxxxxx). */\\n      if (isContinuationByte(_b[i + 1])) return false;\\n\\n      /* 0b110xxxxx: 2 bytes sequence */\\n      /* U+0080..U+07FF */\\n      if (isTwoBytesSequence(_b[i])) {\\n        cp = twoBytesCodePoint(bytes.concat(_b[i], _b[i + 1]));\\n\\n        if (cp < 0x0080 || cp > 0x07FF) return false;\\n\\n        i += 2;\\n        continue;\\n      }\\n\\n      if (isContinuationByte(_b[i + 2])) return false;\\n\\n      /* 0b1110xxxx: 3 bytes sequence */\\n      /* 3 bytes sequence: U+0800..U+FFFF */\\n      if (isThreeBytesSequence(_b[i])) {\\n        cp = threeBytesCodePoint(bytes.concat(_b[i], _b[i + 1], _b[i + 2]));\\n\\n        /* (0xff & 0x0f) << 12 | (0xff & 0x3f) << 6 | (0xff & 0x3f) = 0xffff,\\n                   so cp <= 0xffff */\\n        if (cp < 0x0800) return false;\\n\\n        /* surrogates (U+D800-U+DFFF) are invalid in UTF-8:\\n                   test if (0xD800 <= cp && cp <= 0xDFFF) */\\n        if ((cp >> 11) == 0x1b) return false;\\n        i += 3;\\n        continue;\\n      }\\n\\n      if (isContinuationByte(_b[i + 3])) return false;\\n\\n      /* 4 bytes sequence: U+10000..U+10FFFF */\\n      /* 0b11110xxx: 4 bytes sequence */\\n      if (isFourBytesSequence(_b[i])) {\\n        cp = fourBytesCodePoint(\\n          bytes.concat(_b[i], _b[i + 1], _b[i + 2], _b[i + 3])\\n        );\\n\\n        if ((cp < 0x10000) && (cp > 0x10FFFF)) return false;\\n\\n        i += 4;\\n        continue;\\n      }\\n\\n      // invalid\\n      return false;\\n    }\\n\\n    return true;\\n  }\\n\\n  /// @notice Decode the next UTF-8 character in `self` given a starting position of `_cursor`\\n  /// @dev decodeChar is useful for functions want to iterate over the string in one pass and check each category for a condition\\n  /// @param self The input string\\n  /// @param _cursor The starting bytes position (inclusive) of the character\\n  /// @return The next character as a string and the starting position of the next character.\\n  function decodeChar(string calldata self, uint256 _cursor)\\n    public\\n    pure\\n    returns (string memory, uint256)\\n  {\\n    bytes memory _b = bytes(self);\\n    uint256 len = _b.length;\\n    bytes memory output;\\n    uint32 cp;\\n\\n    require(_cursor < len, \\\"invalid cursor: cursor out of bounds\\\");\\n    output = bytes.concat(output, _b[_cursor]);\\n    _cursor++;\\n\\n    // ASCII\\n    /* 1 byte sequence: U+0000..U+007F */\\n    if (isOneBytesSequence(output[0])) return (string(output), _cursor);\\n\\n    require(_cursor < len, \\\"invalid cursor: cursor out of bounds\\\");\\n    /* Check continuation bytes: bit 7 should be set, bit 6 should be\\n     * unset (b10xxxxxx). */\\n    require(\\n      !isContinuationByte(_b[_cursor]),\\n      \\\"only bit 7 should contain a continuation byte\\\"\\n    );\\n    output = bytes.concat(output, _b[_cursor]);\\n    _cursor++;\\n\\n    /* 0b110xxxxx: 2 bytes sequence */\\n    /* U+0080..U+07FF */\\n    if (isTwoBytesSequence(output[0])) {\\n      cp = twoBytesCodePoint(output);\\n      require(\\n        cp >= 0x0080 && cp <= 0x07FF,\\n        \\\"invalid character: out of two bytes sequence range U+0080..U+07FF\\\"\\n      );\\n\\n      return (string(output), _cursor);\\n    }\\n\\n    require(_cursor < len, \\\"invalid cursor: cursor out of bounds\\\");\\n    /* Check continuation bytes: bit 7 should be set, bit 6 should be\\n     * unset (b10xxxxxx). */\\n    require(\\n      !isContinuationByte(_b[_cursor]),\\n      \\\"only bit 7 should contain a continuation byte\\\"\\n    );\\n    output = bytes.concat(output, _b[_cursor]);\\n    _cursor++;\\n\\n    /* 0b1110xxxx: 3 bytes sequence */\\n    /* 3 bytes sequence: U+0800..U+FFFF */\\n    if (isThreeBytesSequence(output[0])) {\\n      cp = threeBytesCodePoint(output);\\n      /* threeBytesCodePoint(cp) will always be <= 0xFFFF */\\n      require(\\n        cp >= 0x0800,\\n        \\\"invalid character: out of three bytes sequence range U+0800..U+FFFF\\\"\\n      );\\n\\n      /* surrogates (U+D800-U+DFFF) are invalid in UTF-8:\\n               test if (0xD800 <= cp && cp <= 0xDFFF) */\\n      require((cp >> 11) != 0x1b, \\\"surrogates are invalid in UTF-8\\\");\\n\\n      return (string(output), _cursor);\\n    }\\n\\n    require(_cursor < len, \\\"invalid cursor: cursor out of bounds\\\");\\n    /* Check continuation bytes: bit 7 (left-most) should be set, bit 6 should be\\n     * unset (b10xxxxxx). */\\n    require(\\n      !isContinuationByte(_b[_cursor]),\\n      \\\"only bit 7 should contain a continuation byte\\\"\\n    );\\n    output = bytes.concat(output, _b[_cursor]);\\n    _cursor++;\\n\\n    /* 0b11110xxx: 4 bytes sequence */\\n    /* 4 bytes sequence: U+10000..U+10FFFF */\\n    if (isFourBytesSequence(output[0])) {\\n      cp = fourBytesCodePoint(output);\\n\\n      require(\\n        (cp >= 0x10000) && (cp <= 0x10FFFF),\\n        \\\"invalid character: out of four bytes sequence range  U+10000..U+10FFFF\\\"\\n      );\\n\\n      return (string(output), _cursor);\\n    }\\n\\n    require(false, \\\"invalid utf8\\\");\\n    return (\\\"\\\", 0);\\n  }\\n\\n  /// @notice Decode every UTF-8 characters in `self`\\n  /// @param self The input string\\n  /// @return An ordered array of all UTF-8 characters  in `self`\\n  function decode(string calldata self)\\n    external\\n    pure\\n    returns (string[] memory)\\n  {\\n    // The charaters array must be initialized to a fixed size.\\n    // Loop over the string to get the number of charcters before decoding.\\n    uint256 size = length(self);\\n    string[] memory characters = new string[](size);\\n\\n    string memory char;\\n    uint256 cursor = 0;\\n    uint256 len = bytes(self).length;\\n    uint256 idx;\\n\\n    while (cursor < len) {\\n      (char, cursor) = decodeChar(self, cursor);\\n      characters[idx] = char;\\n      idx++;\\n    }\\n\\n    return characters;\\n  }\\n\\n  /// @notice Get the UTF-8 character at `_idx` for `self`\\n  /// @dev charAt will error if the idx is out of bounds\\n  /// @param self The input string\\n  /// @param _idx The index of the character to get\\n  /// @return The character at the given index\\n  function charAt(string calldata self, uint256 _idx)\\n    public\\n    pure\\n    returns (string memory)\\n  {\\n    string memory char;\\n    uint256 len = bytes(self).length;\\n    uint256 cursor;\\n\\n    for (uint256 i = 0; i <= _idx; i++) {\\n      (char, cursor) = decodeChar(self, cursor);\\n      // if we hit the end, it must be the _idx\\n      require(cursor < len || i == _idx, \\\"index out of bounds\\\");\\n    }\\n\\n    return char;\\n  }\\n\\n  /// @notice Get the Unicode code point at `_idx` for `self`\\n  /// @dev codePointAt requires a valid UTF-8 string\\n  /// @param self The input string\\n  /// @param _idx The index of the code point to get\\n  /// @return The Unicode code point at the given index\\n  function codePointAt(string calldata self, uint256 _idx)\\n    external\\n    pure\\n    returns (uint32)\\n  {\\n    return toCodePoint(charAt(self, _idx));\\n  }\\n\\n  /// @notice The return value of indexOf and bytesIndicesOf if the character is not found\\n  /// @dev Use CHAR_NOT_FOUND to check if indexOf or bytesIndicesOf does not find the inputted character\\n  uint256 public constant CHAR_NOT_FOUND = type(uint256).max;\\n\\n  /// @notice Get the character index of `_of` in string `self`\\n  /// @dev indexOf returns CHAR_NOT_FOUND if `_of` isn't found in `self`\\n  /// @param self The input string\\n  /// @param _of The character to find the index of\\n  /// @return The index of the character in the given string\\n  function indexOf(string calldata self, string calldata _of)\\n    external\\n    pure\\n    returns (uint256)\\n  {\\n    string memory char;\\n    uint256 cursor = 0;\\n    uint256 len = bytes(self).length;\\n    uint256 idx;\\n\\n    while (cursor < len) {\\n      (char, cursor) = decodeChar(self, cursor);\\n      if (keccak256(bytes(char)) == keccak256(bytes(_of))) return idx;\\n      idx++;\\n    }\\n\\n    return CHAR_NOT_FOUND;\\n  }\\n\\n  /// @notice Get the starting (inclusive) and ending (exclusive) bytes indices of character `_of` in string `self`\\n  /// @dev bytesIndicesOf returns (CHAR_NOT_FOUND, CHAR_NOT_FOUND) if `_of` isn't found in `self`\\n  /// @param self The input string\\n  /// @param _of The character to find the bytes indices of\\n  /// @return The starting (inclusive) and ending (exclusive) indites the character in the bytes underlying the string\\n  function bytesIndicesOf(string calldata self, string calldata _of)\\n    external\\n    pure\\n    returns (uint256, uint256)\\n  {\\n    string memory char;\\n    uint256 start;\\n    uint256 cursor = 0;\\n    uint256 len = bytes(self).length;\\n\\n    while (cursor < len) {\\n      // start is the prev cursor before the character\\n      start = cursor;\\n      (char, cursor) = decodeChar(self, cursor);\\n      if (keccak256(bytes(char)) == keccak256(bytes(_of)))\\n        return (start, cursor);\\n    }\\n\\n    return (CHAR_NOT_FOUND, CHAR_NOT_FOUND);\\n  }\\n}\\n\",\"keccak256\":\"0xc4ed0fc9064e7142c3eb12f9b059fed5ac5d479e9d1cf043b7b263b3436c28a0\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061001a3361001f565b61006f565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b610c698061007e6000396000f3fe608060405234801561001057600080fd5b50600436106100b45760003560e01c80638da5cb5b116100715780638da5cb5b146101575780639791c097146101725780639c7193c914610185578063a64d0cd414610198578063ee2e47c3146101bf578063f2fde38b146101d257600080fd5b806301ffc9a7146100b957806308bd9694146100e157806323309560146100f65780632b1bfb7514610109578063580fcace1461012c578063715018a61461014f575b600080fd5b6100cc6100c736600461084a565b6101e5565b60405190151581526020015b60405180910390f35b6100f46100ef3660046108a2565b61021c565b005b6100f46101043660046108a2565b610277565b6100cc6101173660046108d7565b60026020526000908152604090205460ff1681565b6100cc61013a3660046108d7565b60016020526000908152604090205460ff1681565b6100f46102c9565b6000546040516001600160a01b0390911681526020016100d8565b6100cc610180366004610963565b6102ff565b6100f46101933660046109e3565b610626565b6101a6639791c09760e01b81565b6040516001600160e01b031990911681526020016100d8565b6100f46101cd3660046109e3565b6106c6565b6100f46101e0366004610a67565b61075f565b60006001600160e01b03198216639791c09760e01b148061021657506001600160e01b031982166301ffc9a760e01b145b92915050565b6000546001600160a01b0316331461024f5760405162461bcd60e51b815260040161024690610a90565b60405180910390fd5b63ffffffff919091166000908152600260205260409020805460ff1916911515919091179055565b6000546001600160a01b031633146102a15760405162461bcd60e51b815260040161024690610a90565b63ffffffff919091166000908152600160205260409020805460ff1916911515919091179055565b6000546001600160a01b031633146102f35760405162461bcd60e51b815260040161024690610a90565b6102fd60006107fa565b565b805160405163127b597f60e01b81526000916060918390819073bC7b39ed8132064eCC00dfD8E5f07f3DD0b38d2B9063127b597f906103449089908590600401610b21565b60006040518083038186803b15801561035c57600080fd5b505af4158015610370573d6000803e3d6000fd5b505050506040513d6000823e601f3d908101601f191682016040526103989190810190610b43565b60405163a2be0d9d60e01b8152919550925073bC7b39ed8132064eCC00dfD8E5f07f3DD0b38d2B9063a2be0d9d906103d4908790600401610bc4565b60206040518083038186803b1580156103ec57600080fd5b505af4158015610400573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104249190610bd7565b63ffffffff811660009081526001602052604090205490915060ff1680610460575063ffffffff811660009081526002602052604090205460ff165b156104715750600095945050505050565b6000805b848410156106045760405163127b597f60e01b815273bC7b39ed8132064eCC00dfD8E5f07f3DD0b38d2B9063127b597f906104b6908b908890600401610b21565b60006040518083038186803b1580156104ce57600080fd5b505af41580156104e2573d6000803e3d6000fd5b505050506040513d6000823e601f3d908101601f1916820160405261050a9190810190610b43565b60405163a2be0d9d60e01b8152919750945073bC7b39ed8132064eCC00dfD8E5f07f3DD0b38d2B9063a2be0d9d90610546908990600401610bc4565b60206040518083038186803b15801561055e57600080fd5b505af4158015610572573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105969190610bd7565b63ffffffff811660009081526001602052604090205490935060ff16156105c557506000979650505050505050565b63ffffffff831660009081526002602052604090205460ff1691508180156105ea5750805b156105fd57506000979650505050505050565b5080610475565b811561061857506000979650505050505050565b506001979650505050505050565b6000546001600160a01b031633146106505760405162461bcd60e51b815260040161024690610a90565b8160005b818110156106bf57826001600087878581811061067357610673610bf4565b905060200201602081019061068891906108d7565b63ffffffff1681526020810191909152604001600020805460ff1916911515919091179055806106b781610c0a565b915050610654565b5050505050565b6000546001600160a01b031633146106f05760405162461bcd60e51b815260040161024690610a90565b8160005b818110156106bf57826002600087878581811061071357610713610bf4565b905060200201602081019061072891906108d7565b63ffffffff1681526020810191909152604001600020805460ff19169115159190911790558061075781610c0a565b9150506106f4565b6000546001600160a01b031633146107895760405162461bcd60e51b815260040161024690610a90565b6001600160a01b0381166107ee5760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152608401610246565b6107f7816107fa565b50565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b60006020828403121561085c57600080fd5b81356001600160e01b03198116811461087457600080fd5b9392505050565b63ffffffff811681146107f757600080fd5b8035801515811461089d57600080fd5b919050565b600080604083850312156108b557600080fd5b82356108c08161087b565b91506108ce6020840161088d565b90509250929050565b6000602082840312156108e957600080fd5b81356108748161087b565b634e487b7160e01b600052604160045260246000fd5b604051601f8201601f1916810167ffffffffffffffff81118282101715610933576109336108f4565b604052919050565b600067ffffffffffffffff821115610955576109556108f4565b50601f01601f191660200190565b60006020828403121561097557600080fd5b813567ffffffffffffffff81111561098c57600080fd5b8201601f8101841361099d57600080fd5b80356109b06109ab8261093b565b61090a565b8181528560208385010111156109c557600080fd5b81602084016020830137600091810160200191909152949350505050565b6000806000604084860312156109f857600080fd5b833567ffffffffffffffff80821115610a1057600080fd5b818601915086601f830112610a2457600080fd5b813581811115610a3357600080fd5b8760208260051b8501011115610a4857600080fd5b602092830195509350610a5e918601905061088d565b90509250925092565b600060208284031215610a7957600080fd5b81356001600160a01b038116811461087457600080fd5b6020808252818101527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604082015260600190565b60005b83811015610ae0578181015183820152602001610ac8565b83811115610aef576000848401525b50505050565b60008151808452610b0d816020860160208601610ac5565b601f01601f19169290920160200192915050565b604081526000610b346040830185610af5565b90508260208301529392505050565b60008060408385031215610b5657600080fd5b825167ffffffffffffffff811115610b6d57600080fd5b8301601f81018513610b7e57600080fd5b8051610b8c6109ab8261093b565b818152866020838501011115610ba157600080fd5b610bb2826020830160208601610ac5565b60209590950151949694955050505050565b6020815260006108746020830184610af5565b600060208284031215610be957600080fd5b81516108748161087b565b634e487b7160e01b600052603260045260246000fd5b6000600019821415610c2c57634e487b7160e01b600052601160045260246000fd5b506001019056fea2646970667358221220b8b5ab1a4adf8e6e7787d315613440909c539fff59e50c895c691f3eba23247264736f6c63430008090033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100b45760003560e01c80638da5cb5b116100715780638da5cb5b146101575780639791c097146101725780639c7193c914610185578063a64d0cd414610198578063ee2e47c3146101bf578063f2fde38b146101d257600080fd5b806301ffc9a7146100b957806308bd9694146100e157806323309560146100f65780632b1bfb7514610109578063580fcace1461012c578063715018a61461014f575b600080fd5b6100cc6100c736600461084a565b6101e5565b60405190151581526020015b60405180910390f35b6100f46100ef3660046108a2565b61021c565b005b6100f46101043660046108a2565b610277565b6100cc6101173660046108d7565b60026020526000908152604090205460ff1681565b6100cc61013a3660046108d7565b60016020526000908152604090205460ff1681565b6100f46102c9565b6000546040516001600160a01b0390911681526020016100d8565b6100cc610180366004610963565b6102ff565b6100f46101933660046109e3565b610626565b6101a6639791c09760e01b81565b6040516001600160e01b031990911681526020016100d8565b6100f46101cd3660046109e3565b6106c6565b6100f46101e0366004610a67565b61075f565b60006001600160e01b03198216639791c09760e01b148061021657506001600160e01b031982166301ffc9a760e01b145b92915050565b6000546001600160a01b0316331461024f5760405162461bcd60e51b815260040161024690610a90565b60405180910390fd5b63ffffffff919091166000908152600260205260409020805460ff1916911515919091179055565b6000546001600160a01b031633146102a15760405162461bcd60e51b815260040161024690610a90565b63ffffffff919091166000908152600160205260409020805460ff1916911515919091179055565b6000546001600160a01b031633146102f35760405162461bcd60e51b815260040161024690610a90565b6102fd60006107fa565b565b805160405163127b597f60e01b81526000916060918390819073__$4c54b96ad00f384de341f9e252b3fe0452$__9063127b597f906103449089908590600401610b21565b60006040518083038186803b15801561035c57600080fd5b505af4158015610370573d6000803e3d6000fd5b505050506040513d6000823e601f3d908101601f191682016040526103989190810190610b43565b60405163a2be0d9d60e01b8152919550925073__$4c54b96ad00f384de341f9e252b3fe0452$__9063a2be0d9d906103d4908790600401610bc4565b60206040518083038186803b1580156103ec57600080fd5b505af4158015610400573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104249190610bd7565b63ffffffff811660009081526001602052604090205490915060ff1680610460575063ffffffff811660009081526002602052604090205460ff165b156104715750600095945050505050565b6000805b848410156106045760405163127b597f60e01b815273__$4c54b96ad00f384de341f9e252b3fe0452$__9063127b597f906104b6908b908890600401610b21565b60006040518083038186803b1580156104ce57600080fd5b505af41580156104e2573d6000803e3d6000fd5b505050506040513d6000823e601f3d908101601f1916820160405261050a9190810190610b43565b60405163a2be0d9d60e01b8152919750945073__$4c54b96ad00f384de341f9e252b3fe0452$__9063a2be0d9d90610546908990600401610bc4565b60206040518083038186803b15801561055e57600080fd5b505af4158015610572573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105969190610bd7565b63ffffffff811660009081526001602052604090205490935060ff16156105c557506000979650505050505050565b63ffffffff831660009081526002602052604090205460ff1691508180156105ea5750805b156105fd57506000979650505050505050565b5080610475565b811561061857506000979650505050505050565b506001979650505050505050565b6000546001600160a01b031633146106505760405162461bcd60e51b815260040161024690610a90565b8160005b818110156106bf57826001600087878581811061067357610673610bf4565b905060200201602081019061068891906108d7565b63ffffffff1681526020810191909152604001600020805460ff1916911515919091179055806106b781610c0a565b915050610654565b5050505050565b6000546001600160a01b031633146106f05760405162461bcd60e51b815260040161024690610a90565b8160005b818110156106bf57826002600087878581811061071357610713610bf4565b905060200201602081019061072891906108d7565b63ffffffff1681526020810191909152604001600020805460ff19169115159190911790558061075781610c0a565b9150506106f4565b6000546001600160a01b031633146107895760405162461bcd60e51b815260040161024690610a90565b6001600160a01b0381166107ee5760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152608401610246565b6107f7816107fa565b50565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b60006020828403121561085c57600080fd5b81356001600160e01b03198116811461087457600080fd5b9392505050565b63ffffffff811681146107f757600080fd5b8035801515811461089d57600080fd5b919050565b600080604083850312156108b557600080fd5b82356108c08161087b565b91506108ce6020840161088d565b90509250929050565b6000602082840312156108e957600080fd5b81356108748161087b565b634e487b7160e01b600052604160045260246000fd5b604051601f8201601f1916810167ffffffffffffffff81118282101715610933576109336108f4565b604052919050565b600067ffffffffffffffff821115610955576109556108f4565b50601f01601f191660200190565b60006020828403121561097557600080fd5b813567ffffffffffffffff81111561098c57600080fd5b8201601f8101841361099d57600080fd5b80356109b06109ab8261093b565b61090a565b8181528560208385010111156109c557600080fd5b81602084016020830137600091810160200191909152949350505050565b6000806000604084860312156109f857600080fd5b833567ffffffffffffffff80821115610a1057600080fd5b818601915086601f830112610a2457600080fd5b813581811115610a3357600080fd5b8760208260051b8501011115610a4857600080fd5b602092830195509350610a5e918601905061088d565b90509250925092565b600060208284031215610a7957600080fd5b81356001600160a01b038116811461087457600080fd5b6020808252818101527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604082015260600190565b60005b83811015610ae0578181015183820152602001610ac8565b83811115610aef576000848401525b50505050565b60008151808452610b0d816020860160208601610ac5565b601f01601f19169290920160200192915050565b604081526000610b346040830185610af5565b90508260208301529392505050565b60008060408385031215610b5657600080fd5b825167ffffffffffffffff811115610b6d57600080fd5b8301601f81018513610b7e57600080fd5b8051610b8c6109ab8261093b565b818152866020838501011115610ba157600080fd5b610bb2826020830160208601610ac5565b60209590950151949694955050505050565b6020815260006108746020830184610af5565b600060208284031215610be957600080fd5b81516108748161087b565b634e487b7160e01b600052603260045260246000fd5b6000600019821415610c2c57634e487b7160e01b600052601160045260246000fd5b506001019056fea2646970667358221220b8b5ab1a4adf8e6e7787d315613440909c539fff59e50c895c691f3eba23247264736f6c63430008090033",
+  "libraries": {
+    "Unicode": "0xbC7b39ed8132064eCC00dfD8E5f07f3DD0b38d2B"
+  },
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      },
+      "valid(string)": {
+        "details": "Given a string, determine if all it's underlying UTF-8 Unicode characters are valid."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 7,
+        "contract": "contracts/LemmaValidator.sol:LemmaValidator",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 3040,
+        "contract": "contracts/LemmaValidator.sol:LemmaValidator",
+        "label": "illegal",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_uint32,t_bool)"
+      },
+      {
+        "astId": 3044,
+        "contract": "contracts/LemmaValidator.sol:LemmaValidator",
+        "label": "whitespace",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_uint32,t_bool)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_uint32,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_uint32",
+        "label": "mapping(uint32 => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_uint32": {
+        "encoding": "inplace",
+        "label": "uint32",
+        "numberOfBytes": "4"
+      }
+    }
+  }
+}
