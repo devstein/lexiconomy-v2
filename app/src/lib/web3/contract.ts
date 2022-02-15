@@ -23,6 +23,8 @@ export const getProviderChainInfo = async (provider: Provider): Promise<ChainInf
 		throw Error(`unsupported chain id: ${chainId}`);
 	}
 
+	console.log('using chain', chainId);
+
 	return chains[chainId];
 };
 
