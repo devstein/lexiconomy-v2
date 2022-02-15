@@ -37,6 +37,7 @@ const func: DeployFunction = async function ({
     log: true,
   });
 
+  // @ts-ignore
   const proxyRegistryAddress = OpenSeaProxyRegistries[chainId];
 
   // do nothing if there is no proxy
