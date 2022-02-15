@@ -11,7 +11,11 @@ const chains: Record<number, ChainInfo> = {
 		lexiconomyAddress: '0xa4097dADAA50DBe0fEF2dD2D5c6699a930F287a6',
 		blockExplorerURI: 'https://ropsten.etherscan.io/'
 	},
-	// 4: { name: 'Rinkeby', lexiconomyAddress: '', blockExplorerURI: 'https://rinkeby.etherscan.io/' },
+	4: {
+		name: 'Rinkeby',
+		lexiconomyAddress: '0x7eD6F31435865be21209e372B367687523441CCE',
+		blockExplorerURI: 'https://rinkeby.etherscan.io/'
+	},
 	// 137: { name: 'Polygon', lexiconomyAddress: '', blockExplorerURI: 'https://polygonscan.com/' },
 	80001: {
 		name: 'Mumbai',
