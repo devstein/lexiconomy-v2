@@ -145,18 +145,6 @@ export default [
 			},
 			{
 				indexed: false,
-				internalType: 'uint256',
-				name: 'fee',
-				type: 'uint256'
-			},
-			{
-				indexed: false,
-				internalType: 'uint256',
-				name: 'number',
-				type: 'uint256'
-			},
-			{
-				indexed: false,
 				internalType: 'string',
 				name: 'lemma',
 				type: 'string'
@@ -281,7 +269,7 @@ export default [
 			},
 			{
 				internalType: 'string',
-				name: 'text',
+				name: '_text',
 				type: 'string'
 			}
 		],
@@ -306,7 +294,7 @@ export default [
 			},
 			{
 				internalType: 'string',
-				name: 'text',
+				name: '_text',
 				type: 'string'
 			}
 		],
@@ -412,8 +400,47 @@ export default [
 	{
 		inputs: [
 			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256'
+			}
+		],
+		name: 'lemmas',
+		outputs: [
+			{
+				internalType: 'string',
+				name: 'lemma',
+				type: 'string'
+			},
+			{
+				internalType: 'string',
+				name: 'definition',
+				type: 'string'
+			},
+			{
+				internalType: 'string',
+				name: 'example',
+				type: 'string'
+			}
+		],
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		inputs: [
+			{
 				internalType: 'string',
 				name: '_lemma',
+				type: 'string'
+			},
+			{
+				internalType: 'string',
+				name: '_definition',
+				type: 'string'
+			},
+			{
+				internalType: 'string',
+				name: '_example',
 				type: 'string'
 			}
 		],
@@ -527,6 +554,19 @@ export default [
 				internalType: 'bytes4',
 				name: '',
 				type: 'bytes4'
+			}
+		],
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		inputs: [],
+		name: 'proxyRegistryAddress',
+		outputs: [
+			{
+				internalType: 'address',
+				name: '',
+				type: 'address'
 			}
 		],
 		stateMutability: 'view',
@@ -648,6 +688,19 @@ export default [
 			}
 		],
 		name: 'setPricer',
+		outputs: [],
+		stateMutability: 'nonpayable',
+		type: 'function'
+	},
+	{
+		inputs: [
+			{
+				internalType: 'address',
+				name: '_address',
+				type: 'address'
+			}
+		],
+		name: 'setProxyRegistryAddress',
 		outputs: [],
 		stateMutability: 'nonpayable',
 		type: 'function'
