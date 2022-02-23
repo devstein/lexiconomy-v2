@@ -18,7 +18,7 @@
 		<h3 class="text-xl italic">noun</h3>
 		<h2 class="text-2xl">1. the world's decentralized dictionary.</h2>
 	</div>
-	<div class="w-1/3 space-y-8">
+	<div class="w-2/5 space-y-8">
 		<form on:submit|preventDefault={submit} class="w-full flex mt-8">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -42,10 +42,11 @@
 				autofocus
 			/>
 		</form>
-		<div class="grid grid-cols-3 text-xl">
+		<div class="grid grid-cols-4 text-xl">
 			<a class="p-12 hover:bg-slate-100 focus:bg-slate-100" href="/manifesto">manifesto</a>
 			<a class="p-12 hover:bg-slate-100 focus:bg-slate-100" href="/guide">guide</a>
 			<a class="p-12 hover:bg-slate-100 focus:bg-slate-100" href="/explore">explore</a>
+			<a class="p-12 hover:bg-slate-100 focus:bg-slate-100" href="/explore">trade</a>
 		</div>
 	</div>
 </div>

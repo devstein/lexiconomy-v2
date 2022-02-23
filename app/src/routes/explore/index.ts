@@ -14,7 +14,7 @@ export const get: RequestHandler = async () => {
 
 	return {
 		body: {
-			lemmas
+			lemmas: [...lemmas, 'lexiconomy', 'some phrase']
 		}
 	};
 };

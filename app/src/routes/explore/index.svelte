@@ -4,30 +4,24 @@
 
 <script lang="ts">
 	export let lemmas: object[] = [];
+
+	// try a word cloud / randomize order?
 </script>
 
 <h1 class="text-5xl pb-4 mb-8 border-b-4 border-green-400">explore</h1>
 <div class="px-8 py-4 h-full">
 	<ul class="h-full grid grid-cols-5 gap-5 place-items-center break-words">
 		{#each lemmas as item}
-			<li class="h-4/5 w-4/5 scene">
-				<div class="card p-2 rounded">
-					<a
-						sveltekit:prefetch
-						href="/lemma/{item}"
-						class="text-center text-lg font-semibold card__face font-semibold flex flex-col justify-center items-center"
-					>
-						<div class="mx-2 font-mono">
-							{item}
-						</div>
-					</a>
-					<a href="/lemma/{item}" class="card__face card__face--back">
-						<div class="m-4 space-y-2">
-							<div>the world's decentralized dictionary</div>
-							<div class="italic">i coined that phrase on the lexiconomy</div>
-						</div>
-					</a>
-				</div>
+			<li class="bg-blue-100 ">
+				<a
+					sveltekit:prefetch
+					href="/lemma/{item}"
+					class="text-center text-lg font-semibold font-semibold flex flex-col justify-center items-center"
+				>
+					<div class="mx-2 font-mono">
+						{item}
+					</div>
+				</a>
 			</li>
 		{/each}
 	</ul>
