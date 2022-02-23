@@ -22,7 +22,9 @@
 
 	const save = () => {
 		// call onSave first in-case it fails we don't want to toggle editing
-		onSave();
+		if (value.trim() !== prevValue.trim()) {
+			onSave();
+		}
 		editing = false;
 	};
 

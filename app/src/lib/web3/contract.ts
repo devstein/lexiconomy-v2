@@ -6,6 +6,18 @@ import chains, { isChainSupported } from './chains';
 import type { ChainInfo } from './chains';
 import lemmas from './store';
 
+export const getProviderChainInfo = async (provider: Provider): Promise<ChainInfo> => {
+	const { chainId } = await provider.getNetwork();
+
+	if (!isChainSupported(chainId)) {
+		throw Error(`unsupported chain id: ${chainId}`);
+	}
+
+	console.log('using chain', chainId);
+
+	return chains[chainId];
+};
+
 export const getServerProvider = (): Provider => {
 	const rpc = import.meta.env.VITE_WEB3_PROVIDER;
 
@@ -16,7 +28,8 @@ export const getServerProvider = (): Provider => {
 	return new ethers.providers.JsonRpcProvider(String(rpc));
 };
 
-export const getProviderChainInfo = async (provider: Provider): Promise<ChainInfo> => {
+export const getServerChainInfo = async (): Promise<ChainInfo> => {
+	const provider = getServerProvider();
 	const { chainId } = await provider.getNetwork();
 
 	if (!isChainSupported(chainId)) {

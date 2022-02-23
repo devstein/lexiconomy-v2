@@ -1,10 +1,12 @@
 import type { RequestHandler } from '@sveltejs/kit';
 
-import { getContract } from '$lib/web3/contract';
-
-const ZERO_ADDR = '0x0000000000000000000000000000000000000000';
+import { getContract, getServerProvider } from '$lib/web3/contract';
+import { ZERO_ADDR } from '$lib/web3/utils';
 
 export const get: RequestHandler = async ({ params }) => {
+	const provider = getServerProvider();
+	const { chainId } = await provider.getNetwork();
+
 	const contract = await getContract();
 
 	const { lemma } = params;
@@ -19,9 +21,14 @@ export const get: RequestHandler = async ({ params }) => {
 			}
 		};
 	}
+
 	console.time(`get: ${lemma} - tokenId`);
 	const tokenId = await contract.getTokenId(lemma);
 	console.timeEnd(`get: ${lemma} - tokenId`);
+
+	console.time(`get: ${lemma} - lemmas`);
+	const { definition, example, number } = await contract.lemmas(tokenId);
+	console.timeEnd(`get: ${lemma} - lemmas`);
 
 	let owner = ZERO_ADDR;
 	let approved = ZERO_ADDR;
@@ -44,9 +51,13 @@ export const get: RequestHandler = async ({ params }) => {
 	return {
 		body: {
 			lemma,
-			tokenId,
+			definition,
+			example,
+			number,
+			tokenId: tokenId.toString(),
 			owner,
-			approved
+			approved,
+			chainId
 		}
 	};
 };
