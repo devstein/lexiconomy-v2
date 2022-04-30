@@ -34,19 +34,13 @@ describe("Lexiconomy", function () {
     }
   });
 
-  it("should mint a lemma", async function () {
+  it("should allow the owner to airdrop a lemma", async function () {
     const lexiconomy = await deployLexiconomy();
-    const [owner] = await ethers.getSigners();
+    const [owner, nonOwner] = await ethers.getSigners();
 
-    const value = await lexiconomy.mintFee();
-    const tx = await lexiconomy.mint(
-      VALID_LEMMA,
-      LEMMA_DEFINITION,
-      LEMMA_EXAMPLE,
-      {
-        value,
-      }
-    );
+    const tx = await lexiconomy
+      .connect(owner)
+      .airdrop(nonOwner.address, VALID_LEMMA, LEMMA_DEFINITION, LEMMA_EXAMPLE);
 
     const reciept = await tx.wait();
 
@@ -55,11 +49,11 @@ describe("Lexiconomy", function () {
 
     // want to assert that token exists
     const actualOwner = await lexiconomy.ownerOf(tokenId);
-    expect(actualOwner).to.equal(owner.address);
+    expect(actualOwner).to.equal(nonOwner.address);
 
     const numberOfTokens = 1;
     // want to assert that the default address owns the token
-    const tokenCount = await lexiconomy.balanceOf(owner.address);
+    const tokenCount = await lexiconomy.balanceOf(nonOwner.address);
     expect(tokenCount).to.equal(numberOfTokens);
 
     // want to assert that the default address owns the token
@@ -77,18 +71,95 @@ describe("Lexiconomy", function () {
 
     const [transfer, invent, definition, example] = reciept.events;
 
-    expect(transfer.args.to).to.equal(owner.address);
+    expect(transfer.args.to).to.equal(nonOwner.address);
     expect(transfer.args.tokenId).to.equal(tokenId);
 
-    expect(invent.args.owner).to.equal(owner.address);
+    expect(invent.args.owner).to.equal(nonOwner.address);
     expect(invent.args.tokenId).to.equal(tokenId);
     expect(invent.args.lemma).to.equal(VALID_LEMMA);
 
-    expect(definition.args.owner).to.equal(owner.address);
+    expect(definition.args.owner).to.equal(nonOwner.address);
     expect(definition.args.tokenId).to.equal(tokenId);
     expect(definition.args.definition).to.equal(LEMMA_DEFINITION);
 
-    expect(example.args.owner).to.equal(owner.address);
+    expect(example.args.owner).to.equal(nonOwner.address);
+    expect(example.args.tokenId).to.equal(tokenId);
+    expect(example.args.example).to.equal(LEMMA_EXAMPLE);
+  });
+
+  it("should not allow users to airdrop a lemma", async function () {
+    const lexiconomy = await deployLexiconomy();
+    const [, nonOwner] = await ethers.getSigners();
+
+    try {
+      await lexiconomy
+        .connect(nonOwner)
+        .airdrop(
+          nonOwner.address,
+          VALID_LEMMA,
+          LEMMA_DEFINITION,
+          LEMMA_EXAMPLE
+        );
+      expect(true).to.equal(false);
+    } catch (error) {
+      expect((error as ContractError).message).to.contain(
+        "caller is not the owner"
+      );
+    }
+  });
+
+  it("should mint a lemma", async function () {
+    const lexiconomy = await deployLexiconomy();
+    const [, minter] = await ethers.getSigners();
+
+    const value = await lexiconomy.mintFee();
+    const tx = await lexiconomy
+      .connect(minter)
+      .mint(VALID_LEMMA, LEMMA_DEFINITION, LEMMA_EXAMPLE, {
+        value,
+      });
+
+    const reciept = await tx.wait();
+
+    // need to generate tokenId
+    const tokenId = ethers.utils.id(VALID_LEMMA);
+
+    // want to assert that token exists
+    const actualOwner = await lexiconomy.ownerOf(tokenId);
+    expect(actualOwner).to.equal(minter.address);
+
+    const numberOfTokens = 1;
+    // want to assert that the default address owns the token
+    const tokenCount = await lexiconomy.balanceOf(minter.address);
+    expect(tokenCount).to.equal(numberOfTokens);
+
+    // want to assert that the default address owns the token
+    const tokenSupply = await lexiconomy.totalSupply();
+    expect(tokenSupply).to.equal(numberOfTokens);
+
+    // verify the data is correctly saved to the lemmas mapping
+    const data = await lexiconomy.lemmas(tokenId);
+    expect(data.lemma).to.equal(VALID_LEMMA);
+    expect(data.definition).to.equal(LEMMA_DEFINITION);
+    expect(data.example).to.equal(LEMMA_EXAMPLE);
+
+    // want to assert the Transfer, Invent, Definition, Example events fired
+    expect(reciept.events).to.have.length(4);
+
+    const [transfer, invent, definition, example] = reciept.events;
+
+    expect(transfer.args.to).to.equal(minter.address);
+    expect(transfer.args.tokenId).to.equal(tokenId);
+
+    expect(invent.args.owner).to.equal(minter.address);
+    expect(invent.args.tokenId).to.equal(tokenId);
+    expect(invent.args.lemma).to.equal(VALID_LEMMA);
+
+    expect(definition.args.owner).to.equal(minter.address);
+    expect(definition.args.tokenId).to.equal(tokenId);
+    expect(definition.args.definition).to.equal(LEMMA_DEFINITION);
+
+    expect(example.args.owner).to.equal(minter.address);
     expect(example.args.tokenId).to.equal(tokenId);
     expect(example.args.example).to.equal(LEMMA_EXAMPLE);
   });
