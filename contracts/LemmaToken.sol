@@ -32,10 +32,6 @@ contract LemmaToken is
     _unpause();
   }
 
-  function safeMint(address to, uint256 tokenId) public onlyOwner {
-    _safeMint(to, tokenId);
-  }
-
   function _baseURI() internal pure override returns (string memory) {
     // tokenURI concats the baseURI with the token id
     return "https://lexiconomy.org/token/";
@@ -164,6 +160,42 @@ contract LemmaToken is
     return uint256(keccak256(bytes(_lemma)));
   }
 
+  function _mint(
+    address to,
+    uint256 tokenId,
+    string calldata _lemma,
+    string calldata _definition,
+    string calldata _example
+  ) internal {
+    // _safeMint verifies the tokenId doesn't exist
+    _safeMint(to, tokenId);
+    lemmas[tokenId] = Lemma(_lemma, _definition, _example);
+
+    // emit Invent event to associate metadata with minting a tokenId
+    // TODO: Consider removing Invent!
+    emit Invent(to, tokenId, _lemma);
+    emit Definition(to, tokenId, _definition);
+    emit Example(to, tokenId, _example);
+  }
+
+  // airdrop for migrating v1 tokens to v2
+  function airdrop(
+    address to,
+    string calldata _lemma,
+    string calldata _definition,
+    string calldata _example
+  ) external onlyOwner returns (uint256 tokenId) {
+    require(
+      lemmaValid(_lemma),
+      "LemmaToken: lemma is invalid: does it contain invalid characters?"
+    );
+    tokenId = getTokenId(_lemma);
+    // _mint verifies the tokenId doesn't exist
+    _mint(to, tokenId, _lemma, _definition, _example);
+
+    return tokenId;
+  }
+
   function mint(
     string calldata _lemma,
     string calldata _definition,
@@ -175,17 +207,8 @@ contract LemmaToken is
       "LemmaToken: lemma is invalid: does it contain invalid characters?"
     );
     tokenId = getTokenId(_lemma);
-
-    // _safeMint verifies the tokenId doesn't exist
-    _safeMint(msg.sender, tokenId);
-
-    lemmas[tokenId] = Lemma(_lemma, _definition, _example);
-
-    // emit Invent event to associate metadata with minting a tokenId
-    // TODO: Consider removing _lemma
-    emit Invent(msg.sender, tokenId, _lemma);
-    emit Definition(msg.sender, tokenId, _definition);
-    emit Example(msg.sender, tokenId, _example);
+    // _mint verifies the tokenId doesn't exist
+    _mint(msg.sender, tokenId, _lemma, _definition, _example);
 
     return tokenId;
   }

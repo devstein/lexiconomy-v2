@@ -30,8 +30,10 @@
 	<div>
 		<p class="text-xl mb-2">you've discovered a new word!</p>
 		<p>
-			enter a definition and example usage to coin the word <strong>{lemma}</strong>. Once coined,
-			you'll own the NFT and can use it however you like. share it, admire it, or trade it.
+			enter a definition, add an example usage, and click mint to coin the word <strong
+				>{lemma}</strong
+			>. after minting, you'll own the NFT and can use it however you like. share it, admire it, or
+			trade it.
 		</p>
 	</div>
 	<div>
