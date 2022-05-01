@@ -24,7 +24,7 @@
 
 	const exists = Boolean(owner) && owner !== ZERO_ADDR;
 
-	console.log(owner, approved, tokenId, lemma);
+	console.log(owner, approved, tokenId, lemma, definition);
 </script>
 
 <h1 class="text-5xl pb-4 mb-8 border-b-4 border-yellow-400">{lemma}</h1>

@@ -5,71 +5,53 @@
 <script lang="ts">
 	export let lemmas: object[] = [];
 
+	export const getColor = (lemma: string) => {
+		const colors = [
+			'#fea3aa80', // salmon-ish
+			'#f8b88b66', // light orange
+			'#fef16073', // yellow
+			'#baed9173', // green
+			'#b2cefe80', // purple blue
+			'#f2a2e84d', // pink
+			'#b0f4e880', // light blue green
+			'#a7f69a66', // green
+			'#f4a1a180', // a pink
+			'#f6b6f180', // a pink
+			'#edf29280', // a yellow
+			'#6eb5ff73', // a green
+			'#77dd7780', // a green
+			'#ffcb0573' // orange
+		];
+
+		const lemmaCode =
+			lemma.length === 1
+				? lemma.codePointAt(0)
+				: lemma.split('').reduce((sum = 0, char, index) => sum + char.codePointAt(0) * index, 0);
+
+		const colorPosition = lemmaCode % colors.length;
+
+		return colors[colorPosition];
+	};
+
 	// try a word cloud / randomize order?
 </script>
 
 <h1 class="text-5xl pb-4 mb-8 border-b-4 border-green-400">explore</h1>
-<div class="px-8 py-4 h-full">
-	<ul class="h-full grid grid-cols-5 gap-5 place-items-center break-words">
+<div class="h-full">
+	<ul class="h-full flex flex-row flex-wrap justify-start items-center content-center break-words">
 		{#each lemmas as item}
-			<li class="bg-blue-100 ">
+			<li class="h-32 min-w-32 mr-4 my-4 px-2" style:background-color={getColor(item)}>
 				<a
 					sveltekit:prefetch
 					href="/lemma/{item}"
-					class="text-center text-lg font-semibold font-semibold flex flex-col justify-center items-center"
+					class="h-full font-mono text-center text-lg font-semibold font-semibold flex flex-col justify-center items-center break-all"
 				>
-					<div class="mx-2 font-mono">
-						{item}
-					</div>
+					{item}
 				</a>
 			</li>
 		{/each}
 	</ul>
 </div>
-<div class="my-8">Navigate pages</div>
 
 <style>
-	/* Add an arrow for definition  */
-	:root {
-		--green-pastel: #d1f7c4;
-		--blue-pastel: #d0f0fd;
-		--dark-blue-pastel: #9cf;
-		--dark-orange-pastel: #eba134;
-		--light-orange-pastel: #f2c17a;
-	}
-
-	.scene {
-		perspective: 1000px;
-		width: 350px;
-		height: 350px;
-	}
-
-	.card {
-		width: 100%;
-		height: 100%;
-		position: relative;
-		transition: transform 0.75s;
-		transform-style: preserve-3d;
-	}
-
-	.card__face {
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		backface-visibility: hidden;
-		background-color: #d0f0fd;
-	}
-
-	.card__face--back {
-		width: 100%;
-		height: 100%;
-		transform: rotateY(180deg);
-		background-color: #f2c17a;
-	}
-
-	.card:hover {
-		transform: rotateY(180deg);
-		transition: transform 0.75s;
-	}
-	/* class="text-lg font-semibold border-b-4 border-[#9cf] border-dotted pb-1 card__face" */
 </style>

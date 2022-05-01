@@ -10,8 +10,9 @@
 		const { defaultEvmStores } = await import('svelte-ethers-store');
 		try {
 			defaultEvmStores.setProvider();
+			console.log('connected to default provider');
 		} catch (err) {
-			console.error(err);
+			console.error('failed to get window provider', err);
 		}
 	});
 </script>
