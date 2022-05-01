@@ -13,7 +13,7 @@ const chains: Record<number, ChainInfo> = {
 	},
 	4: {
 		name: 'Rinkeby',
-		lexiconomyAddress: '0x7eD6F31435865be21209e372B367687523441CCE',
+		lexiconomyAddress: '0x5E665E41dF55470FD7284Cf9E48cE427FC34f7b5',
 		blockExplorerURI: 'https://rinkeby.etherscan.io/'
 	},
 	// 137: { name: 'Polygon', lexiconomyAddress: '', blockExplorerURI: 'https://polygonscan.com/' },
