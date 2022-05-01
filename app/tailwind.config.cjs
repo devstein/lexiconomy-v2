@@ -3,6 +3,9 @@ const config = {
 
 	theme: {
 		extend: {
+			minWidth: {
+				32: '8rem'
+			},
 			fontFamily: {
 				mono: [
 					'IBM Plex Mono',
