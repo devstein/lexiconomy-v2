@@ -55,7 +55,7 @@ export const get: RequestHandler = async ({ params }) => {
 				{
 					display_type: 'number',
 					trait_type: 'Number',
-					value: number
+					value: number.toString()
 				}
 			]
 		}
