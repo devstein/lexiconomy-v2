@@ -29,13 +29,15 @@
 	const { lexiconomyAddress, blockExplorerURI } = chainInfo[chainId];
 
 	if (browser) {
-		console.log($connected, $signerAddress, owner, approved);
-		canOperate =
-			$connected &&
-			$signerAddress &&
-			($signerAddress.toLowerCase() === owner.toLowerCase() ||
-				(approved && $signerAddress.toLowerCase() === approved.toLowerCase()));
 	}
+
+	// TODO: RE-Evaluate!
+	console.log($provider, $connected, $signerAddress, owner, approved);
+	$: canOperate =
+		$connected &&
+		$signerAddress &&
+		($signerAddress.toLowerCase() === owner.toLowerCase() ||
+			(approved && $signerAddress.toLowerCase() === approved.toLowerCase()));
 
 	const updateDefinition = async () => {
 		const contract = await getContractWithProvider($provider);
@@ -50,33 +52,30 @@
 	};
 
 	const displayAddress = (address: string) => address.slice(0, 8);
+	$: console.log($provider, $connected, $signerAddress, owner, approved);
 </script>
 
 <div class="space-y-4 text-lg w-2/3">
 	{#if definition || canOperate}
-		<div>
-			<h3 class="section">definition</h3>
-			<EditableTextArea
-				value={definition}
-				placeholder="add a definition"
-				editable={canOperate}
-				onSave={updateDefinition}
-			/>
-		</div>
+		<EditableTextArea
+			title="definition"
+			value={definition}
+			placeholder="add a definition"
+			editable={canOperate}
+			onSave={updateDefinition}
+		/>
 	{/if}
 	{#if example || canOperate}
-		<div>
-			<h3 class="section">example</h3>
-			<EditableTextArea
-				value={example}
-				placeholder="add an example"
-				editable={canOperate}
-				onSave={updateExample}
-			/>
-		</div>
+		<EditableTextArea
+			title="example"
+			value={example}
+			placeholder="add an example"
+			editable={canOperate}
+			onSave={updateExample}
+		/>
 	{/if}
 	<div>
-		<h3 class="section">metadata</h3>
+		<h3 class="text-gray-500">metadata</h3>
 		<div class="flex flex-row flex-wrap space-x-8 text-gray-700 text-base">
 			<div>#{number}</div>
 			<div>
@@ -118,7 +117,4 @@
 </div>
 
 <style>
-	.section {
-		@apply text-gray-500;
-	}
 </style>
