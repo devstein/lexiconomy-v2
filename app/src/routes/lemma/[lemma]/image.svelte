@@ -5,12 +5,10 @@
 <script lang="ts">
 	import domtoimage from 'dom-to-image';
 
-	import type { BigNumber } from 'ethers';
-
 	let node: HTMLDivElement;
 
 	export let lemma: string;
-	export let number: BigNumber;
+	export let number: string;
 
 	export let definition: string;
 	export let example: string;
@@ -30,7 +28,7 @@
 
 <button on:click={transform}>Transform into an SVG</button>
 
-<div bind:this={node} class="size p-2 rounded flex flex-col align-start h-full">
+<div bind:this={node} class="bg-white size p-2 rounded flex flex-col align-start h-full">
 	<div class="my-2 font-mono text-3xl font-semibold text-center color">{lemma}</div>
 	<div class="mx-2 space-y-2 text-sm">
 		<div>
@@ -48,7 +46,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="flex-1 align-self-end flex flex-row-reverse items-end text-sm">#{number || 1}</div>
+	<div class="flex-1 align-self-end flex flex-row-reverse items-end text-sm">#{number}</div>
 </div>
 
 <style>
@@ -64,44 +62,6 @@
 		--dark-blue-pastel: #9cf;
 		--dark-orange-pastel: #eba134;
 		--light-orange-pastel: #f2c17a;
-	}
-
-	.scene {
-		perspective: 1000px;
-	}
-
-	.card {
-		width: 100%;
-		height: 100%;
-		position: relative;
-		transition: transform 0.75s;
-		transform-style: preserve-3d;
-	}
-
-	.card__face {
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		backface-visibility: hidden;
-		background-color: #d0f0fd;
-	}
-
-	.card__face--back {
-		width: 100%;
-		height: 100%;
-		transform: rotateY(180deg);
-		/* background-color: #f2c17a; */
-		/* background-color: var(--green-pastel); */
-		background-color: var(--light-orange-pastel);
-	}
-
-	.card:hover {
-		transform: rotateY(180deg);
-		transition: transform 0.75s;
-	}
-
-	.bg {
-		background-color: var(--green-pastel);
 	}
 
 	.color {

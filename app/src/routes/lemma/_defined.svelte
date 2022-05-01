@@ -5,7 +5,6 @@
 <script lang="ts">
 	import { browser } from '$app/env';
 
-	import type { BigNumber } from 'ethers';
 	import { connected, signerAddress, provider } from 'svelte-ethers-store';
 
 	import { getContractWithProvider } from '$lib/web3/contract';
@@ -15,7 +14,7 @@
 
 	// pass lemma as prop
 	export let tokenId: string;
-	export let number: BigNumber;
+	export let number: string;
 	export let definition: string;
 	export let example: string;
 	export let owner: string;
