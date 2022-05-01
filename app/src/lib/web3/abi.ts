@@ -231,6 +231,40 @@ export default [
 				type: 'address'
 			},
 			{
+				internalType: 'string',
+				name: '_lemma',
+				type: 'string'
+			},
+			{
+				internalType: 'string',
+				name: '_definition',
+				type: 'string'
+			},
+			{
+				internalType: 'string',
+				name: '_example',
+				type: 'string'
+			}
+		],
+		name: 'airdrop',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: 'tokenId',
+				type: 'uint256'
+			}
+		],
+		stateMutability: 'nonpayable',
+		type: 'function'
+	},
+	{
+		inputs: [
+			{
+				internalType: 'address',
+				name: 'to',
+				type: 'address'
+			},
+			{
 				internalType: 'uint256',
 				name: 'tokenId',
 				type: 'uint256'
@@ -575,24 +609,6 @@ export default [
 	{
 		inputs: [],
 		name: 'renounceOwnership',
-		outputs: [],
-		stateMutability: 'nonpayable',
-		type: 'function'
-	},
-	{
-		inputs: [
-			{
-				internalType: 'address',
-				name: 'to',
-				type: 'address'
-			},
-			{
-				internalType: 'uint256',
-				name: 'tokenId',
-				type: 'uint256'
-			}
-		],
-		name: 'safeMint',
 		outputs: [],
 		stateMutability: 'nonpayable',
 		type: 'function'
