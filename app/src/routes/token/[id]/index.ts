@@ -48,7 +48,7 @@ export const get: RequestHandler = async ({ params }) => {
 			name: lemma,
 			description,
 			external_url: `${BASE_URL}/lemma/${lemma}`,
-			image: `${BASE_URL}/lemma/${lemma}/image.svg`,
+			image_data: `${BASE_URL}/lemma/${lemma}/image.svg`,
 			// TODO: Decide on animation_url
 			// animation_url: `https://lexiconomy.org/lemma/${lemma}/animation`,
 			attributes: [
