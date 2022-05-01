@@ -53,7 +53,7 @@ export const get: RequestHandler = async ({ params }) => {
 			lemma,
 			definition,
 			example,
-			number,
+			number: number.toString(),
 			tokenId: tokenId.toString(),
 			owner,
 			approved,

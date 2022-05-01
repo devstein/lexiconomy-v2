@@ -3,8 +3,6 @@
 </script>
 
 <script lang="ts">
-	import type { BigNumber } from 'ethers';
-
 	import { ZERO_ADDR } from '$lib/web3/utils';
 
 	import UndefinedState from './_undefined.svelte';
@@ -12,7 +10,7 @@
 
 	export let lemma: string;
 	export let tokenId: string;
-	export let number: BigNumber;
+	export let number: string;
 
 	export let definition: string;
 	export let example: string;

@@ -31,7 +31,7 @@ export const get: RequestHandler = async ({ params }) => {
 			lemma,
 			definition,
 			example,
-			number
+			number: number.toString()
 		}
 	};
 };

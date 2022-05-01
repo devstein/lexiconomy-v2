@@ -455,6 +455,11 @@ export default [
 				internalType: 'string',
 				name: 'example',
 				type: 'string'
+			},
+			{
+				internalType: 'uint256',
+				name: 'number',
+				type: 'uint256'
 			}
 		],
 		stateMutability: 'view',
