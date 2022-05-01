@@ -34,7 +34,8 @@ contract LemmaToken is
 
   function _baseURI() internal pure override returns (string memory) {
     // tokenURI concats the baseURI with the token id
-    return "https://lexiconomy.org/token/";
+    // return "https://lexiconomy.org/token/";
+    return "https://lexiconomy-v2.vercel.app/token/";
   }
 
   function _beforeTokenTransfer(
@@ -113,6 +114,8 @@ contract LemmaToken is
     string lemma;
     string definition;
     string example;
+    // number is a monotonically increasing value for every lemma
+    uint256 number;
   }
 
   mapping(uint256 => Lemma) public lemmas;
@@ -169,10 +172,9 @@ contract LemmaToken is
   ) internal {
     // _safeMint verifies the tokenId doesn't exist
     _safeMint(to, tokenId);
-    lemmas[tokenId] = Lemma(_lemma, _definition, _example);
+    lemmas[tokenId] = Lemma(_lemma, _definition, _example, totalSupply());
 
-    // emit Invent event to associate metadata with minting a tokenId
-    // TODO: Consider removing Invent!
+    // emit Invent to let us easily query all created lemmas
     emit Invent(to, tokenId, _lemma);
     emit Definition(to, tokenId, _definition);
     emit Example(to, tokenId, _example);

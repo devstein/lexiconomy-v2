@@ -65,6 +65,7 @@ describe("Lexiconomy", function () {
     expect(data.lemma).to.equal(VALID_LEMMA);
     expect(data.definition).to.equal(LEMMA_DEFINITION);
     expect(data.example).to.equal(LEMMA_EXAMPLE);
+    expect(data.number.toString()).to.equal(tokenSupply.toString());
 
     // want to assert the Transfer, Invent, Definition, Example events fired
     expect(reciept.events).to.have.length(4);
@@ -142,6 +143,7 @@ describe("Lexiconomy", function () {
     expect(data.lemma).to.equal(VALID_LEMMA);
     expect(data.definition).to.equal(LEMMA_DEFINITION);
     expect(data.example).to.equal(LEMMA_EXAMPLE);
+    expect(data.number.toString()).to.equal(tokenSupply.toString());
 
     // want to assert the Transfer, Invent, Definition, Example events fired
     expect(reciept.events).to.have.length(4);
