@@ -28,8 +28,7 @@ export const get: RequestHandler = async ({ params }) => {
 
 	return {
 		headers: {
-			'Content-Type': 'data:image/svg',
-			// 'Content-Type': 'data:image/svg+xml',
+			'Content-Type': 'image/svg+xml',
 			'Content-Disposition': `attachment; filename="nft.svg"`,
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Methods': 'GET,OPTIONS',

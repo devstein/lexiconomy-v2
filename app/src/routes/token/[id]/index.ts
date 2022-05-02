@@ -24,13 +24,11 @@ export const get: RequestHandler = async ({ params }) => {
 		};
 	}
 
-	const description = `
-	definition
+	const description = `definition
 	${definition}
 
 	example
-	${example}
-	`;
+	${example}`;
 
 	// - [ ] animation_url -> TBD!
 	// - [ ] background color?
