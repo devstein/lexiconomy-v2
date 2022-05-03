@@ -60,7 +60,7 @@ ${example}`;
 				{
 					trait_type: 'Generation',
 					// number < NUMBER_OF_V1_TOKENS then it's a 1  else 2
-					value: number.isLessThan(NUMBER_OF_V1_TOKENS) ? 'v1' : 'v2'
+					value: number.lt(NUMBER_OF_V1_TOKENS) ? 'v1' : 'v2'
 				}
 			]
 		}
