@@ -35,7 +35,7 @@ ${definition}
 	const exampleDescription = example
 		? `
 ## example
-${example}
+> ${example}
 	`
 		: '';
 
