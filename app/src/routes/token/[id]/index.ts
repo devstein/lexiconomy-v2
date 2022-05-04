@@ -35,12 +35,13 @@ ${definition}
 	const exampleDescription = example
 		? `
 ## example
-> ${example}
+_${example}_
 	`
 		: '';
 
 	const description = `
 # ${lemma}
+
 ${definitionDescription}
 ${exampleDescription}
 `;
