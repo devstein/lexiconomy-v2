@@ -27,7 +27,7 @@ export const get: RequestHandler = async ({ params }) => {
 
 	const description = `
 # ${lemma}
-
+---
 ## definition
 ${definition}
 
