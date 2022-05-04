@@ -25,16 +25,25 @@ export const get: RequestHandler = async ({ params }) => {
 		};
 	}
 
-	const description = `
-# ${lemma}
-
----
-
+	const definitionDescription = definition
+		? `
 ## definition
 ${definition}
+	`
+		: '';
 
+	const exampleDescription = example
+		? `
 ## example
-${example}`;
+${example}
+	`
+		: '';
+
+	const description = `
+# ${lemma}
+${definitionDescription}
+${exampleDescription}
+`;
 
 	// - [ ] animation_url -> TBD!
 	// - [ ] background color?
