@@ -3,35 +3,8 @@
 </script>
 
 <script lang="ts">
+	import { getColor } from '$lib/nft/color';
 	export let lemmas: object[] = [];
-
-	export const getColor = (lemma: string) => {
-		const colors = [
-			'#fea3aa80', // salmon-ish
-			'#f8b88b66', // light orange
-			'#fef16073', // yellow
-			'#baed9173', // green
-			'#b2cefe80', // purple blue
-			'#f2a2e84d', // pink
-			'#b0f4e880', // light blue green
-			'#a7f69a66', // green
-			'#f4a1a180', // a pink
-			'#f6b6f180', // a pink
-			'#edf29280', // a yellow
-			'#6eb5ff73', // a green
-			'#77dd7780', // a green
-			'#ffcb0573' // orange
-		];
-
-		const lemmaCode =
-			lemma.length === 1
-				? lemma.codePointAt(0)
-				: lemma.split('').reduce((sum = 0, char, index) => sum + char.codePointAt(0) * index, 0);
-
-		const colorPosition = lemmaCode % colors.length;
-
-		return colors[colorPosition];
-	};
 
 	// try a word cloud / randomize order?
 </script>
