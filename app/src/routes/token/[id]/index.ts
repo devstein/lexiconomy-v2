@@ -6,7 +6,7 @@ import { getContract } from '$lib/web3/contract';
 const BASE_URL = 'https://lexiconomy-v2.vercel.app';
 const NUMBER_OF_V1_TOKENS = 160;
 
-export const get: RequestHandler = async ({ params }) => {
+export const get: RequestHandler = async ({ request, params }) => {
 	const contract = await getContract();
 
 	const { id } = params;
@@ -25,6 +25,9 @@ export const get: RequestHandler = async ({ params }) => {
 		};
 	}
 
+	console.log('request from', request.referrer);
+
+	// TODO: Change response based of request origin?
 	const definitionDescription = definition
 		? `
 ## definition
