@@ -1,6 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 
 import { getContract } from '$lib/web3/contract';
+import { getColorPalette } from '$lib/nft/color';
 
 // TODO: Update before going to production
 const BASE_URL = 'https://lexiconomy-v2.vercel.app';
@@ -25,9 +26,9 @@ export const get: RequestHandler = async ({ request, params }) => {
 		};
 	}
 
+	// TODO: Change response based of request origin?
 	console.log('request from', request.referrer);
 
-	// TODO: Change response based of request origin?
 	const definitionDescription = definition
 		? `
 ## definition
@@ -49,15 +50,7 @@ ${definitionDescription}
 ${exampleDescription}
 `;
 
-	// - [ ] animation_url -> TBD!
-	// - [ ] background color?
-	// - [ ] Attributes
-	// - [ ] inverted? rare
-	// - [ ] back_color
-	// - [ ] color
-
-	// compute rarity based off some hash??
-	// change colors accordingly (gradient, kaleidescope, etc)
+	const { background, primary, secondary } = getColorPalette(lemma);
 
 	return {
 		body: {
@@ -65,8 +58,7 @@ ${exampleDescription}
 			description,
 			external_url: `${BASE_URL}/lemma/${lemma}`,
 			image_data: `${BASE_URL}/lemma/${lemma}/image.svg`,
-			// TODO: Decide on animation_url
-			// animation_url: `https://lexiconomy.org/lemma/${lemma}/animation`,
+			// background_color: background.slice(1),
 			attributes: [
 				{
 					display_type: 'number',
@@ -77,6 +69,18 @@ ${exampleDescription}
 					trait_type: 'Generation',
 					// number < NUMBER_OF_V1_TOKENS then it's a 1  else 2
 					value: number.lt(NUMBER_OF_V1_TOKENS) ? 'v1' : 'v2'
+				},
+				{
+					trait_type: 'Background Color',
+					value: background
+				},
+				{
+					trait_type: 'Primary Color',
+					value: primary
+				},
+				{
+					trait_type: 'Secondary Color',
+					value: secondary
 				}
 			]
 		}

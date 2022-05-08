@@ -27,6 +27,8 @@ export const get: RequestHandler = async ({ params }) => {
 	const { definition, example, number } = await contract.lemmas(tokenId);
 	console.timeEnd(`get: ${lemma} - lemmas`);
 
+	console.timeEnd(`get: ${lemma}`);
+
 	return {
 		headers: {
 			'Content-Type': 'image/svg+xml',
