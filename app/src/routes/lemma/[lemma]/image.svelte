@@ -8,8 +8,6 @@
 
 	export let lemma: string;
 	export let number: string;
-	export let definition: string;
-	export let example: string;
 
 	let { background, primary, secondary } = getColorPalette(lemma);
 	let node: HTMLDivElement;
@@ -22,7 +20,6 @@
 		});
 	};
 
-	// TODO: Adjust line-clamping or height of definition && example based on length of lemma
 </script>
 
 <div class="flex flex-row space-x-4 my-4">
@@ -45,56 +42,15 @@
 	class="size p-2 rounded flex flex-col align-start h-full"
 	style:background-color={background}
 >
-	{#if !(definition || example)}
-		<div
-			class="flex-1 flex flex-col justify-center font-mono text-3xl font-semibold text-center"
-			style:color={primary}
-		>
-			{lemma}
-		</div>
-		<div class="align-self-end flex flex-row-reverse items-end text-sm" style:color={secondary}>
-			#{number}
-		</div>
-	{/if}
-	{#if definition || example}
-		<div class="my-2 font-mono text-3xl font-semibold text-center" style:color={primary}>
-			{lemma}
-		</div>
-		<div class="mx-2 space-y-2 text-sm">
-			{#if definition}
-				<div>
-					<div class="text-sm font-semibold" style:color={primary}>definition</div>
-					<div
-						class="text-sm truncate-overflow "
-						class:short={Boolean(definition && example)}
-						class:long={!Boolean(definition && example)}
-						style:color={secondary}
-					>
-						{definition}
-					</div>
-				</div>
-			{/if}
-			{#if example}
-				<div>
-					<div class="text-sm font-semibold" style:color={primary}>example</div>
-					<div
-						class="italic text-sm truncate-overflow"
-						class:short={Boolean(definition && example)}
-						class:long={!Boolean(definition && example)}
-						style:color={secondary}
-					>
-						{example}
-					</div>
-				</div>
-			{/if}
-		</div>
-		<div
-			class="flex-1 align-self-end flex flex-row-reverse items-end text-sm"
-			style:color={secondary}
-		>
-			#{number}
-		</div>
-	{/if}
+	<div
+		class="flex-1 flex flex-col justify-center font-mono text-3xl font-semibold text-center"
+		style:color={primary}
+	>
+		{lemma}
+	</div>
+	<div class="align-self-end flex flex-row-reverse items-end text-sm" style:color={secondary}>
+		#{number}
+	</div>
 </div>
 
 <button class="my-4" on:click={transform}>Transform into an SVG</button>
@@ -103,21 +59,6 @@
 	.size {
 		height: 350px;
 		width: 350px;
-	}
-
-	.truncate-overflow {
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-		white-space: pre-line;
-	}
-
-	.truncate-overflow.short {
-		-webkit-line-clamp: 5;
-	}
-
-	.truncate-overflow.long {
-		-webkit-line-clamp: 12;
 	}
 
 	/* cyrillic-ext */

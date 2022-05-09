@@ -58,7 +58,7 @@ ${exampleDescription}
 			description,
 			external_url: `${BASE_URL}/lemma/${lemma}`,
 			image_data: `${BASE_URL}/lemma/${lemma}/image.svg`,
-			// background_color: background.slice(1),
+			background_color: background.slice(1),
 			attributes: [
 				{
 					display_type: 'number',
