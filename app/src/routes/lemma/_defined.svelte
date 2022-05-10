@@ -25,7 +25,7 @@
 	let canOperate = false;
 
 	// GET CHAIN INFO FROM SERVER!
-	const { lexiconomyAddress, blockExplorerURI } = chainInfo[chainId];
+	const { lexiconomyAddress, blockExplorerURI, openSeaURI, raribleURI } = chainInfo[chainId];
 
 	if (browser) {
 	}
@@ -106,9 +106,18 @@
 					rel="external"
 					target="_blank"
 					class="text-blue-400"
-					href="https://testnets.opensea.io/assets/{lexiconomyAddress}/{tokenId.toString()}"
+					href="{openSeaURI}/assets/{lexiconomyAddress}/{tokenId.toString()}"
 				>
 					OpenSea
+				</a>
+				or
+				<a
+					rel="external"
+					target="_blank"
+					class="text-blue-400"
+					href="{raribleURI}/token/{lexiconomyAddress}:{tokenId.toString()}"
+				>
+					Rarible
 				</a>
 			</div>
 		</div>
