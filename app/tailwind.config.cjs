@@ -4,6 +4,7 @@ const config = {
 	theme: {
 		extend: {
 			minWidth: {
+				16: '4rem',
 				32: '8rem'
 			},
 			fontFamily: {

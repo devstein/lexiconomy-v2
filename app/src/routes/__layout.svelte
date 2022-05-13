@@ -19,6 +19,6 @@
 
 <Header />
 
-<div class="px-40 py-8">
+<div class="px-12 md:px-24 lg:px-40 py-4 md:py-8">
 	<slot />
 </div>
