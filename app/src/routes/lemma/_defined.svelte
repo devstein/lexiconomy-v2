@@ -54,28 +54,32 @@
 	$: console.log($provider, $connected, $signerAddress, owner, approved);
 </script>
 
-<div class="space-y-4 text-lg w-2/3">
-	{#if definition || canOperate}
-		<EditableTextArea
-			title="definition"
-			value={definition}
-			placeholder="add a definition"
-			editable={canOperate}
-			onSave={updateDefinition}
-		/>
-	{/if}
-	{#if example || canOperate}
-		<EditableTextArea
-			title="example"
-			value={example}
-			placeholder="add an example"
-			editable={canOperate}
-			onSave={updateExample}
-		/>
-	{/if}
+<div class="space-y-4 text-lg">
+	<div class="space-y-4 w-2/3">
+		{#if definition || canOperate}
+			<EditableTextArea
+				title="definition"
+				value={definition}
+				placeholder="add a definition"
+				editable={canOperate}
+				onSave={updateDefinition}
+			/>
+		{/if}
+		{#if example || canOperate}
+			<EditableTextArea
+				title="example"
+				value={example}
+				placeholder="add an example"
+				editable={canOperate}
+				onSave={updateExample}
+			/>
+		{/if}
+	</div>
 	<div>
 		<h3 class="text-gray-500">metadata</h3>
-		<div class="flex flex-row flex-wrap space-x-8 text-gray-700 text-base">
+		<div
+			class="w-full flex flex-wrap flex-col space-y-1 md:flex-row md:space-x-8 md:space-y-0 text-gray-700 text-base"
+		>
 			<div>#{number}</div>
 			<div>
 				owned by

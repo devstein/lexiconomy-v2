@@ -4,6 +4,7 @@
 
 <script lang="ts">
 	import { ZERO_ADDR } from '$lib/web3/utils';
+	import { getColorPalette } from '$lib/nft/color';
 
 	import UndefinedState from './_undefined.svelte';
 	import DefinedState from './_defined.svelte';
@@ -19,13 +20,26 @@
 	export let approved: string;
 
 	export let chainId: number;
+	let { background, primary, secondary } = getColorPalette(lemma);
 
 	const exists = Boolean(owner) && owner !== ZERO_ADDR;
 
 	console.log(owner, approved, tokenId, lemma, definition);
+	$: ({ background, primary, secondary } = getColorPalette(lemma));
+
+	// TODOs
+	// Colors? Where else could we use?
+	// Show NFT
+	// Mobile friendly
 </script>
 
-<h1 class="text-5xl pb-4 mb-8 border-b-4 border-yellow-400">{lemma}</h1>
+<h1 class="text-5xl pb-4 mb-8">
+	<div>{lemma}</div>
+	<div class="border-b-4 mb-0.5" style:border-color={background} />
+	<div class="border-b-4 mb-0.5" style:border-color={primary} />
+	<div class="border-b-4 mb-0.5" style:border-color={secondary} />
+</h1>
+
 {#if exists}
 	<DefinedState {chainId} {tokenId} {number} {example} {definition} {owner} {approved} />
 {:else}
