@@ -12,6 +12,7 @@
 <header class="my-4 mx-2">
 	<div class="hidden md:flex flex-row items-center font-mono space-x-4">
 		<a href="/home" class="text-2xl">lexiconomy</a>
+		<!-- TODO: On click shift focus to input -->
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width="24"
@@ -38,13 +39,14 @@
 		<a class="text-xl" href="/manifesto">manifesto</a>
 	</div>
 
-	<!-- Hamburger menu -->
 	<div class="flex flex-row md:hidden space-x-4">
+		<!-- Hamburger menu -->
 		<div class="space-y-2">
 			<span class="block w-8 h-0.5 bg-gray-600" />
 			<span class="block w-8 h-0.5 bg-gray-600" />
 			<span class="block w-8 h-0.5 bg-gray-600" />
 		</div>
+		<!-- TODO: On click shift focus to input -->
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width="24"

@@ -24,3 +24,13 @@ declare module 'svelte-ethers-store' {
 	export const provider: DefaultEVMStore['provider'];
 	export const signer: DefaultEVMStore['signer'];
 }
+
+interface Heap {
+	identify: (string) => void;
+}
+
+export declare global {
+	interface Window {
+		heap: Heap;
+	}
+}
