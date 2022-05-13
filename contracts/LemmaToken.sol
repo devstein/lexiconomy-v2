@@ -34,8 +34,13 @@ contract LemmaToken is
 
   function _baseURI() internal pure override returns (string memory) {
     // tokenURI concats the baseURI with the token id
-    // return "https://lexiconomy.org/token/";
+    // TODO: return "https://lexiconomy.org/token/";
     return "https://lexiconomy-v2.vercel.app/token/";
+  }
+
+  function contractURI() public view returns (string memory) {
+    // TODO: return "https://lexiconomy.org/cotnract/metadata";
+    return "https://lexiconomy-v2.vercel.app/contract/metadata";
   }
 
   function _beforeTokenTransfer(

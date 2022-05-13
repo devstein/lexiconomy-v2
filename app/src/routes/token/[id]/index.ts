@@ -7,7 +7,7 @@ import { getColorPalette } from '$lib/nft/color';
 const BASE_URL = 'https://lexiconomy-v2.vercel.app';
 const NUMBER_OF_V1_TOKENS = 160;
 
-export const get: RequestHandler = async ({ request, params }) => {
+export const get: RequestHandler = async ({ params }) => {
 	const contract = await getContract();
 
 	const { id } = params;
@@ -25,9 +25,6 @@ export const get: RequestHandler = async ({ request, params }) => {
 			status: 404
 		};
 	}
-
-	// TODO: Change response based of request origin?
-	console.log('request from', request.referrer);
 
 	const definitionDescription = definition
 		? `
