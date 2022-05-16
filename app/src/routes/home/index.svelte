@@ -13,10 +13,10 @@
 
 <div class="h-full flex flex-col items-center justify-center font-mono text-center">
 	<div class="space-y-4">
-		<h1 class="text-7xl">lexiconomy</h1>
-		<h3 class="text-xl">/ leksi-kän-əmē /</h3>
-		<h3 class="text-xl italic">noun</h3>
-		<h2 class="text-2xl">1. the world's decentralized dictionary.</h2>
+		<h1 class="text-5xl md:text-7xl">lexiconomy</h1>
+		<h3 class="text-lg md:text-xl">/ leksi-kän-əmē /</h3>
+		<h3 class="text-lg md:text-xl italic">noun</h3>
+		<h2 class="text-xl md:text-2xl">1. the world's decentralized dictionary.</h2>
 	</div>
 	<div class="w-4/5 lg:w-3/5 space-y-8">
 		<form on:submit|preventDefault={submit} class="w-full flex mt-8 space-x-4">
