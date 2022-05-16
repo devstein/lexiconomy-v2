@@ -9,6 +9,8 @@
 		if (!search) return;
 		goto(`/lemma/${encodeURIComponent(search.trim())}`);
 	};
+
+	const toggleMenu = () => (showMobileMenu = !showMobileMenu);
 </script>
 
 <header class="my-4 mx-2">
@@ -45,7 +47,7 @@
 
 	<div class="flex flex-row md:hidden space-x-4">
 		<!-- Hamburger menu -->
-		<button class="space-y-2" on:click={() => (showMobileMenu = !showMobileMenu)}>
+		<button class="space-y-2" on:click={toggleMenu}>
 			<span class="block w-8 h-0.5 bg-gray-600" />
 			<span class="block w-8 h-0.5 bg-gray-600" />
 			<span class="block w-8 h-0.5 bg-gray-600" />
@@ -77,13 +79,13 @@
 	</div>
 	{#if showMobileMenu}
 		<ul class="mt-2 space-y-1 font-mono md:hidden" transition:slide>
-			<li>
+			<li on:click={toggleMenu}>
 				<a class="text-lg" href="/explore">explore</a>
 			</li>
-			<li>
+			<li on:click={toggleMenu}>
 				<a class="text-lg" href="/guide">guide</a>
 			</li>
-			<li>
+			<li on:click={toggleMenu}>
 				<a class="text-lg" href="/manifesto">manifesto</a>
 			</li>
 		</ul>
