@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { slide } from 'svelte/transition';
 	import { goto } from '$app/navigation';
 
 	let search: string;
+	let showMobileMenu = false;
 
 	const submit = () => {
 		if (!search) return;
@@ -43,11 +45,11 @@
 
 	<div class="flex flex-row md:hidden space-x-4">
 		<!-- Hamburger menu -->
-		<div class="space-y-2">
+		<button class="space-y-2" on:click={() => (showMobileMenu = !showMobileMenu)}>
 			<span class="block w-8 h-0.5 bg-gray-600" />
 			<span class="block w-8 h-0.5 bg-gray-600" />
 			<span class="block w-8 h-0.5 bg-gray-600" />
-		</div>
+		</button>
 		<!-- TODO: On click shift focus to input -->
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -73,4 +75,17 @@
 			/>
 		</form>
 	</div>
+	{#if showMobileMenu}
+		<ul class="mt-2 space-y-1 font-mono md:hidden" transition:slide>
+			<li>
+				<a class="text-lg" href="/explore">explore</a>
+			</li>
+			<li>
+				<a class="text-lg" href="/guide">guide</a>
+			</li>
+			<li>
+				<a class="text-lg" href="/manifesto">manifesto</a>
+			</li>
+		</ul>
+	{/if}
 </header>
