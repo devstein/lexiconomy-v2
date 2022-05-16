@@ -9,10 +9,13 @@
 
 	import { getContractWithProvider } from '$lib/web3/contract';
 	import chainInfo from '$lib/web3/chains';
+	import { getColorPalette } from '$lib/nft/color';
 
 	import EditableTextArea from '$lib/components/EditableTextArea.svelte';
+	import NFT from '$lib/components/NFT.svelte';
 
 	// pass lemma as prop
+	export let lemma: string;
 	export let tokenId: string;
 	export let number: string;
 	export let definition: string;
@@ -24,14 +27,13 @@
 
 	let canOperate = false;
 
-	// GET CHAIN INFO FROM SERVER!
+	// TODO: GET CHAIN INFO FROM SERVER!
 	const { lexiconomyAddress, blockExplorerURI, openSeaURI, raribleURI } = chainInfo[chainId];
+	let { background, primary, secondary } = getColorPalette(lemma);
 
 	if (browser) {
 	}
 
-	// TODO: RE-Evaluate!
-	console.log($provider, $connected, $signerAddress, owner, approved);
 	$: canOperate =
 		$connected &&
 		$signerAddress &&
@@ -51,36 +53,51 @@
 	};
 
 	const displayAddress = (address: string) => address.slice(0, 8);
-	$: console.log($provider, $connected, $signerAddress, owner, approved);
 </script>
 
 <div class="space-y-4 text-lg">
-	<div class="space-y-4 w-2/3">
-		{#if definition || canOperate}
+	<div class="flex flex-col-reverse md:flex-row">
+		<div>
+			<h3 class="md:hidden text-gray-500">nft</h3>
+			<div class="mr-8 h-72 w-72">
+				<NFT {lemma} {number} />
+			</div>
+		</div>
+		<div class="space-y-4 flex-1">
 			<EditableTextArea
 				title="definition"
 				value={definition}
-				placeholder="add a definition"
+				placeholder={canOperate ? 'add a definition' : 'n/a'}
 				editable={canOperate}
 				onSave={updateDefinition}
 			/>
-		{/if}
-		{#if example || canOperate}
 			<EditableTextArea
 				title="example"
 				value={example}
-				placeholder="add an example"
+				placeholder={canOperate ? 'add an example' : 'n/a'}
 				editable={canOperate}
 				onSave={updateExample}
 			/>
-		{/if}
+		</div>
 	</div>
 	<div>
 		<h3 class="text-gray-500">metadata</h3>
 		<div
-			class="w-full flex flex-wrap flex-col space-y-1 md:flex-row md:space-x-8 md:space-y-0 text-gray-700 text-base"
+			class="w-full flex flex-wrap flex-col space-y-1 md:flex-row md:items-center md:space-x-8 md:space-y-0 text-gray-700 text-base"
 		>
 			<div>#{number}</div>
+			<div class="flex flex-row flex-nowrap items-center space-x-1">
+				<div class="w-4 h-4 border" style:background-color={background} />
+				<div>background</div>
+			</div>
+			<div class="flex flex-row flex-nowrap items-center space-x-1">
+				<div class="w-4 h-4 border" style:background-color={primary} />
+				<div>primary</div>
+			</div>
+			<div class="flex flex-row flex-nowrap items-center space-x-1">
+				<div class="w-4 h-4 border" style:background-color={secondary} />
+				<div>secondary</div>
+			</div>
 			<div>
 				owned by
 				<a
@@ -90,17 +107,6 @@
 					href="{blockExplorerURI}/address/{owner}"
 				>
 					{displayAddress(owner)}...
-				</a>
-			</div>
-			<div>
-				view on
-				<a
-					rel="external"
-					target="_blank"
-					class="text-blue-400"
-					href="{blockExplorerURI}/token/{lexiconomyAddress}?a={tokenId.toString()}#inventory"
-				>
-					block explorer
 				</a>
 			</div>
 
@@ -122,6 +128,18 @@
 					href="{raribleURI}/token/{lexiconomyAddress}:{tokenId.toString()}"
 				>
 					Rarible
+				</a>
+			</div>
+
+			<div>
+				view on
+				<a
+					rel="external"
+					target="_blank"
+					class="text-blue-400"
+					href="{blockExplorerURI}/token/{lexiconomyAddress}?a={tokenId.toString()}#inventory"
+				>
+					block explorer
 				</a>
 			</div>
 		</div>

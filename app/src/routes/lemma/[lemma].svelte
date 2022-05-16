@@ -41,7 +41,7 @@
 </h1>
 
 {#if exists}
-	<DefinedState {chainId} {tokenId} {number} {example} {definition} {owner} {approved} />
+	<DefinedState {lemma} {chainId} {tokenId} {number} {example} {definition} {owner} {approved} />
 {:else}
 	<UndefinedState {lemma} />
 {/if}
