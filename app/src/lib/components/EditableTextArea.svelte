@@ -22,7 +22,7 @@
 	});
 
 	const getHeighBasedOffValue = (str: string) => {
-		const numberOfLineBreaks = (str.match(/\n/g) || []).length + 1;
+		const numberOfLineBreaks = (str.match(/\n/g) || []).length + 2;
 		return LINE_HEIGHT * numberOfLineBreaks + TEXTAREA_BUFFER;
 	};
 
@@ -77,6 +77,7 @@
 		class:focus-visible:outline-none={!editing}
 		class:cursor-default={!editing}
 		class:border-2={editing}
+		class:p-2={editing}
 		on:dblclick={() => editable && edit()}
 	/>
 </div>

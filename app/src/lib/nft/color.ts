@@ -15,52 +15,20 @@
 // '#ffcb0573' // orange
 // ];
 
-// https://colorhunt.co/palettes/popular
-export const colors = [
-	// https://colorhunt.co/palette/a8d8eaaa96dafcbad3ffffd2
-	'#A8D8EA',
-	'#AA96DA',
-	'#FCBAD3',
-	'#FFFFD2',
-
-	// https://colorhunt.co/palette/ffb6b9fae3d9bbded661c0bf
-	'#FFB6B9',
-	'#FAE3D9',
-	'#BBDED6',
-	'#61C0BF',
-
-	// https://colorhunt.co/palette/ffcfdffefdcae0f9b5a5dee5
-	'#FFCFDF',
-	'#FEFDCA',
-	'#E0F9B5',
-	'#A5DEE5',
-
-	// https://colorhunt.co/palette/9adcfffff89affb2a6ff8aae
-	'#9ADCFF',
-	'#FFF89A',
-	'#FFB2A6',
-	'#FF8AAE',
-
-	// https://colorhunt.co/palette/f38181fce38aeaffd095e1d3
-	'#F38181',
-	'#FCE38A',
-	'#EAFFD0',
-	'#95E1D3',
-
-	// https://colorhunt.co/palette/f38181fce38aeaffd095e1d3
-	'#D9D7F1',
-	'#FFFDDE',
-	'#E7FBBE',
-	'#FFCBCB'
-
-	// https://colorhunt.co/palette/222831393e4600adb5eeeeee
-];
-
 interface ColorPalette {
 	background: string;
 	primary: string;
 	secondary: string;
 }
+
+const WHITE = '#ffffff';
+const BLACK = '#000000';
+
+// TODO: Create palette for v1 lemmas
+
+// background = color, white, or black
+// primary = color, white, or black
+// secondary = color, white, or black
 
 const palettes: ColorPalette[] = [
 	{
@@ -89,7 +57,7 @@ const palettes: ColorPalette[] = [
 		secondary: '#222831'
 	},
 	{
-		background: '#fffff',
+		background: '#ffffff',
 		primary: '#ff2e63',
 		secondary: '#252a34'
 	},
@@ -99,7 +67,7 @@ const palettes: ColorPalette[] = [
 		secondary: '#000000'
 	},
 	{
-		background: '#fffff',
+		background: '#ffffff',
 		primary: '#6a2c70',
 		secondary: '#222831'
 	},

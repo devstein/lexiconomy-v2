@@ -14,7 +14,6 @@
 	import EditableTextArea from '$lib/components/EditableTextArea.svelte';
 	import NFT from '$lib/components/NFT.svelte';
 
-	// pass lemma as prop
 	export let lemma: string;
 	export let tokenId: string;
 	export let number: string;
@@ -83,7 +82,7 @@
 	<div>
 		<h3 class="text-gray-500">metadata</h3>
 		<div
-			class="w-full flex flex-wrap flex-col space-y-1 md:flex-row md:items-center md:space-x-8 md:space-y-0 text-gray-700 text-base"
+			class="w-full flex flex-wrap flex-col space-y-1 md:flex-row md:items-center md:space-x-8 text-gray-700 text-base"
 		>
 			<div>#{number}</div>
 			<div class="flex flex-row flex-nowrap items-center space-x-1">

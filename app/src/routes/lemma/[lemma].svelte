@@ -20,21 +20,17 @@
 	export let approved: string;
 
 	export let chainId: number;
+
+	let exists = false;
 	let { background, primary, secondary } = getColorPalette(lemma);
 
-	const exists = Boolean(owner) && owner !== ZERO_ADDR;
+	$: exists = Boolean(owner) && owner !== ZERO_ADDR;
 
-	console.log(owner, approved, tokenId, lemma, definition);
 	$: ({ background, primary, secondary } = getColorPalette(lemma));
-
-	// TODOs
-	// Colors? Where else could we use?
-	// Show NFT
-	// Mobile friendly
 </script>
 
-<h1 class="text-5xl pb-4 mb-8">
-	<div>{lemma}</div>
+<h1 class="text-4xl md:text-5xl mb-4 md:mb-8">
+	<div class="font-mono mb-1">{lemma}</div>
 	<div class="border-b-4 mb-0.5" style:border-color={background} />
 	<div class="border-b-4 mb-0.5" style:border-color={primary} />
 	<div class="border-b-4 mb-0.5" style:border-color={secondary} />

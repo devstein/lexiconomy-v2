@@ -6,9 +6,13 @@
 	import { connected, provider } from 'svelte-ethers-store';
 
 	import { getContractWithProvider } from '$lib/web3/contract';
+	import { getColorPalette } from '$lib/nft/color';
 
 	// pass lemma as prop
 	export let lemma: string;
+
+	let { background, primary, secondary } = getColorPalette(lemma);
+	$: ({ background, primary, secondary } = getColorPalette(lemma));
 
 	let definition: string;
 	let example: string;
@@ -24,25 +28,43 @@
 			value: fee
 		});
 	};
+
+	// TODO: Better Design
 </script>
 
-<div class="space-y-4 text-lg w-2/3">
+<div class="space-y-4 text-lg md:w-2/3">
 	<div>
-		<p class="text-xl mb-2">you've discovered a new word!</p>
-		<p>
+		<h4 class="text-gray-500">how it works</h4>
+		<p class="text-base">
 			enter a definition, add an example usage, and click mint to coin the word <strong
 				>{lemma}</strong
-			>. after minting, you'll own the NFT and can use it however you like. share it, admire it, or
+			>.
+		</p>
+		<p class="text-base">
+			after minting, you'll own the NFT and can use it however you like. share it, admire it, or
 			trade it.
 		</p>
 	</div>
 	<div>
 		<h4 class="text-gray-500">definition</h4>
-		<textarea bind:value={definition} class="w-full border-2 text-base" />
+		<textarea
+			bind:value={definition}
+			class="p-2 w-full border-2 text-base"
+			placeholder="Add your definition here..."
+		/>
 	</div>
 	<div class="w-full">
 		<h4 class="text-gray-500">example</h4>
-		<textarea bind:value={example} class="w-full border-2 text-base" />
+		<textarea
+			bind:value={example}
+			class="p-2 w-full border-2 text-base"
+			placeholder="Add an example of how it's used in a sentence..."
+		/>
 	</div>
-	<button class="p-4 bg-green-200 rounded" on:click={mint}>Mint</button>
+	<button
+		class="w-32 p-4 rounded font-semibold border"
+		style:background-color={background}
+		style:color={primary}
+		on:click={mint}>mint</button
+	>
 </div>
