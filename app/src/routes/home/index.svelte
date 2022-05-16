@@ -18,7 +18,7 @@
 		<h3 class="text-xl italic">noun</h3>
 		<h2 class="text-2xl">1. the world's decentralized dictionary.</h2>
 	</div>
-	<div class="w-2/5 space-y-8">
+	<div class="w-4/5 lg:w-3/5 space-y-8">
 		<form on:submit|preventDefault={submit} class="w-full flex mt-8 space-x-4">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -44,11 +44,11 @@
 				class="w-full focus-visible:outline-none mt-0 block px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
 			/>
 		</form>
-		<div class="grid grid-cols-4 text-xl">
-			<a class="p-8 hover:bg-slate-100 focus:bg-slate-100" href="/manifesto">manifesto</a>
-			<a class="p-8 hover:bg-slate-100 focus:bg-slate-100" href="/guide">guide</a>
-			<a class="p-8 hover:bg-slate-100 focus:bg-slate-100" href="/explore">explore</a>
-			<a class="p-8 hover:bg-slate-100 focus:bg-slate-100" href="/explore">trade</a>
+		<div class="grid grid-rows-4 text-lg md:grid-cols-4 md:text-xl">
+			<a class="p-4 md:p-8 hover:bg-slate-100 focus:bg-slate-100" href="/explore">explore</a>
+			<a class="p-4 md:p-8 hover:bg-slate-100 focus:bg-slate-100" href="/manifesto">manifesto</a>
+			<a class="p-4 md:p-8 hover:bg-slate-100 focus:bg-slate-100" href="/guide">guide</a>
+			<a class="p-4 md:p-8 hover:bg-slate-100 focus:bg-slate-100" href="/explore">trade</a>
 		</div>
 	</div>
 </div>
