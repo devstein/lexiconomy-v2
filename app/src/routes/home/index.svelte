@@ -19,7 +19,7 @@
 		<h2 class="text-2xl">1. the world's decentralized dictionary.</h2>
 	</div>
 	<div class="w-2/5 space-y-8">
-		<form on:submit|preventDefault={submit} class="w-full flex mt-8">
+		<form on:submit|preventDefault={submit} class="w-full flex mt-8 space-x-4">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
@@ -36,10 +36,12 @@
 			</svg>
 			<!-- svelte-ignore a11y-autofocus -->
 			<input
-				bind:value={search}
-				label="Label"
-				class="ml-2 w-full focus:bg-slate-100 focus-visible:outline-none"
 				autofocus
+				type="search"
+				placeholder="discover a word..."
+				bind:value={search}
+				label="Search"
+				class="w-full focus-visible:outline-none mt-0 block px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
 			/>
 		</form>
 		<div class="grid grid-cols-4 text-xl">

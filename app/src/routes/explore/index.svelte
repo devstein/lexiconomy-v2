@@ -8,25 +8,20 @@
 	// TODO: Filter lemmas by search bar
 </script>
 
-<div class="h-full mt-4 lg:mt-8">
-	<ul class="h-full flex flex-row flex-wrap justify-start items-center content-center break-words">
-		{#each lemmas as item}
-			<li
-				class="h-16 min-w-16 mr-2 md:h-32 md:min-w-32 md:mr-4 my-4 px-2 rounded"
-				style:background-color={getColorPalette(item).background}
+<ul class="h-full flex flex-row flex-wrap justify-start items-center content-center break-words">
+	{#each lemmas as item}
+		<li
+			class="h-16 min-w-16 mr-2 md:h-32 md:min-w-32 md:mr-4 my-4 px-2 rounded"
+			style:background-color={getColorPalette(item).background}
+		>
+			<a
+				sveltekit:prefetch
+				href="/lemma/{item}"
+				class="h-full font-mono text-center md:text-lg font-semibold flex flex-col justify-center items-center break-all"
+				style:color={getColorPalette(item).primary}
 			>
-				<a
-					sveltekit:prefetch
-					href="/lemma/{item}"
-					class="h-full font-mono text-center md:text-lg font-semibold flex flex-col justify-center items-center break-all"
-					style:color={getColorPalette(item).primary}
-				>
-					{item}
-				</a>
-			</li>
-		{/each}
-	</ul>
-</div>
-
-<style>
-</style>
+				{item}
+			</a>
+		</li>
+	{/each}
+</ul>

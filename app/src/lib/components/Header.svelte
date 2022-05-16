@@ -29,9 +29,11 @@
 		</svg>
 		<form on:submit|preventDefault={submit} class="flex-1">
 			<input
+				type="search"
+				placeholder="discover a word..."
 				bind:value={search}
-				label="Label"
-				class="w-full focus:bg-slate-100 focus-visible:outline-none"
+				label="Search"
+				class="w-full focus-visible:outline-none mt-0 block px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
 			/>
 		</form>
 		<a class="text-xl" href="/explore">explore</a>
@@ -63,9 +65,11 @@
 		</svg>
 		<form on:submit|preventDefault={submit} class="flex-1">
 			<input
+				type="search"
+				placeholder="discover a word..."
 				bind:value={search}
-				label="Label"
-				class="w-full focus:bg-slate-100 focus-visible:outline-none"
+				label="Search"
+				class="w-full focus-visible:outline-none mt-0 block px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
 			/>
 		</form>
 	</div>

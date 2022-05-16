@@ -11,8 +11,8 @@
 	// pass lemma as prop
 	export let lemma: string;
 
-	let { background, primary, secondary } = getColorPalette(lemma);
-	$: ({ background, primary, secondary } = getColorPalette(lemma));
+	let { background, primary } = getColorPalette(lemma);
+	$: ({ background, primary } = getColorPalette(lemma));
 
 	let definition: string;
 	let example: string;
