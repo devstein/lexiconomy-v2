@@ -7,3 +7,5 @@ artifacts
 .env
 .env*
 todos.md
+
+.DS_Store*
