@@ -4,8 +4,11 @@
 
 <script lang="ts">
 	import { getColorPalette } from '$lib/nft/color';
+
 	export let lemmas: string[] = [];
-	// TODO: Filter lemmas by search bar
+	// TODO: Pagination
+	// TODO: Fuzzy Search by Global Search Value
+	// TODO: Update lemma when event comes through???
 </script>
 
 <ul class="h-full flex flex-row flex-wrap justify-start items-center content-center break-words">
@@ -17,7 +20,7 @@
 			<a
 				sveltekit:prefetch
 				href="/lemma/{item}"
-				class="h-full font-mono text-center md:text-lg font-semibold flex flex-col justify-center items-center break-all"
+				class="h-full font-mono text-center md:text-lg flex flex-col justify-center items-center break-all"
 				style:color={getColorPalette(item).primary}
 			>
 				{item}
