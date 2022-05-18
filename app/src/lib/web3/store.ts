@@ -6,6 +6,7 @@ export interface Lemma {
 	definition: string;
 	example: string;
 	owner: string;
+	number: string;
 }
 
 // Lemmas
@@ -14,6 +15,6 @@ export interface Lemma {
 
 // Store
 // lemmas
-const lemmas = writable({});
+const lemmas = writable<Record<string, Lemma | undefined>>({});
 
 export default lemmas;

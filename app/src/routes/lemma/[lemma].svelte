@@ -3,8 +3,9 @@
 </script>
 
 <script lang="ts">
-	import { ZERO_ADDR } from '$lib/web3/utils';
+	import { isZeroAddr } from '$lib/web3/utils';
 	import { getColorPalette } from '$lib/nft/color';
+	import lemmas from '$lib/web3/store';
 
 	import UndefinedState from './_undefined.svelte';
 	import DefinedState from './_defined.svelte';
@@ -22,11 +23,21 @@
 	export let chainId: number;
 
 	let exists = false;
-	let { background, primary, secondary } = getColorPalette(lemma);
 
-	$: exists = Boolean(owner) && owner !== ZERO_ADDR;
-
+	$: exists = Boolean(owner) && !isZeroAddr(owner);
 	$: ({ background, primary, secondary } = getColorPalette(lemma));
+
+	// Update lemma when event comes through
+	lemmas.subscribe((value) => {
+		const updates = value[tokenId];
+
+		if (!updates) return;
+
+		owner = updates?.owner || owner;
+		definition = updates?.definition || definition;
+		example = updates?.example || example;
+		number = updates?.number || number;
+	});
 </script>
 
 <h1 class="text-4xl md:text-5xl mb-4 md:mb-8">
