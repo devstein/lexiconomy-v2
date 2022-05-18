@@ -1,19 +1,4 @@
-// export const colors = [
-// '#fea3aa80', // salmon-ish
-// '#f8b88b66', // light orange
-// '#fef16073', // yellow
-// '#baed9173', // green
-// '#b2cefe80', // purple blue
-// '#f2a2e84d', // pink
-// '#b0f4e880', // light blue green
-// '#a7f69a66', // green
-// '#f4a1a180', // a pink
-// '#f6b6f180', // a pink
-// '#edf29280', // a yellow
-// '#6eb5ff73', // a green
-// '#77dd7780', // a green
-// '#ffcb0573' // orange
-// ];
+import { version } from '$lib/nft/version';
 
 interface ColorPalette {
 	background: string;
@@ -21,16 +6,32 @@ interface ColorPalette {
 	secondary: string;
 }
 
-const WHITE = '#ffffff';
 const BLACK = '#000000';
-
-// TODO: Create palette for v1 lemmas
+const WHITE = '#ffffff';
 
 // background = color, white, or black
 // primary = color, white, or black
 // secondary = color, white, or black
 
-const palettes: ColorPalette[] = [
+// original pastels with black text
+const palettesV1: ColorPalette[] = [
+	{ background: '#fea3aa80', primary: BLACK, secondary: BLACK }, // salmon-ish
+	{ background: '#f8b88b66', primary: BLACK, secondary: BLACK }, // light orange
+	{ background: '#fef16073', primary: BLACK, secondary: BLACK }, // yellow
+	{ background: '#baed9173', primary: BLACK, secondary: BLACK }, // green
+	{ background: '#b2cefe80', primary: BLACK, secondary: BLACK }, // purple blue
+	{ background: '#f2a2e84d', primary: BLACK, secondary: BLACK }, // pink
+	{ background: '#b0f4e880', primary: BLACK, secondary: BLACK }, // light blue green
+	{ background: '#a7f69a66', primary: BLACK, secondary: BLACK }, // green
+	{ background: '#f4a1a180', primary: BLACK, secondary: BLACK }, // a pink
+	{ background: '#f6b6f180', primary: BLACK, secondary: BLACK }, // a pink
+	{ background: '#edf29280', primary: BLACK, secondary: BLACK }, // a yellow
+	{ background: '#6eb5ff73', primary: BLACK, secondary: BLACK }, // a green
+	{ background: '#77dd7780', primary: BLACK, secondary: BLACK }, // a green
+	{ background: '#ffcb0573', primary: BLACK, secondary: BLACK } // orange
+];
+
+const palettesV2: ColorPalette[] = [
 	{
 		background: '#222831',
 		primary: '#00adb5',
@@ -43,8 +44,8 @@ const palettes: ColorPalette[] = [
 	},
 	{
 		background: '#fce38a',
-		primary: '#000',
-		secondary: '#000'
+		primary: BLACK,
+		secondary: BLACK
 	},
 	{
 		background: '#f9ed69',
@@ -57,17 +58,17 @@ const palettes: ColorPalette[] = [
 		secondary: '#222831'
 	},
 	{
-		background: '#ffffff',
+		background: WHITE,
 		primary: '#ff2e63',
 		secondary: '#252a34'
 	},
 	{
 		background: '#ff2e63',
 		primary: '#fef16b',
-		secondary: '#000000'
+		secondary: BLACK
 	},
 	{
-		background: '#ffffff',
+		background: WHITE,
 		primary: '#6a2c70',
 		secondary: '#222831'
 	},
@@ -88,43 +89,43 @@ const palettes: ColorPalette[] = [
 	},
 	{
 		background: '#e84545',
-		primary: '#ffffff',
-		secondary: '#000000'
+		primary: WHITE,
+		secondary: BLACK
 	},
 	{
-		background: '#ffffff',
+		background: WHITE,
 		primary: '#bc5921',
 		secondary: '#7b782f'
 	},
 	{
 		background: '#f38181',
-		primary: '#000000',
-		secondary: '#000000'
+		primary: BLACK,
+		secondary: BLACK
 	},
 	{
 		background: '#fce38a',
-		primary: '#000000',
-		secondary: '#000000'
+		primary: BLACK,
+		secondary: BLACK
 	},
 	{
 		background: '#eaffd0',
-		primary: '#000000',
-		secondary: '#000000'
+		primary: BLACK,
+		secondary: BLACK
 	},
 	{
 		background: '#95e1d3',
-		primary: '#000000',
+		primary: BLACK,
 		secondary: '#95e1d3'
 	},
 	{
 		background: '#bae8e8',
 		primary: '#272343',
-		secondary: '#000000'
+		secondary: BLACK
 	},
 	{
 		background: '#6e5773',
-		primary: '#ffffff',
-		secondary: '#ffffff'
+		primary: WHITE,
+		secondary: WHITE
 	},
 	{
 		background: '#1c2938',
@@ -159,11 +160,13 @@ const palettes: ColorPalette[] = [
 	{
 		background: '#a8dadc',
 		primary: '#343a40',
-		secondary: '#000000'
+		secondary: BLACK
 	}
 ];
 
-export const getColorPalette = (lemma = 'lexiconomy'): ColorPalette => {
+export const getColorPalette = (lemma: string): ColorPalette => {
+	const palettes = version(lemma) === 'v1' ? palettesV1 : palettesV2;
+
 	const lemmaCode =
 		lemma.length === 1
 			? lemma.codePointAt(0)

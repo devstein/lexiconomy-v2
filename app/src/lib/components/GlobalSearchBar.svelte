@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	// props
-	// TODO: How to make this available to parent component!
 	let search: string = '';
 
 	const submit = () => {
