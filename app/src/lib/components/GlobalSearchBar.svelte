@@ -7,6 +7,8 @@
 		if (!search) return;
 		search = search.toLowerCase().trim();
 		goto(`/lemma/${encodeURIComponent(search)}`);
+		// reset search
+		search = '';
 	};
 </script>
 
