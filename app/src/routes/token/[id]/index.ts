@@ -2,10 +2,10 @@ import type { RequestHandler } from '@sveltejs/kit';
 
 import { getContract } from '$lib/web3/contract';
 import { getColorPalette } from '$lib/nft/color';
+import { version } from '$lib/nft/version';
 
 // TODO: Update before going to production
 const BASE_URL = 'https://lexiconomy-v2.vercel.app';
-const NUMBER_OF_V1_TOKENS = 160;
 
 export const get: RequestHandler = async ({ params }) => {
 	const contract = await getContract();
@@ -64,8 +64,7 @@ ${exampleDescription}
 				},
 				{
 					trait_type: 'Generation',
-					// number < NUMBER_OF_V1_TOKENS then it's a 1  else 2
-					value: number.lt(NUMBER_OF_V1_TOKENS) ? 'v1' : 'v2'
+					value: version(lemma)
 				},
 				{
 					trait_type: 'Background Color',
