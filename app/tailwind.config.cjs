@@ -8,8 +8,10 @@ const config = {
 				32: '8rem'
 			},
 			fontFamily: {
+				sans: ['Oxygen', 'sans-serif'],
 				mono: [
-					'IBM Plex Mono',
+					'Berkeley Mono',
+					'Space Mono',
 					'ui-monospace',
 					'SFMono-Regular',
 					'Menlo',

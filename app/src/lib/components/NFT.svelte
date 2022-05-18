@@ -17,7 +17,7 @@
 	style:background-color={background}
 >
 	<div
-		class="flex-1 flex flex-col justify-center font-mono text-3xl font-semibold text-center"
+		class="flex-1 flex flex-col justify-center font-mono text-3xl text-center"
 		style:color={primary}
 	>
 		{lemma}

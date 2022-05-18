@@ -1,4 +1,69 @@
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono');
+@import url('https://fonts.googleapis.com/css?family=Space+Mono');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap');
+
+@font-face {
+	font-family: 'Berkeley Mono';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+
+	src: url('/fonts/BerkeleyMono-Regular.woff2') format('woff2'),
+		url('/fonts/BerkeleyMono-Regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Berkeley Mono';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+
+	src: url('/fonts/BerkeleyMono-Bold.woff2') format('woff2'),
+		url('/fonts/BerkeleyMono-Bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Berkeley Mono';
+	font-style: normal;
+	font-weight: bold;
+	font-display: swap;
+
+	src: url('/fonts/BerkeleyMono-Bold.woff2') format('woff2'),
+		url('/fonts/BerkeleyMono-Bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Berkeley Mono';
+	font-style: italic;
+	font-weight: 600;
+	font-display: swap;
+
+	src: url('/fonts/BerkeleyMono-BoldItalic.woff2') format('woff2'),
+		url('/fonts/BerkeleyMono-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Berkeley Mono';
+	font-style: italic;
+	font-weight: bold;
+	font-display: swap;
+
+	src: url('/fonts/BerkeleyMono-BoldItalic.woff2') format('woff2'),
+		url('/fonts/BerkeleyMono-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Berkeley Mono';
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+
+	src: url('/fonts/BerkeleyMono-BoldItalic.woff2') format('woff2'),
+		url('/fonts/BerkeleyMono-BoldItalic.woff') format('woff');
+}
 
 /* Write your global styles here, in PostCSS syntax */
 @tailwind base;
