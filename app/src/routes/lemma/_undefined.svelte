@@ -10,7 +10,7 @@
 
 	// pass lemma as prop
 	export let lemma: string;
-	let errors: Partial<Record<'definition' | 'example', string | undefined>> = {};
+	let errors: Partial<Record<'definition' | 'example' | 'mint', string | undefined>> = {};
 
 	$: ({ background, primary } = getColorPalette(lemma));
 
@@ -36,20 +36,39 @@
 		errors.example = undefined;
 
 		if (!$connected) {
-			// TODO: Use Web3Modal or Web3 React
-			await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-			// catch err if contains unsupported chain id
+			try {
+				// TODO: Use Web3Modal or Web3 React
+				await window.ethereum.request({ method: 'eth_requestAccounts' });
+			} catch (err) {
+				// catch err if contains unsupported chain id
+				errors.mint = 'unable to connect to a wallet provider. please try again.';
+				return;
+			}
 		}
-		const contract = await getContractWithProvider($provider);
-		const fee = await contract.mintFee();
 
-		await contract.mint(lemma, definition, example, {
-			value: fee
-		});
+		try {
+			const contract = await getContractWithProvider($provider);
+			const fee = await contract.mintFee();
+			await contract.mint(lemma, definition, example, {
+				value: fee
+			});
+		} catch (err) {
+			console.error(err);
+			// catch err if contains unsupported chain id
+			if (String(err).includes('unsupported chain')) {
+				errors.mint = `unsupported chain. please connect to the mainnet.`;
+				return;
+			}
+
+			if ('message' in err) {
+				errors.mint = `transaction failed with message: ${err.message}`;
+				return;
+			}
+			// catch err if contains unsupported chain id
+			errors.mint = 'failed to mint. please try again.';
+			return;
+		}
 	};
-
-	// TODO: Better Design
 </script>
 
 <div class="space-y-4 text-lg md:w-2/3">
@@ -90,10 +109,15 @@
 			<div class="text-sm text-rose-500">{errors.example}</div>
 		{/if}
 	</div>
-	<button
-		class="w-32 p-4 rounded font-semibold border"
-		style:background-color={background}
-		style:color={primary}
-		on:click={mint}>mint</button
-	>
+	<div>
+		<button
+			class="w-32 p-4 rounded font-semibold border"
+			style:background-color={background}
+			style:color={primary}
+			on:click={mint}>mint</button
+		>
+		{#if errors?.mint}
+			<div class="text-sm text-rose-500">{errors.mint}</div>
+		{/if}
+	</div>
 </div>
