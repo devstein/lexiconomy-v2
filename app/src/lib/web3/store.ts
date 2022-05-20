@@ -9,10 +9,6 @@ export interface Lemma {
 	number: string;
 }
 
-// Lemmas
-// Update when we get latestLemmas?
-// Update when we load a page?
-
 // Store
 // lemmas
 const lemmas = writable<Record<string, Lemma | undefined>>({});

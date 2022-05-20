@@ -11,7 +11,7 @@ const chains: Record<number, ChainInfo> = {
 	4: {
 		name: 'Rinkeby',
 		lexiconomyAddress: '0xAfEFf024498D2C78D1Eb9348aBc91912ea80b8E3',
-		blockExplorerURI: 'https://rinkeby.etherscan.io/',
+		blockExplorerURI: 'https://rinkeby.etherscan.io',
 		openSeaURI: 'https://testnets.opensea.io',
 		raribleURI: 'https://rinkeby.rarible.com'
 	},
@@ -19,7 +19,7 @@ const chains: Record<number, ChainInfo> = {
 	80001: {
 		name: 'Mumbai',
 		lexiconomyAddress: '0x1E17a1ED19E4617Cae8f5d713009ac326f156eee',
-		blockExplorerURI: 'https://mumbai.polygonscan.com/',
+		blockExplorerURI: 'https://mumbai.polygonscan.com',
 		openSeaURI: 'https://testnets.opensea.io',
 		raribleURI: 'https://rinkeby.rarible.com'
 	}

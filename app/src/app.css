@@ -81,3 +81,7 @@ input[type='search'] {
 	border-radius: 0px;
 	background: none;
 }
+
+button {
+	text-transform: lowercase;
+}

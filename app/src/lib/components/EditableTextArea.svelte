@@ -8,6 +8,10 @@
 	export let editable: boolean;
 	export let onSave: () => void;
 
+	// naive way of adding classes to the textarea component...
+	// reconsider in future
+	export let additionalClasses = '';
+
 	const LINE_HEIGHT = 24;
 	const TEXTAREA_BUFFER = LINE_HEIGHT / 4;
 
@@ -72,7 +76,7 @@
 		bind:this={node}
 		{placeholder}
 		style:height={`${height}px`}
-		class="w-full text-base"
+		class={`w-full text-base ${additionalClasses}`}
 		class:resize-none={!editing}
 		class:focus-visible:outline-none={!editing}
 		class:cursor-default={!editing}

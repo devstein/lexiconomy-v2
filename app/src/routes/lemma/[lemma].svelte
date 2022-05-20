@@ -18,6 +18,7 @@
 	export let example: string;
 
 	export let owner: string;
+	export let ownerDisplayName: string;
 	export let approved: string;
 
 	export let chainId: number;
@@ -48,7 +49,17 @@
 </h1>
 
 {#if exists}
-	<DefinedState {lemma} {chainId} {tokenId} {number} {example} {definition} {owner} {approved} />
+	<DefinedState
+		{lemma}
+		{chainId}
+		{tokenId}
+		{number}
+		{example}
+		{definition}
+		{owner}
+		{ownerDisplayName}
+		{approved}
+	/>
 {:else}
 	<UndefinedState {lemma} />
 {/if}

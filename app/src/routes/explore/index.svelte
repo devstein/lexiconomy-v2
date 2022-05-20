@@ -14,7 +14,7 @@
 <ul class="h-full flex flex-row flex-wrap justify-start items-center content-center break-words">
 	{#each lemmas as item}
 		<li
-			class="h-16 min-w-16 mr-2 md:h-32 md:min-w-32 md:mr-4 my-4 px-2 rounded"
+			class="h-16 min-w-16 mr-2 md:h-32 md:min-w-32 md:mr-4 my-4 px-2 rounded shadow-none	hover:shadow-lg transition duration-400 transition-shadow"
 			style:background-color={getColorPalette(item).background}
 		>
 			<a

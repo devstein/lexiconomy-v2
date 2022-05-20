@@ -12,15 +12,15 @@
 		<a href="/home" class="text-2xl">lexiconomy</a>
 		<GlobalSearchBar />
 		<a
-			class="text-xl hover:underline hover:decoration-pink-500 hover:underline-offset-1 decoration-double"
+			class="text-xl hover:underline hover:decoration-pink-400 hover:underline-offset-1"
 			href="/explore">explore</a
 		>
 		<a
-			class="text-xl hover:underline hover:decoration-cyan-500 hover:underline-offset-1 decoration-double"
+			class="text-xl hover:underline hover:decoration-cyan-400 hover:underline-offset-1"
 			href="/guide">guide</a
 		>
 		<a
-			class="text-xl hover:underline hover:decoration-yellow-500 hover:underline-offset-1 decoration-double"
+			class="text-xl hover:underline hover:decoration-yellow-400 hover:underline-offset-1"
 			href="/manifesto">manifesto</a
 		>
 	</div>
@@ -38,19 +38,19 @@
 		<ul class="mt-2 space-y-1 font-mono md:hidden" transition:slide>
 			<li on:click={toggleMenu}>
 				<a
-					class="text-lg hover:underline hover:decoration-pink-500 hover:underline-offset-1 decoration-double"
+					class="text-lg hover:underline hover:decoration-pink-400 hover:underline-offset-1"
 					href="/explore">explore</a
 				>
 			</li>
 			<li on:click={toggleMenu}>
 				<a
-					class="text-lg hover:underline hover:decoration-cyan-500 hover:underline-offset-1 decoration-double"
+					class="text-lg hover:underline hover:decoration-cyan-400 hover:underline-offset-1"
 					href="/guide">guide</a
 				>
 			</li>
 			<li on:click={toggleMenu}>
 				<a
-					class="text-lg hover:underline hover:decoration-yellow-500 hover:underline-offset-1 decoration-double"
+					class="text-lg hover:underline hover:decoration-yellow-400 hover:underline-offset-1"
 					href="/manifesto">manifesto</a
 				>
 			</li>

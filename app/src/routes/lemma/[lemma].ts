@@ -1,7 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 
 import { getContract, getServerProvider } from '$lib/web3/contract';
-import { ZERO_ADDR } from '$lib/web3/utils';
+import { ZERO_ADDR, displayAddress } from '$lib/web3/utils';
 
 export const get: RequestHandler = async ({ params }) => {
 	const provider = getServerProvider();
@@ -31,10 +31,13 @@ export const get: RequestHandler = async ({ params }) => {
 	console.timeEnd(`get: ${lemma} - lemmas`);
 
 	let owner = ZERO_ADDR;
+	let ownerDisplayName = '';
 	let approved = ZERO_ADDR;
+
 	console.time(`get: ${lemma} - ownerOf`);
 	try {
 		owner = await contract.ownerOf(tokenId);
+		ownerDisplayName = await displayAddress(owner, provider);
 	} catch (e) {
 		console.log('');
 	}
@@ -48,6 +51,7 @@ export const get: RequestHandler = async ({ params }) => {
 	console.timeEnd(`get: ${lemma} - getApproved`);
 
 	console.timeEnd(`get: ${lemma}`);
+
 	return {
 		body: {
 			lemma,
@@ -56,6 +60,7 @@ export const get: RequestHandler = async ({ params }) => {
 			number: number.toString(),
 			tokenId: tokenId.toString(),
 			owner,
+			ownerDisplayName,
 			approved,
 			chainId
 		}

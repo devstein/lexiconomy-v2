@@ -68,6 +68,9 @@
 			errors.mint = 'failed to mint. please try again.';
 			return;
 		}
+		errors.mint = undefined;
+
+		// TODO: Success notification/state
 	};
 </script>
 
