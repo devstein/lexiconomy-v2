@@ -11,9 +11,18 @@
 	<div class="hidden md:flex flex-row items-center font-mono space-x-4">
 		<a href="/home" class="text-2xl">lexiconomy</a>
 		<GlobalSearchBar />
-		<a class="text-xl" href="/explore">explore</a>
-		<a class="text-xl" href="/guide">guide</a>
-		<a class="text-xl" href="/manifesto">manifesto</a>
+		<a
+			class="text-xl hover:underline hover:decoration-pink-500 hover:underline-offset-1 decoration-double"
+			href="/explore">explore</a
+		>
+		<a
+			class="text-xl hover:underline hover:decoration-cyan-500 hover:underline-offset-1 decoration-double"
+			href="/guide">guide</a
+		>
+		<a
+			class="text-xl hover:underline hover:decoration-yellow-500 hover:underline-offset-1 decoration-double"
+			href="/manifesto">manifesto</a
+		>
 	</div>
 
 	<div class="flex flex-row md:hidden space-x-4">
@@ -28,13 +37,22 @@
 	{#if showMobileMenu}
 		<ul class="mt-2 space-y-1 font-mono md:hidden" transition:slide>
 			<li on:click={toggleMenu}>
-				<a class="text-lg" href="/explore">explore</a>
+				<a
+					class="text-lg hover:underline hover:decoration-pink-500 hover:underline-offset-1 decoration-double"
+					href="/explore">explore</a
+				>
 			</li>
 			<li on:click={toggleMenu}>
-				<a class="text-lg" href="/guide">guide</a>
+				<a
+					class="text-lg hover:underline hover:decoration-cyan-500 hover:underline-offset-1 decoration-double"
+					href="/guide">guide</a
+				>
 			</li>
 			<li on:click={toggleMenu}>
-				<a class="text-lg" href="/manifesto">manifesto</a>
+				<a
+					class="text-lg hover:underline hover:decoration-yellow-500 hover:underline-offset-1 decoration-double"
+					href="/manifesto">manifesto</a
+				>
 			</li>
 		</ul>
 	{/if}
