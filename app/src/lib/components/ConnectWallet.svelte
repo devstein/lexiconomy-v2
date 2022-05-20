@@ -27,7 +27,7 @@
 {#if $connected && $signerAddress}
 	{#await displayAddress($signerAddress, $provider) then value}
 		<div
-			class="fixed right-2 bottom-1 px-4 py-2 rounded bg-pink-200 font-mono text-sm md:text-base flex flex-row items-center"
+			class="fixed right-2 bottom-1 px-4 py-2 rounded font-mono text-sm md:text-base flex flex-row items-center"
 			on:click={connect}
 		>
 			<span
@@ -39,7 +39,7 @@
 	{/await}
 {:else}
 	<button
-		class="fixed right-2 bottom-1 px-4 py-2 rounded bg-cyan-200 font-mono text-sm md:text-base"
+		class="fixed right-2 bottom-1 px-4 py-2 rounded bg-black text-white font-mono text-sm md:text-base"
 		disabled={connecting}
 		on:click={connect}>{connecting ? 'connecting...' : 'connect wallet'}</button
 	>
