@@ -13,11 +13,10 @@
 	</div>
 	<div class="mt-12 w-4/5 lg:w-3/5 space-y-8">
 		<GlobalSearchBar />
-		<div class="font-mono grid grid-rows-4 text-lg md:grid-cols-4 md:text-xl">
+		<div class="font-mono grid grid-rows-3 text-lg md:grid-cols-3 md:text-xl">
 			<a class="p-4 md:p-8 hover:bg-slate-100 focus:bg-slate-100" href="/explore">explore</a>
 			<a class="p-4 md:p-8 hover:bg-slate-100 focus:bg-slate-100" href="/manifesto">manifesto</a>
 			<a class="p-4 md:p-8 hover:bg-slate-100 focus:bg-slate-100" href="/guide">guide</a>
-			<a class="p-4 md:p-8 hover:bg-slate-100 focus:bg-slate-100" href="/explore">trade</a>
 		</div>
 	</div>
 </div>
