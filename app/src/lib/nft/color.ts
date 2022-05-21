@@ -33,6 +33,16 @@ const palettesV1: ColorPalette[] = [
 
 const palettesV2: ColorPalette[] = [
 	{
+		background: WHITE,
+		primary: BLACK,
+		secondary: BLACK
+	},
+	{
+		background: BLACK,
+		primary: WHITE,
+		secondary: WHITE
+	},
+	{
 		background: '#222831',
 		primary: '#00adb5',
 		secondary: '#eeeeee'
@@ -108,11 +118,6 @@ const palettesV2: ColorPalette[] = [
 		secondary: BLACK
 	},
 	{
-		background: '#eaffd0',
-		primary: BLACK,
-		secondary: BLACK
-	},
-	{
 		background: '#95e1d3',
 		primary: BLACK,
 		secondary: '#95e1d3'
@@ -128,14 +133,14 @@ const palettesV2: ColorPalette[] = [
 		secondary: WHITE
 	},
 	{
+		background: WHITE,
+		primary: '#6e5773',
+		secondary: BLACK
+	},
+	{
 		background: '#1c2938',
 		primary: '#ff9c91',
 		secondary: '#f4f6f6'
-	},
-	{
-		background: '#e7fbbe',
-		primary: '#080808',
-		secondary: '#080808'
 	},
 	{
 		background: '#fdc7ff',
@@ -161,18 +166,118 @@ const palettesV2: ColorPalette[] = [
 		background: '#a8dadc',
 		primary: '#343a40',
 		secondary: BLACK
+	},
+	{
+		background: '#2a9d8f',
+		primary: WHITE,
+		secondary: BLACK
+	},
+	{
+		background: WHITE,
+		primary: '#2a9d8f',
+		secondary: BLACK
+	},
+	{
+		background: '#fb8500',
+		primary: BLACK,
+		secondary: BLACK
+	},
+	{
+		background: '#8338ec',
+		primary: WHITE,
+		secondary: WHITE
+	},
+	{
+		background: WHITE,
+		primary: '#8338ec',
+		secondary: BLACK
+	},
+	{
+		background: '#ff006e',
+		primary: WHITE,
+		secondary: BLACK
+	},
+	{
+		background: '#14213d',
+		primary: '#e5e5e5',
+		secondary: '#e5e5e5'
+	},
+	{
+		background: BLACK,
+		primary: '#00f5d4',
+		secondary: WHITE
+	},
+	{
+		background: BLACK,
+		primary: '#fee440',
+		secondary: WHITE
+	},
+	{
+		background: '#00bbf9',
+		primary: BLACK,
+		secondary: BLACK
+	},
+	{
+		background: '#9b5de5',
+		primary: WHITE,
+		secondary: WHITE
+	},
+	{
+		background: '#390099',
+		primary: '#ff0054',
+		secondary: WHITE
+	},
+	{
+		background: '#8ac926',
+		primary: BLACK,
+		secondary: BLACK
+	},
+	{
+		background: '#ee426623',
+		primary: '#ee6055',
+		secondary: BLACK
+	},
+	{
+		background: '#048ba8',
+		primary: '#efea5a',
+		secondary: '#efea5a'
+	},
+	{
+		background: '#598392',
+		primary: '#eff6e0',
+		secondary: '#eff6e0'
+	},
+	{
+		background: '#ff206e',
+		primary: '#41ead4',
+		secondary: BLACK
+	},
+	{
+		background: '#41ead4',
+		primary: '#ff206e',
+		secondary: BLACK
+	},
+	{
+		background: WHITE,
+		primary: '#df2935',
+		secondary: '#3772ff'
+	},
+	{
+		background: '#df2935',
+		primary: WHITE,
+		secondary: WHITE
 	}
 ];
 
 export const getColorPalette = (lemma: string): ColorPalette => {
 	const palettes = version(lemma) === 'v1' ? palettesV1 : palettesV2;
 
-	const lemmaCode =
+	const code =
 		lemma.length === 1
 			? lemma.codePointAt(0)
 			: lemma.split('').reduce((sum = 0, char, index) => sum + char.codePointAt(0) * index, 0);
 
-	const colorPosition = lemmaCode % palettes.length;
+	const colorPosition = code % palettes.length;
 
 	return palettes[colorPosition];
 };
