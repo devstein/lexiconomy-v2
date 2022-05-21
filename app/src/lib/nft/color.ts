@@ -266,6 +266,11 @@ const palettesV2: ColorPalette[] = [
 		background: '#df2935',
 		primary: WHITE,
 		secondary: WHITE
+	},
+	{
+		background: '#b9e769',
+		primary: '#54478c',
+		secondary: '#54478c'
 	}
 ];
 

@@ -14,7 +14,12 @@ export const get: RequestHandler = async () => {
 
 	return {
 		body: {
-			lemmas: [...lemmas]
+			lemmas: [
+				...Array(100)
+					.fill(100)
+					.reduce((acc) => [...acc, String.fromCodePoint(acc.length + 45)], []),
+				...lemmas
+			]
 		}
 	};
 };

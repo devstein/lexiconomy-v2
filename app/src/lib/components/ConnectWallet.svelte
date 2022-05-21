@@ -1,34 +1,26 @@
 <script lang="ts">
 	export const prerender = false;
-	import { ethers } from 'ethers';
 	import { connected, signerAddress, provider } from 'svelte-ethers-store';
 
 	import { displayAddress } from '$lib/web3/utils';
+	import { connect } from '$lib/web3/connect';
 
 	let connecting = false;
 
-	const connect = async () => {
+	const onClick = async () => {
 		connecting = true;
-		// import client-side libraries
-		const { defaultEvmStores } = await import('svelte-ethers-store');
-
 		try {
-			defaultEvmStores.setProvider();
-		} catch {}
-		connecting = false;
-
-		// save to global store
-		/* defaultEvmStores.setProvider(provider); */
+			await connect();
+		} finally {
+			connecting = false;
+		}
 	};
-
-	$: console.log($connected, $signerAddress);
 </script>
 
 {#if $connected && $signerAddress}
 	{#await displayAddress($signerAddress, $provider) then value}
 		<div
 			class="fixed right-2 bottom-1 px-4 py-2 rounded font-mono text-sm md:text-base flex flex-row items-center"
-			on:click={connect}
 		>
 			<span
 				class="w-4 h-4 md:w-8 md:h-8 mr-2"
@@ -41,6 +33,6 @@
 	<button
 		class="fixed right-2 bottom-1 px-4 py-2 rounded bg-black text-white font-mono text-sm md:text-base"
 		disabled={connecting}
-		on:click={connect}>{connecting ? 'connecting...' : 'connect wallet'}</button
+		on:click={onClick}>{connecting ? 'connecting...' : 'connect wallet'}</button
 	>
 {/if}

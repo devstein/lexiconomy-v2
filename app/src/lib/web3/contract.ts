@@ -6,6 +6,8 @@ import chains, { isChainSupported } from './chains';
 import type { ChainInfo } from './chains';
 import lemmas from './store';
 
+// TODO: Clean this file up
+
 export const getProviderChainInfo = async (provider: Provider): Promise<ChainInfo> => {
 	const { chainId } = await provider.getNetwork();
 
@@ -39,6 +41,22 @@ export const getServerChainInfo = async (): Promise<ChainInfo> => {
 	console.log('using chain', chainId);
 
 	return chains[chainId];
+};
+
+let chainInfoCache: ChainInfo;
+
+export const getServerChainInfoForClient = async (): Promise<ChainInfo> => {
+	if (chainInfoCache) return chainInfoCache;
+
+	const resp = await fetch('/chain', {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	chainInfoCache = await resp.json();
+
+	return chainInfoCache;
 };
 
 // events
@@ -135,6 +153,3 @@ export const getLatestLemmas = async (): Promise<string[]> => {
 	const events = await contract.queryFilter(filter);
 	return events.map(({ args: { lemma } }) => lemma);
 };
-
-// getLatestDefinition
-// getLatestExample

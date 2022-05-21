@@ -8,8 +8,13 @@
 	export let lemmas: string[] = [];
 	// TODO: Pagination
 	// TODO: Fuzzy Search by Global Search Value
-	// TODO: Update lemma when event comes through???
+	// TODO: Update lemma when event comes through
 </script>
+
+<svelte:head>
+	<title>explore</title>
+	<meta name="description" content="explore endless possibilities of the lexiconomy" />
+</svelte:head>
 
 <ul class="h-full flex flex-row flex-wrap justify-start items-center content-center break-words">
 	{#each lemmas as item}

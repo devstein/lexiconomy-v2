@@ -7,6 +7,7 @@
 
 	import { getContractWithProvider } from '$lib/web3/contract';
 	import { getColorPalette } from '$lib/nft/color';
+	import { connect } from '$lib/web3/connect';
 
 	// pass lemma as prop
 	export let lemma: string;
@@ -37,8 +38,7 @@
 
 		if (!$connected) {
 			try {
-				// TODO: Use Web3Modal or Web3 React
-				await window.ethereum.request({ method: 'eth_requestAccounts' });
+				await connect();
 			} catch (err) {
 				// catch err if contains unsupported chain id
 				errors.mint = 'unable to connect to a wallet provider. please try again.';
@@ -56,7 +56,7 @@
 			console.error(err);
 			// catch err if contains unsupported chain id
 			if (String(err).includes('unsupported chain')) {
-				errors.mint = `unsupported chain. please connect to the mainnet.`;
+				errors.mint = `unsupported chain. please connect to the ethereum mainnet.`;
 				return;
 			}
 

@@ -41,6 +41,14 @@
 	});
 </script>
 
+<svelte:head>
+	<title>{lemma}</title>
+	<meta
+		name="description"
+		content={`Discover the meaning and usage of ${lemma} in the lexiconomy`}
+	/>
+</svelte:head>
+
 <h1 class="text-4xl md:text-5xl mb-4 md:mb-8">
 	<div class="font-mono mb-1">{lemma}</div>
 	<div class="border-b-4 mb-0.5" style:border-color={background} />

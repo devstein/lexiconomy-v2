@@ -14,7 +14,6 @@
 			console.log('connected to default provider');
 		} catch (err) {
 			console.error('failed to get window provider', err);
-			// TODO: Use Web3Modal or Web3 React
 		}
 	});
 </script>

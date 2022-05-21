@@ -103,7 +103,12 @@ contract LemmaToken is
   // END: Support OpenSea Trading
 
   /// @dev The Invent event is fired whenever a new lemma is invented
-  event Invent(address indexed owner, uint256 indexed tokenId, string lemma);
+  event Invent(
+    address indexed owner,
+    uint256 indexed tokenId,
+    string lemma,
+    uint256 number
+  );
 
   /// @dev Definition event whenever an owner redefines their lemma
   event Definition(
@@ -177,10 +182,11 @@ contract LemmaToken is
   ) internal {
     // _safeMint verifies the tokenId doesn't exist
     _safeMint(to, tokenId);
-    lemmas[tokenId] = Lemma(_lemma, _definition, _example, totalSupply());
+    uint256 number = totalSupply();
+    lemmas[tokenId] = Lemma(_lemma, _definition, _example, number);
 
     // emit Invent to let us easily query all created lemmas
-    emit Invent(to, tokenId, _lemma);
+    emit Invent(to, tokenId, _lemma, number);
     emit Definition(to, tokenId, _definition);
     emit Example(to, tokenId, _example);
   }
