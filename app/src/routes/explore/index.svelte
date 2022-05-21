@@ -19,7 +19,7 @@
 		>
 			<a
 				sveltekit:prefetch
-				href="/lemma/{item}"
+				href="/lemma/{encodeURIComponent(item)}"
 				class="h-full font-mono text-center md:text-lg flex flex-col justify-center items-center break-all"
 				style:color={getColorPalette(item).primary}
 			>
