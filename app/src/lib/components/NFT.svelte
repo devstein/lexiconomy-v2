@@ -13,7 +13,7 @@
 </script>
 
 <div
-	class="p-2 rounded flex flex-col align-start h-full w-full relative"
+	class="p-2 rounded flex flex-col align-start h-full w-full"
 	style:background-color={background}
 >
 	<div
@@ -22,5 +22,5 @@
 	>
 		{lemma}
 	</div>
-	<div class="absolute bottom-2 right-2 text-sm" style:color={secondary}>#{number}</div>
+	<div class="flex flex-row-reverse text-sm" style:color={secondary}>#{number}</div>
 </div>
