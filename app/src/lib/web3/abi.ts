@@ -148,6 +148,12 @@ export default [
 				internalType: 'string',
 				name: 'lemma',
 				type: 'string'
+			},
+			{
+				indexed: false,
+				internalType: 'uint256',
+				name: 'number',
+				type: 'uint256'
 			}
 		],
 		name: 'Invent',
@@ -289,6 +295,19 @@ export default [
 				internalType: 'uint256',
 				name: '',
 				type: 'uint256'
+			}
+		],
+		stateMutability: 'view',
+		type: 'function'
+	},
+	{
+		inputs: [],
+		name: 'contractURI',
+		outputs: [
+			{
+				internalType: 'string',
+				name: '',
+				type: 'string'
 			}
 		],
 		stateMutability: 'view',
