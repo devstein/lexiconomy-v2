@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import { connected, provider } from 'svelte-ethers-store';
+	import { connected, signerAddress, provider } from 'svelte-ethers-store';
 
 	import { getContractWithProvider } from '$lib/web3/contract';
 	import { getColorPalette } from '$lib/nft/color';
@@ -12,13 +12,14 @@
 	// pass lemma as prop
 	export let lemma: string;
 	let errors: Partial<Record<'definition' | 'example' | 'mint', string | undefined>> = {};
+	let minting = false;
 
 	$: ({ background, primary } = getColorPalette(lemma));
 
 	let definition: string;
 	let example: string;
 
-	const mint = async () => {
+	$: mint = async () => {
 		definition = definition?.trim();
 		example = example?.trim();
 
@@ -36,7 +37,7 @@
 		}
 		errors.example = undefined;
 
-		if (!$connected) {
+		if (!($connected && $signerAddress)) {
 			try {
 				await connect();
 			} catch (err) {
@@ -49,9 +50,11 @@
 		try {
 			const contract = await getContractWithProvider($provider);
 			const fee = await contract.mintFee();
-			await contract.mint(lemma, definition, example, {
+			const tx = await contract.mint(lemma, definition, example, {
 				value: fee
 			});
+			minting = true;
+			await tx.wait();
 		} catch (err) {
 			console.error(err);
 			// catch err if contains unsupported chain id
@@ -67,6 +70,8 @@
 			// catch err if contains unsupported chain id
 			errors.mint = 'failed to mint. please try again.';
 			return;
+		} finally {
+			minting = false;
 		}
 		errors.mint = undefined;
 
@@ -117,7 +122,8 @@
 			class="w-32 p-4 rounded font-semibold border"
 			style:background-color={background}
 			style:color={primary}
-			on:click={mint}>mint</button
+			disabled={minting}
+			on:click={mint}>{minting ? 'minting...' : 'mint'}</button
 		>
 		{#if errors?.mint}
 			<div class="text-sm text-rose-500">{errors.mint}</div>
