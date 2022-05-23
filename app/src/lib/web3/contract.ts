@@ -1,4 +1,4 @@
-import { ethers, Contract } from 'ethers';
+import { ethers, Contract, providers, BigNumber } from 'ethers';
 import type { Provider } from '@ethersproject/abstract-provider';
 
 import abi from './abi';
@@ -7,6 +7,9 @@ import type { ChainInfo } from './chains';
 import lemmas from './store';
 
 // TODO: Clean this file up
+
+// CLIENT-SIDE
+export const LEXICONOMY_CONTRACT_ADDRESS = import.meta.env.VITE_LEXICONOMY_CONTRACT_ADDRESS;
 
 export const getProviderChainInfo = async (provider: Provider): Promise<ChainInfo> => {
 	const { chainId } = await provider.getNetwork();
@@ -20,86 +23,66 @@ export const getProviderChainInfo = async (provider: Provider): Promise<ChainInf
 	return chains[chainId];
 };
 
-export const getServerProvider = (): Provider => {
-	const rpc = import.meta.env.VITE_WEB3_PROVIDER;
-
-	if (!rpc) {
-		throw Error('web3 provider required');
-	}
-
-	return new ethers.providers.JsonRpcProvider(String(rpc));
-};
-
-export const getServerChainInfo = async (): Promise<ChainInfo> => {
-	const provider = getServerProvider();
-	const { chainId } = await provider.getNetwork();
-
-	if (!isChainSupported(chainId)) {
-		throw Error(`unsupported chain id: ${chainId}`);
-	}
-
-	console.log('using chain', chainId);
-
-	return chains[chainId];
-};
-
-let chainInfoCache: ChainInfo;
-
-export const getServerChainInfoForClient = async (): Promise<ChainInfo> => {
-	if (chainInfoCache) return chainInfoCache;
-
-	const resp = await fetch('/chain', {
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
-
-	chainInfoCache = await resp.json();
-
-	return chainInfoCache;
-};
-
 // events
+// from, to, BigNumber
+type TransferEvent = [string, string, BigNumber];
+
+// owner, tokenId, lemma, number
+type InventEvent = [string, BigNumber, string, BigNumber];
+
+// owner, tokenId, definition
+type DefinitionEvent = [string, BigNumber, string];
+
+// owner, tokenId, example
+type ExampleEvent = [string, BigNumber, string];
+
 // [EVENT_NAME] => FUNCTION
 const eventFunctions = {
-	Transfer: (...args) => {
+	Transfer: (...args: TransferEvent) => {
 		console.log('Transfer', ...args);
 
 		const [, to, tokenId] = args;
+		const id = tokenId.toString();
 
 		lemmas.update((state) => {
-			const cur = state[tokenId] || { tokenId };
-			state[tokenId] = { ...cur, owner: to };
+			const cur = state[id] || { tokenId: id };
+			state[id] = { ...cur, owner: to };
 			return state;
 		});
 	},
-	Invent: (...args) => {
+	Invent: (...args: InventEvent) => {
 		console.log('Invent', ...args);
 
-		const [owner, tokenId, , , lemma] = args;
+		const [owner, tokenId, lemma, number] = args;
+		const id = tokenId.toString();
 
 		lemmas.update((state) => {
-			state[tokenId] = { tokenId, owner, lemma };
+			state[id] = { tokenId: id, owner, lemma, number: number.toString() };
+			console.log(state);
 			return state;
 		});
 	},
-	Definition: (...args) => {
+	Definition: (...args: DefinitionEvent) => {
 		console.log('Definition', ...args);
 
 		const [owner, tokenId, definition] = args;
+		const id = tokenId.toString();
+
 		lemmas.update((state) => {
-			const cur = state[tokenId] || { tokenId };
-			state[tokenId] = { ...cur, owner, definition };
+			const cur = state[id] || { tokenId: id };
+			state[id] = { ...cur, owner, definition };
 			return state;
 		});
 	},
-	Example: (...args) => {
+	Example: (...args: ExampleEvent) => {
 		console.log('Example', ...args);
 
 		const [owner, tokenId, example] = args;
+		const id = tokenId.toString();
+
 		lemmas.update((state) => {
-			const cur = state[tokenId] || { tokenId };
-			state[tokenId] = { ...cur, owner, example };
+			const cur = state[id] || { tokenId: id };
+			state[id] = { ...cur, owner, example };
 			return state;
 		});
 	}
@@ -114,6 +97,54 @@ const setContractEventSubscriptions = (contract: Contract): Contract => {
 	return contract;
 };
 
+export const getContractWithProvider = async (provider: Provider): Promise<Contract> => {
+	let contract = new Contract(LEXICONOMY_CONTRACT_ADDRESS, abi, provider);
+
+	// setup event subscriptions
+	contract = setContractEventSubscriptions(contract);
+
+	// wallet-based and JsonRpcProvider have this method
+	const signer = (provider as providers.JsonRpcProvider).getSigner();
+
+	return contract.connect(signer);
+};
+
+// SERVER-SIDE
+export const getServerProvider = (): Provider => {
+	const rpc = import.meta.env.VITE_WEB3_PROVIDER;
+
+	if (!rpc) {
+		throw Error('web3 provider required');
+	}
+
+	return new ethers.providers.JsonRpcProvider(String(rpc));
+};
+
+export const getServerChainInfo = async (): Promise<ChainInfo> => {
+	const provider = getServerProvider();
+	return getProviderChainInfo(provider);
+};
+
+interface ChainInfoWithRPC extends ChainInfo {
+	rpc: string;
+}
+
+let chainInfoCache: ChainInfoWithRPC;
+
+export const getServerChainInfoForClient = async (): Promise<ChainInfoWithRPC> => {
+	if (chainInfoCache) return chainInfoCache;
+
+	const resp = await fetch('/chain', {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	chainInfoCache = await resp.json();
+
+	return chainInfoCache;
+};
+
 // only create the Ether JS contract once
 let contractPromise = null;
 
@@ -121,10 +152,9 @@ export const getContract = async (): Promise<Contract> => {
 	if (contractPromise) return contractPromise;
 
 	const provider = getServerProvider();
-	const { lexiconomyAddress } = await getProviderChainInfo(provider);
 
 	contractPromise = new Promise((resolve) => {
-		let contract = new Contract(lexiconomyAddress, abi, provider);
+		let contract = new Contract(LEXICONOMY_CONTRACT_ADDRESS, abi, provider);
 
 		// setup event subscriptions
 		contract = setContractEventSubscriptions(contract);
@@ -133,18 +163,6 @@ export const getContract = async (): Promise<Contract> => {
 	});
 
 	return contractPromise;
-};
-
-export const getContractWithProvider = async (provider: Provider): Promise<Contract> => {
-	const { lexiconomyAddress } = await getProviderChainInfo(provider);
-	let contract = new Contract(lexiconomyAddress, abi, provider);
-
-	// setup event subscriptions
-	contract = setContractEventSubscriptions(contract);
-
-	const signer = provider.getSigner();
-
-	return contract.connect(signer);
 };
 
 export const getLatestLemmas = async (): Promise<string[]> => {

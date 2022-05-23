@@ -4,13 +4,7 @@ import { getContract, getServerProvider } from '$lib/web3/contract';
 import { ZERO_ADDR, displayAddress } from '$lib/web3/utils';
 
 export const get: RequestHandler = async ({ params }) => {
-	const provider = getServerProvider();
-	const { chainId } = await provider.getNetwork();
-
-	const contract = await getContract();
-
 	const { lemma } = params;
-	console.time(`get: ${lemma}`);
 
 	// don't allow non-lowercase, untrimmed lemmas
 	if (lemma.toLowerCase().trim() !== lemma) {
@@ -21,6 +15,12 @@ export const get: RequestHandler = async ({ params }) => {
 			}
 		};
 	}
+	console.time(`get: ${lemma}`);
+
+	const provider = getServerProvider();
+	const { chainId } = await provider.getNetwork();
+
+	const contract = await getContract();
 
 	console.time(`get: ${lemma} - tokenId`);
 	const tokenId = await contract.getTokenId(lemma);

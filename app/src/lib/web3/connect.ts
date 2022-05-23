@@ -6,7 +6,6 @@ export const connect = async (): Promise<void> => {
 	const { defaultEvmStores } = await import('svelte-ethers-store');
 	const Web3Modal = await import('web3modal');
 	const WalletConnectProvider = await import('@walletconnect/web3-provider');
-	// const WalletConnectProvider = await import('@walletconnect/web3-provider/dist/umd/index.min.js');
 	const CoinbaseWalletSDK = await import('@coinbase/wallet-sdk');
 
 	const chain = await getServerChainInfoForClient();

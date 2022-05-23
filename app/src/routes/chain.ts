@@ -3,8 +3,8 @@ import { getServerChainInfo } from '$lib/web3/contract';
 
 // return server chain information to the client
 export const get: RequestHandler = async () => {
-	const body = await getServerChainInfo();
+	const chain = await getServerChainInfo();
 	return {
-		body
+		body: { ...chain, rpc: import.meta.env.VITE_WEB3_PROVIDER }
 	};
 };

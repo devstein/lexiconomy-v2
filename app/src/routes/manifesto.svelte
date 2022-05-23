@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
 	export const prerender = true;
 
+	// @ts-ignore
 	import Manifesto from '$lib/docs/manifesto.md';
 </script>
 

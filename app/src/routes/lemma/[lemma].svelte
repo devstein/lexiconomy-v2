@@ -59,7 +59,6 @@
 {#if exists}
 	<DefinedState
 		{lemma}
-		{chainId}
 		{tokenId}
 		{number}
 		{example}
@@ -67,6 +66,7 @@
 		{owner}
 		{ownerDisplayName}
 		{approved}
+		serverChainId={chainId}
 	/>
 {:else}
 	<UndefinedState {lemma} />

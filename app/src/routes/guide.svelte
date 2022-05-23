@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
 	export const prerender = true;
 
+	// @ts-ignore
 	import Guide from '$lib/docs/guide.md';
 </script>
 

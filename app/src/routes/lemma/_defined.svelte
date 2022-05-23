@@ -1,13 +1,13 @@
 <script lang="ts" context="module">
-	export const prerender = true;
+	// different user see different content if canOperate
+	export const prerender = false;
 </script>
 
 <script lang="ts">
-	import { connected, signerAddress, provider } from 'svelte-ethers-store';
+	import { connected, signerAddress, provider, chainId } from 'svelte-ethers-store';
 
-	import { getContractWithProvider } from '$lib/web3/contract';
+	import { LEXICONOMY_CONTRACT_ADDRESS, getContractWithProvider } from '$lib/web3/contract';
 	import chainInfo from '$lib/web3/chains';
-	import { displayAddress } from '$lib/web3/utils';
 	import { getColorPalette } from '$lib/nft/color';
 
 	import EditableTextArea from '$lib/components/EditableTextArea.svelte';
@@ -22,16 +22,18 @@
 	export let ownerDisplayName: string;
 	export let approved: string;
 
-	export let chainId: number;
+	export let serverChainId: number;
 
 	let canOperate = false;
 
-	// TODO: GET CHAIN INFO FROM SERVER!
-	const { lexiconomyAddress, blockExplorerURI, openSeaURI, raribleURI } = chainInfo[chainId];
+	const { blockExplorerURI, openSeaURI, raribleURI } = chainInfo[serverChainId];
+
 	$: ({ background, primary, secondary } = getColorPalette(lemma));
 
 	$: canOperate =
 		$connected &&
+		// $chainId can be #, '#', or '0x#'. parseInt handles all gracefully
+		parseInt($chainId as string) === serverChainId &&
 		$signerAddress &&
 		($signerAddress.toLowerCase() === owner.toLowerCase() ||
 			(approved && $signerAddress.toLowerCase() === approved.toLowerCase()));
@@ -111,7 +113,7 @@
 					rel="external"
 					target="_blank"
 					class="text-blue-400"
-					href="{openSeaURI}/assets/{lexiconomyAddress}/{tokenId.toString()}"
+					href="{openSeaURI}/assets/{LEXICONOMY_CONTRACT_ADDRESS}/{tokenId.toString()}"
 				>
 					OpenSea
 				</a>
@@ -120,7 +122,7 @@
 					rel="external"
 					target="_blank"
 					class="text-blue-400"
-					href="{raribleURI}/token/{lexiconomyAddress}:{tokenId.toString()}"
+					href="{raribleURI}/token/{LEXICONOMY_CONTRACT_ADDRESS}:{tokenId.toString()}"
 				>
 					Rarible
 				</a>
@@ -132,7 +134,7 @@
 					rel="external"
 					target="_blank"
 					class="text-blue-400"
-					href="{blockExplorerURI}/token/{lexiconomyAddress}?a={tokenId.toString()}#inventory"
+					href="{blockExplorerURI}/token/{LEXICONOMY_CONTRACT_ADDRESS}?a={tokenId.toString()}#inventory"
 				>
 					block explorer
 				</a>

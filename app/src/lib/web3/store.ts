@@ -11,6 +11,6 @@ export interface Lemma {
 
 // Store
 // lemmas
-const lemmas = writable<Record<string, Lemma | undefined>>({});
+const lemmas = writable<Record<string, Partial<Lemma> | undefined>>({});
 
 export default lemmas;
