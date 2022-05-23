@@ -34,7 +34,7 @@ export const connect = async (): Promise<void> => {
 	// NOTE: VITE Bundling Issue Workaround
 	const web3Modal = new Web3Modal.default({
 		network: chain.name.toLowerCase(), // optional
-		cacheProvider: true, // optional
+		cacheProvider: false, // optional
 		providerOptions // required
 	});
 

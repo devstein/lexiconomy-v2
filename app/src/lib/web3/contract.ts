@@ -18,8 +18,6 @@ export const getProviderChainInfo = async (provider: Provider): Promise<ChainInf
 		throw Error(`unsupported chain id: ${chainId}`);
 	}
 
-	console.log('using chain', chainId);
-
 	return chains[chainId];
 };
 
@@ -39,8 +37,6 @@ type ExampleEvent = [string, BigNumber, string];
 // [EVENT_NAME] => FUNCTION
 const eventFunctions = {
 	Transfer: (...args: TransferEvent) => {
-		console.log('Transfer', ...args);
-
 		const [, to, tokenId] = args;
 		const id = tokenId.toString();
 
@@ -51,20 +47,15 @@ const eventFunctions = {
 		});
 	},
 	Invent: (...args: InventEvent) => {
-		console.log('Invent', ...args);
-
 		const [owner, tokenId, lemma, number] = args;
 		const id = tokenId.toString();
 
 		lemmas.update((state) => {
 			state[id] = { tokenId: id, owner, lemma, number: number.toString() };
-			console.log(state);
 			return state;
 		});
 	},
 	Definition: (...args: DefinitionEvent) => {
-		console.log('Definition', ...args);
-
 		const [owner, tokenId, definition] = args;
 		const id = tokenId.toString();
 
@@ -75,8 +66,6 @@ const eventFunctions = {
 		});
 	},
 	Example: (...args: ExampleEvent) => {
-		console.log('Example', ...args);
-
 		const [owner, tokenId, example] = args;
 		const id = tokenId.toString();
 
