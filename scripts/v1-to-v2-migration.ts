@@ -29,6 +29,12 @@ interface LemmaV2 {
 
 type OldLemmas = Record<string, Partial<LemmaV2>>;
 
+const ONE_SECOND_IN_MS = 1000;
+const sleep = (duration = ONE_SECOND_IN_MS) =>
+  new Promise<void>((resolve) => {
+    setTimeout(resolve, duration);
+  });
+
 const getOldLemmas = async (): Promise<OldLemmas> => {
   let index = 0;
   let id: ethers.BigNumber = await lexiconomyV1.lemmaIds(index);
@@ -266,9 +272,12 @@ async function main() {
 
   const ids = Object.keys(data);
 
-  // TODO: Make this a task!
   // unpause the contract!
-  await lexiconomyV2.connect(ceo).unpause();
+  const paused = await lexiconomyV2.paused();
+  if (paused) {
+    console.log("unpausing lexiconomy...");
+    await lexiconomyV2.connect(ceo).unpause();
+  }
 
   let count = 0;
   const total = ids.length;
@@ -276,6 +285,9 @@ async function main() {
     const { lemma, definition = "", owner, example = "" } = data[id];
     count++;
     console.log(`${count} of ${total}: ${lemma} ${id} ${owner} ${definition}`);
+
+    // sleep for 5 second
+    await sleep(ONE_SECOND_IN_MS * 5);
 
     try {
       // check if the lemma exists
