@@ -20,12 +20,14 @@ const shuffle = <T>(array: T[]): T[] => {
 	return array;
 };
 
+const fromBlock = parseInt(import.meta.env.VITE_LEXICONOMY_CREATION_BLOCK);
+
 export const get: RequestHandler = async () => {
 	const contract = await getContract();
 
 	console.time(`get: explore - invent events`);
 	const filter = contract.filters.Invent();
-	const events = await contract.queryFilter(filter);
+	const events = await contract.queryFilter(filter, fromBlock);
 	console.timeEnd(`get: explore - invent events`);
 
 	// TODO: Add a fromBlock
