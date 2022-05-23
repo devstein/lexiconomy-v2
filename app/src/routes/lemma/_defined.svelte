@@ -40,13 +40,11 @@
 
 	const updateDefinition = async () => {
 		const contract = await getContractWithProvider($provider);
-
 		await contract.definition(tokenId, definition);
 	};
 
 	const updateExample = async () => {
 		const contract = await getContractWithProvider($provider);
-
 		await contract.example(tokenId, example);
 	};
 </script>
@@ -62,14 +60,14 @@
 		<div class="space-y-4 flex-1">
 			<EditableTextArea
 				title="definition"
-				value={definition}
+				bind:value={definition}
 				placeholder={canOperate ? 'add a definition' : 'n/a'}
 				editable={canOperate}
 				onSave={updateDefinition}
 			/>
 			<EditableTextArea
 				title="example"
-				value={example}
+				bind:value={example}
 				placeholder={canOperate ? 'add an example' : 'n/a'}
 				editable={canOperate}
 				onSave={updateExample}
