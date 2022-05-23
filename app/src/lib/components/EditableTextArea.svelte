@@ -86,7 +86,7 @@
 	/>
 </div>
 
-<style>
+<style lang="postcss">
 	.button {
 		@apply text-sm text-blue-300 ml-2;
 	}
