@@ -1,6 +1,19 @@
 import { ethers } from 'ethers';
 import { getServerChainInfoForClient } from '$lib/web3/contract';
 
+import { signer } from 'svelte-ethers-store';
+
+// setup subscripting for address changing
+signer.subscribe(async (s) => {
+	// early return if no signer or address
+	if (!s) return;
+
+	const address = await s.getAddress();
+	if (!address) return;
+
+	window.heap.addUserProperties({ wallet: address });
+});
+
 export const connect = async (): Promise<void> => {
 	// import client-side libraries
 	const { defaultEvmStores } = await import('svelte-ethers-store');
@@ -43,4 +56,10 @@ export const connect = async (): Promise<void> => {
 	const provider = new ethers.providers.Web3Provider(instance);
 	// save to global store
 	defaultEvmStores.setProvider(provider);
+
+	try {
+		window.heap.track('Connect', { Method: 'Button' });
+	} catch (err) {
+		console.log('failed to track connect event', err);
+	}
 };

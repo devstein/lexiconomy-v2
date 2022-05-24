@@ -6,6 +6,12 @@
 	const submit = () => {
 		if (!search) return;
 		search = search.toLowerCase().trim();
+
+		try {
+			window.heap.track('Search', { lemma: search });
+		} catch (err) {
+			console.log('failed to track search event', err);
+		}
 		goto(`/lemma/${encodeURIComponent(search)}`);
 		// reset search
 		search = '';

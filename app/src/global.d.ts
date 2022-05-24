@@ -27,6 +27,8 @@ declare module 'svelte-ethers-store' {
 
 interface Heap {
 	identify: (string) => void;
+	addUserProperties: (properties: Record<string, string | number>) => void;
+	track: (name: string, properties?: Record<string, string>) => void;
 }
 
 export declare global {

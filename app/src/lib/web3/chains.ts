@@ -1,3 +1,4 @@
+// TODO: Leverage chainData from svelte-ethers-store
 export interface ChainInfo {
 	id: number;
 	name: string;

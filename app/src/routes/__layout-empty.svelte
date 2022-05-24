@@ -9,6 +9,12 @@
 		try {
 			defaultEvmStores.setProvider();
 			console.log('connected to default provider');
+
+			try {
+				window.heap.track('Connect', { Method: 'Mount' });
+			} catch (err) {
+				console.log('failed to track connect event', err);
+			}
 		} catch (err) {
 			console.error('failed to get window provider', err);
 		}
