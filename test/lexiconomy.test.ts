@@ -267,6 +267,23 @@ describe("Lexiconomy", function () {
     }
   });
 
+  it("should reject adding a definition for an undefined lemma", async function () {
+    const lexiconomy = await deployLexiconomy();
+
+    // need to generate tokenId
+    const tokenId = ethers.utils.id(VALID_LEMMA);
+    const definition = "a definition";
+
+    try {
+      await lexiconomy.definition(tokenId, definition);
+      expect(true).to.equal(false);
+    } catch (error) {
+      expect((error as ContractError).message).to.contain(
+        "ERC721: operator query for nonexistent token"
+      );
+    }
+  });
+
   it("should allow owners to add examples to their lemmas", async function () {
     const lexiconomy = await deployLexiconomy();
 
@@ -324,22 +341,21 @@ describe("Lexiconomy", function () {
     }
   });
 
-  it("should emit a donation event", async function () {
+  it("should reject adding examples for an undefined lemma", async function () {
     const lexiconomy = await deployLexiconomy();
 
-    const tx = await lexiconomy.donate({
-      value: 1000,
-    });
+    // need to generate tokenId
+    const tokenId = ethers.utils.id(VALID_LEMMA);
+    const example = "an example";
 
-    const reciept = await tx.wait();
-
-    expect(reciept.events).to.have.length(1);
-
-    const { event, args } = reciept.events[0];
-    const [owner] = await ethers.getSigners();
-
-    expect(event).to.equal("Donation");
-    expect(args[0]).to.equal(owner.address);
+    try {
+      await lexiconomy.example(tokenId, example);
+      expect(true).to.equal(false);
+    } catch (error) {
+      expect((error as ContractError).message).to.contain(
+        "ERC721: operator query for nonexistent token"
+      );
+    }
   });
 
   it("should return a mint fee", async function () {

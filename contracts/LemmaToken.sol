@@ -12,6 +12,10 @@ import "./Pricer.sol";
 import "./StringValidator.sol";
 import "./OpenSea.sol";
 
+/// @title The LemmaToken is the Lexiconomy's NFT
+/// @author Devin Stein
+/// @notice The LemmaToken contract is the core of the Lexiconomy logic.
+/// @dev The meat of the ERC721 logic is implemented by OpenZepplin. The minting logic and NFT on-chain data is customized to the Lexiconomy.
 contract LemmaToken is
   ERC721,
   ERC721Enumerable,
@@ -38,8 +42,8 @@ contract LemmaToken is
     return "https://lexiconomy-v2.vercel.app/token/";
   }
 
-  function contractURI() public view returns (string memory) {
-    // TODO: return "https://lexiconomy.org/cotnract/metadata";
+  function contractURI() public pure returns (string memory) {
+    // TODO: return "https://lexiconomy.org/contract/metadata";
     return "https://lexiconomy-v2.vercel.app/contract/metadata";
   }
 
@@ -102,7 +106,8 @@ contract LemmaToken is
 
   // END: Support OpenSea Trading
 
-  /// @dev The Invent event is fired whenever a new lemma is invented
+  /// @notice The Invent event is fired whenever a new lemma is invented
+  /// @dev The Invent event allows for easy access to the lemma (string) value of newly minted tokens
   event Invent(
     address indexed owner,
     uint256 indexed tokenId,
@@ -110,16 +115,19 @@ contract LemmaToken is
     uint256 number
   );
 
-  /// @dev Definition event whenever an owner redefines their lemma
+  /// @notice Definition event whenever an owner defines or redefines their lemma
+  /// @dev Definition events help maintain the history of definitions for a lemma over time.
   event Definition(
     address indexed owner,
     uint256 indexed tokenId,
     string definition
   );
 
-  /// @dev Example event whenever an owner provides an example for their lemma
+  /// @notice Example event whenever an owner provides an example for their lemma
+  /// @dev Example events help maintain the history of examples for a lemma over time.
   event Example(address indexed owner, uint256 indexed tokenId, string example);
 
+  /// @notice The Lemma struct is the on-chain representation of a lemma
   struct Lemma {
     string lemma;
     string definition;
@@ -128,11 +136,13 @@ contract LemmaToken is
     uint256 number;
   }
 
+  /// @notice The lemmas mapping maintains all on-chain data for every token
   mapping(uint256 => Lemma) public lemmas;
 
   bytes4 public constant pricerInterfaceId = type(Pricer).interfaceId;
   Pricer public pricer;
 
+  /// @dev Allows the owner to update the Pricer contract. This allows flexibility on the pricing strategies in the future.
   function setPricer(address _address) public onlyOwner {
     require(
       _address.supportsInterface(pricerInterfaceId),
@@ -149,6 +159,7 @@ contract LemmaToken is
     type(StringValidator).interfaceId;
   StringValidator public lemmaValidator;
 
+  /// @dev Allows the owner to update the LemmaValidator contract. This allows flexibility on the pricing strategies in the future
   function setLemmaValidator(address _address) public onlyOwner {
     require(
       _address.supportsInterface(stringValidatorInterfaceId),
@@ -161,18 +172,29 @@ contract LemmaToken is
     lemmaValidator = candidateContract;
   }
 
+  /// @notice mintFee returns the current minting fee
+  /// @return The current minting fee
   function mintFee() public view returns (uint256) {
     return pricer.price();
   }
 
+  /// @notice lemmaValid checks if a given lemma string is valid
+  /// @param _lemma the string to validate
+  /// @return True if the lemma is valid; otherwise, false
+  /// @dev Calls the LemmaValidator.valid method
   function lemmaValid(string calldata _lemma) public view returns (bool) {
     return lemmaValidator.valid(_lemma);
   }
 
+  /// @notice Get the token ID for a given string
+  /// @param _lemma the string to get a token ID for
+  /// @return The ERC721 token ID
+  /// @dev Useful for getting the token ID of a lemma client-side
   function getTokenId(string calldata _lemma) public pure returns (uint256) {
     return uint256(keccak256(bytes(_lemma)));
   }
 
+  /// @dev The internal mint function for creating a new token
   function _mint(
     address to,
     uint256 tokenId,
@@ -191,7 +213,13 @@ contract LemmaToken is
     emit Example(to, tokenId, _example);
   }
 
-  // airdrop for migrating v1 tokens to v2
+  /// @notice Airdrop a new token to an address
+  /// @param to The address to airdrop the new token to
+  /// @param _lemma The lemma to mint
+  /// @param _definition The definition for the lemma
+  /// @param _example The example for the lemma
+  /// @return tokenId of the minted ERC721 token
+  /// @dev Used to migrating v1 tokens to their owners in the v2 lexiconomy. Only the owner can airdrop tokens.
   function airdrop(
     address to,
     string calldata _lemma,
@@ -209,6 +237,12 @@ contract LemmaToken is
     return tokenId;
   }
 
+  /// @notice Mint a new token to the sender of the transaction
+  /// @param _lemma The lemma to mint
+  /// @param _definition The definition for the lemma
+  /// @param _example The example for the lemma
+  /// @return tokenId of the minted ERC721 token
+  /// @dev All non-airdropped tokens are created by this method
   function mint(
     string calldata _lemma,
     string calldata _definition,
@@ -226,11 +260,15 @@ contract LemmaToken is
     return tokenId;
   }
 
+  /// @notice Add a definition to an existing lemma
+  /// @param tokenId The token to define
+  /// @param _text The definition text
   /// @dev named 'definition' because 'define' is a reserved keyword
   function definition(uint256 tokenId, string calldata _text)
     public
     whenNotPaused
   {
+    // this also prevents defining undefined lemmas
     bool allowed = _isApprovedOrOwner(msg.sender, tokenId);
     require(allowed, "LemmaToken: caller is not owner nor approved");
 
@@ -238,10 +276,14 @@ contract LemmaToken is
     emit Definition(msg.sender, tokenId, _text);
   }
 
+  /// @notice Add an example to an existing lemma
+  /// @param tokenId The token to define
+  /// @param _text The example text
   function example(uint256 tokenId, string calldata _text)
     public
     whenNotPaused
   {
+    // this also prevents adding examples for undefined lemmas
     bool allowed = _isApprovedOrOwner(msg.sender, tokenId);
     require(allowed, "LemmaToken: caller is not owner nor approved");
 

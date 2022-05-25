@@ -7,12 +7,19 @@ import "unicode-eth/contracts/Unicode.sol";
 
 import "./StringValidator.sol";
 
+/// @title The LemmaValidator checks if a lemma contains only lowercase letters and has no trailing or preceding whitespace.
+/// @author Devin Stein
+/// @notice This is the current lemma validation logic for the Lexiconomy. Only valid lemmas can be minted.
+/// @dev This code formed the basis of the Unicode Ethereum Project (https://github.com/devstein/unicode-eth/), which is now imported.
 contract LemmaValidator is StringValidator, Ownable {
+  /// @dev Add Unicode utilities to strings
   using Unicode for string;
 
   bytes4 public constant interfaceId = type(StringValidator).interfaceId;
 
+  // @notice a mapping to check if a character code point is illegal
   mapping(uint32 => bool) public illegal;
+  // @notice a mapping to check if a character code point is whitespace
   mapping(uint32 => bool) public whitespace;
 
   constructor() {}
@@ -28,7 +35,9 @@ contract LemmaValidator is StringValidator, Ownable {
       _interfaceId == interfaceId || _interfaceId == type(IERC165).interfaceId;
   }
 
-  /// @dev Given a string, determine if all it's underlying UTF-8 Unicode characters are valid.
+  /// @notice Given a string, if it is considered valid
+  /// @param _str The input string to validate
+  /// @dev Given a string, determine if all it's underlying UTF-8 Unicode characters are valid
   function valid(string memory _str) external view returns (bool) {
     string memory char;
     uint256 len = bytes(_str).length;

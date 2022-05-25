@@ -5,7 +5,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 import "./StringValidator.sol";
 
-// MockStringValidator is for testing
+/// @title The MockStringValidator is used for testing
+/// @author Devin Stein
+/// @dev This checks for a single expected string value.
 contract MockStringValidator is StringValidator, Ownable {
   bytes4 public constant interfaceId = type(StringValidator).interfaceId;
 
