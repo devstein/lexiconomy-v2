@@ -87,27 +87,6 @@
 		font-weight: 400;
 		font-display: swap;
 
-		src: url('/fonts/BerkeleyMono-Regular.woff2') format('woff2'),
-			url('/fonts/BerkeleyMono-Regular.woff') format('woff');
-	}
-
-	@font-face {
-		font-family: 'Berkeley Mono';
-		font-style: normal;
-		font-weight: 600;
-		font-display: swap;
-
-		src: url('/fonts/BerkeleyMono-Bold.woff2') format('woff2'),
-			url('/fonts/BerkeleyMono-Bold.woff') format('woff');
-	}
-
-	@font-face {
-		font-family: 'Berkeley Mono';
-		font-style: normal;
-		font-weight: bold;
-		font-display: swap;
-
-		src: url('/fonts/BerkeleyMono-Bold.woff2') format('woff2'),
-			url('/fonts/BerkeleyMono-Bold.woff') format('woff');
+		src: url('/fonts/BerkeleyMono-Regular.woff2') format('woff2');
 	}
 </style>
