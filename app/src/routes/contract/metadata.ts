@@ -9,7 +9,7 @@ export const get: RequestHandler = async () => {
 			name: 'Lexiconomy v2',
 			description:
 				'the lexiconomy is the world’s first decentralized and economized dictionary, empowering anyone to coin a word or phrase. it’s a dictionary for all languages, people, and cultures.',
-			image: `${BASE_URL}/images/lexiconomy.png`,
+			image: `${BASE_URL}/images/lexiconomy.svg`,
 			external_link: BASE_URL,
 			// 2.5%
 			seller_fee_basis_points: 250,
