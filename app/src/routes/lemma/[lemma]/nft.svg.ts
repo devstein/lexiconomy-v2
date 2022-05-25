@@ -9,12 +9,12 @@ export const get: RequestHandler = async ({ params }) => {
 
 	console.time(`get: ${lemma}`);
 
-	// don't allow untrimmed lemmas
-	if (lemma.trim() !== lemma) {
+	// don't allow non-lowercase, untrimmed lemmas
+	if (lemma.toLowerCase().trim() !== lemma) {
 		return {
 			status: 301,
 			headers: {
-				location: `/lemma/${lemma.trim()}/image.svg`
+				location: `/lemma/${lemma.toLowerCase().trim()}/nft.svg`
 			}
 		};
 	}
