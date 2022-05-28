@@ -1,11 +1,6 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types/runtime";
 import { DeployFunction } from "hardhat-deploy/types";
 
-import {
-  getIllegalCharacterCodePoints,
-  getWhitespaceCodePoints,
-} from "../scripts/unicode-data";
-
 const CONTRACT_NAME = "Lexiconomy";
 
 export const tags = ["Lexiconomy"];
@@ -15,8 +10,6 @@ const OpenSeaProxyRegistries = {
   1: "0xa5409ec958c83c3f309868babaca7c86dcb077c1",
   // Rinkeby
   4: "0xf57b2c51ded3a29e6891aba85459d600256cf317",
-  // Polygon Mainet
-  137: "0x58807baD0B376efc12F5AD86aAc70E78ed67deaE",
 };
 
 const func: DeployFunction = async function ({
