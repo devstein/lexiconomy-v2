@@ -9,18 +9,7 @@ const config = {
 			},
 			fontFamily: {
 				sans: ['Oxygen', 'sans-serif'],
-				mono: [
-					'Berkeley Mono',
-					'Space Mono',
-					'ui-monospace',
-					'SFMono-Regular',
-					'Menlo',
-					'Monaco',
-					'Consolas',
-					'Liberation Mono',
-					'Courier New',
-					'monospace'
-				]
+				mono: ['Berkeley Mono', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace']
 			}
 		}
 	},
