@@ -13,7 +13,7 @@
 			console.log('failed to track search event', err);
 		}
 		goto(`/lemma/${encodeURIComponent(search)}`);
-		// reset search
+		// reset search on navigation
 		search = '';
 	};
 </script>
