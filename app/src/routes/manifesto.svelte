@@ -10,6 +10,6 @@
 	<meta name="description" content="the manifesto of the lexiconomy" />
 </svelte:head>
 
-<article class="ml-10 md:ml-20 prose prose-headings:font-mono md:prose-lg md:max-w-2xl">
+<article class="md:ml-20 prose prose-headings:font-mono md:prose-lg md:max-w-3xl">
 	<Manifesto />
 </article>
