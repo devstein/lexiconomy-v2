@@ -2,7 +2,7 @@
 	import '../app.css';
 
 	import { onMount } from 'svelte';
-	import { goto, beforeNavigate, afterNavigate } from '$app/navigation';
+	import { beforeNavigate, afterNavigate } from '$app/navigation';
 
 	import { slide } from 'svelte/transition';
 
