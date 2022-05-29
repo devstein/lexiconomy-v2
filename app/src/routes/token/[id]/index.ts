@@ -54,7 +54,8 @@ ${exampleDescription}
 			name: lemma,
 			description,
 			external_url: `${BASE_URL}/lemma/${lemma}`,
-			image_data: `${BASE_URL}/lemma/${lemma}/nft.svg`,
+			image: `${BASE_URL}/lemma/${lemma}/nft.svg`,
+			// image_data: `${BASE_URL}/lemma/${lemma}/nft.svg`,
 			// background_color: background.slice(1),
 			attributes: [
 				{
