@@ -15,14 +15,17 @@
 		<GlobalSearchBar />
 		<div class="font-mono grid grid-rows-3 text-lg md:grid-cols-3 md:text-xl">
 			<a
+				sveltekit:prefetch
 				class="p-4 md:p-12 hover:bg-pink-200 focus:bg-pink-200 transition transition-colors outline-black"
 				href="/explore">explore</a
 			>
 			<a
+				sveltekit:prefetch
 				class="p-4 md:p-12 hover:bg-cyan-200 focus:bg-cyan-200 transition transition-colors outline-black"
 				href="/manifesto">manifesto</a
 			>
 			<a
+				sveltekit:prefetch
 				class="p-4 md:p-12 hover:bg-yellow-200 focus:bg-yellow-200 transition transition-colors outline-black"
 				href="/guide">guide</a
 			>
