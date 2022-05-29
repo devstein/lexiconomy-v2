@@ -9,7 +9,7 @@
 
 <header class="my-4 mx-2">
 	<div class="hidden md:flex flex-row items-center font-mono space-x-4">
-		<a href="/home" class="text-2xl">lexiconomy</a>
+		<a href="/" class="text-2xl">lexiconomy</a>
 		<GlobalSearchBar />
 		<a
 			class="text-xl hover:underline hover:decoration-pink-400 hover:underline-offset-1"
